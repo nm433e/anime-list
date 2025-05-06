@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmEdit = document.getElementById('confirmEdit');
     const editStatus = document.getElementById('editStatus');
     const clearListBtn = document.getElementById('clearListBtn');
+    const exportListBtn = document.getElementById('exportListBtn');
+    const importListInput = document.getElementById('importListInput');
 
     // --- State Variables ---
     let animeList = []; // Array to hold anime objects
@@ -108,18 +110,28 @@ document.addEventListener('DOMContentLoaded', () => {
             // Actions cell
             const actionsCell = row.insertCell(4);
             
+            // Toggle Added button
+            const toggleBtn = document.createElement('button');
+            toggleBtn.className = `action-btn toggle-btn ${anime.added ? 'added' : ''}`;
+            toggleBtn.innerHTML = anime.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
+            toggleBtn.title = anime.added ? 'Mark as Not Added' : 'Mark as Added';
+            toggleBtn.onclick = () => toggleAnimeAdded(index);
+            
             // Edit button
             const editBtn = document.createElement('button');
             editBtn.className = 'action-btn edit-btn';
-            editBtn.textContent = 'Edit';
+            editBtn.innerHTML = '<i class="fas fa-pen"></i>';
+            editBtn.title = 'Edit';
             editBtn.onclick = () => openEditModal(index);
             
             // Delete button
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'action-btn delete-btn';
-            deleteBtn.textContent = 'Delete';
+            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteBtn.title = 'Delete';
             deleteBtn.onclick = () => deleteAnime(index);
             
+            actionsCell.appendChild(toggleBtn);
             actionsCell.appendChild(editBtn);
             actionsCell.appendChild(deleteBtn);
         });
@@ -272,8 +284,22 @@ document.addEventListener('DOMContentLoaded', () => {
             year: apiData.year,
             members: apiData.members || 0,
             score: apiData.score || 0,
-            searchTerm: apiData.searchTerm // This will be set when adding from search
+            searchTerm: apiData.searchTerm, // This will be set when adding from search
+            added: false // Default to not added
         };
+    };
+
+    // Function to toggle anime added status
+    const toggleAnimeAdded = (index) => {
+        const sortedList = sortAnimeList(animeList, currentSortColumn, currentSortDirection);
+        const animeToToggle = sortedList[index];
+        const actualIndex = animeList.findIndex(anime => anime.mal_id === animeToToggle.mal_id);
+        
+        if (actualIndex !== -1) {
+            animeList[actualIndex].added = !animeList[actualIndex].added;
+            saveListToLocalStorage();
+            renderAnimeList();
+        }
     };
 
     // Function to add anime to the list (with duplicate check)
@@ -475,6 +501,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Clear List button click
     clearListBtn.addEventListener('click', clearList);
+
+    // --- Export/Import Functions ---
+    const exportList = () => {
+        if (animeList.length === 0) {
+            alert('Your list is empty. Nothing to export.');
+            return;
+        }
+
+        const exportData = {
+            version: '1.0',
+            exportDate: new Date().toISOString(),
+            animeList: animeList
+        };
+
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `anime-list-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const importList = (file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const importData = JSON.parse(e.target.result);
+                
+                // Validate the imported data
+                if (!importData.animeList || !Array.isArray(importData.animeList)) {
+                    throw new Error('Invalid file format: animeList array not found');
+                }
+
+                // Validate each anime entry
+                const validAnimeList = importData.animeList.filter(anime => {
+                    return anime && 
+                           typeof anime.mal_id === 'number' && 
+                           typeof anime.name === 'string';
+                });
+
+                if (validAnimeList.length === 0) {
+                    throw new Error('No valid anime entries found in the file');
+                }
+
+                // Ask for confirmation
+                if (confirm(`Found ${validAnimeList.length} valid anime entries. Import them?`)) {
+                    // Merge with existing list, avoiding duplicates
+                    const newAnimeList = [...animeList];
+                    let addedCount = 0;
+
+                    validAnimeList.forEach(anime => {
+                        if (!newAnimeList.some(existing => existing.mal_id === anime.mal_id)) {
+                            newAnimeList.push(anime);
+                            addedCount++;
+                        }
+                    });
+
+                    animeList = newAnimeList;
+                    saveListToLocalStorage();
+                    renderAnimeList();
+                    alert(`Import complete. Added ${addedCount} new entries.`);
+                }
+            } catch (error) {
+                alert(`Error importing file: ${error.message}`);
+            }
+        };
+        reader.onerror = () => {
+            alert('Error reading file');
+        };
+        reader.readAsText(file);
+    };
+
+    // --- Event Handlers ---
+    exportListBtn.addEventListener('click', exportList);
+    importListInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            importList(e.target.files[0]);
+            // Reset the input so the same file can be imported again
+            e.target.value = '';
+        }
+    });
 
     // --- Initialization ---
     loadListFromLocalStorage();

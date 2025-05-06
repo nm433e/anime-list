@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jikan Anime List App</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -35,7 +36,13 @@
 
     <div class="anime-list-section">
         <h2>My Anime List</h2>
-        <button id="clearListBtn" class="clear-btn">Clear List</button>
+        <div class="list-actions">
+            <button id="clearListBtn" class="clear-btn">Clear List</button>
+            <button id="exportListBtn" class="export-btn">Export List</button>
+            <label for="importListInput" class="import-btn">Import List
+                <input type="file" id="importListInput" accept=".json" style="display: none;">
+            </label>
+        </div>
         <table id="animeTable">
             <thead>
                 <tr>
