@@ -349,3 +349,21 @@ hr {
 .import-btn:hover {
     background-color: #138496;
 }
+
+/* Adult Genre Styling */
+.genre.adult {
+    color: #ff69b4; /* Hot pink */
+}
+
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.genre {
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+}

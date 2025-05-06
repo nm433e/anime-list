@@ -69,15 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to render the anime list in the table
     const renderAnimeList = () => {
-        animeTableBody.innerHTML = ''; // Clear current table body
-        emptyListMessage.classList.add('hidden'); // Hide empty message by default
+        animeTableBody.innerHTML = '';
+        emptyListMessage.classList.add('hidden');
 
         if (animeList.length === 0) {
-            emptyListMessage.classList.remove('hidden'); // Show empty message if list is empty
+            emptyListMessage.classList.remove('hidden');
             return;
         }
 
-        // Sort the list before rendering
         const sortedList = sortAnimeList(animeList, currentSortColumn, currentSortDirection);
 
         sortedList.forEach((anime, index) => {
@@ -106,9 +105,32 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Score cell
             row.insertCell(3).textContent = anime.score ? anime.score.toFixed(2) : 'N/A';
+
+            // Episodes cell
+            row.insertCell(4).textContent = anime.episodes || '?';
+
+            // Genres cell
+            const genresCell = row.insertCell(5);
+            const genreList = document.createElement('div');
+            genreList.className = 'genre-list';
+            
+            if (anime.genres && anime.genres.length > 0) {
+                anime.genres.forEach(genre => {
+                    const genreSpan = document.createElement('span');
+                    genreSpan.className = 'genre';
+                    if (['Erotica', 'Ecchi', 'Hentai'].includes(genre)) {
+                        genreSpan.classList.add('adult');
+                    }
+                    genreSpan.textContent = genre;
+                    genreList.appendChild(genreSpan);
+                });
+            } else {
+                genreList.textContent = 'N/A';
+            }
+            genresCell.appendChild(genreList);
             
             // Actions cell
-            const actionsCell = row.insertCell(4);
+            const actionsCell = row.insertCell(6);
             
             // Toggle Added button
             const toggleBtn = document.createElement('button');
@@ -145,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const bValue = b[column];
 
             if (column === 'seasonYear') {
-                // Custom sort for Season & Year
                 const aYear = a.year || 0;
                 const bYear = b.year || 0;
                 const aSeason = a.season || '';
@@ -156,6 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     comparison = aSeason.localeCompare(bSeason);
                 }
+            } else if (column === 'genres') {
+                // Sort by first genre name
+                const aGenres = a.genres || [];
+                const bGenres = b.genres || [];
+                const aFirstGenre = aGenres[0] || '';
+                const bFirstGenre = bGenres[0] || '';
+                comparison = aFirstGenre.localeCompare(bFirstGenre);
             } else if (typeof aValue === 'string') {
                 comparison = aValue.localeCompare(bValue);
             } else {
@@ -277,6 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to extract relevant anime data
     const extractAnimeData = (apiData) => {
         if (!apiData) return null;
+
+        // Extract genre names and identify adult genres
+        const genres = (apiData.genres || []).map(genre => genre.name);
+        const adultGenres = ['Erotica', 'Ecchi', 'Hentai'];
+        const hasAdultGenre = genres.some(genre => adultGenres.includes(genre));
+
         return {
             mal_id: apiData.mal_id,
             name: apiData.title || apiData.title_english || apiData.title_japanese || 'Unknown Title',
@@ -284,8 +318,11 @@ document.addEventListener('DOMContentLoaded', () => {
             year: apiData.year,
             members: apiData.members || 0,
             score: apiData.score || 0,
-            searchTerm: apiData.searchTerm, // This will be set when adding from search
-            added: false // Default to not added
+            episodes: apiData.episodes || 0,
+            genres: genres,
+            hasAdultGenre: hasAdultGenre,
+            searchTerm: apiData.searchTerm,
+            added: false
         };
     };
 
