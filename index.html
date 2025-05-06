@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jikan Anime List App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Jikan Anime List App</h1>
+
+    <div class="mode-switcher">
+        <button id="inputModeBtn" class="active">Input Mode</button>
+        <button id="searchModeBtn">Search Mode</button>
+    </div>
+
+    <div id="inputModeSection" class="mode-section">
+        <h2>Add Anime from List</h2>
+        <p>Paste anime names or IDs, one per line.</p>
+        <textarea id="animeInputList" rows="10" cols="50" placeholder="Enter anime names or IDs here..."></textarea>
+        <button id="processInputBtn">Process List</button>
+        <div id="inputStatus" class="status-area"></div>
+    </div>
+
+    <div id="searchModeSection" class="mode-section hidden">
+        <h2>Search and Add Anime</h2>
+        <p>Type an anime name to search.</p>
+        <input type="text" id="animeSearchInput" placeholder="Search for an anime...">
+        <div id="searchResultsDropdown" class="dropdown-results">
+            </div>
+        </div>
+
+    <hr>
+
+    <div class="anime-list-section">
+        <h2>My Anime List</h2>
+        <button id="clearListBtn" class="clear-btn">Clear List</button>
+        <table id="animeTable">
+            <thead>
+                <tr>
+                    <th data-sort-by="name">Name</th>
+                    <th data-sort-by="seasonYear">Season & Year</th>
+                    <th data-sort-by="members">Members</th>
+                    <th data-sort-by="score">Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+        <p id="emptyListMessage">Your list is empty.</p>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Anime Entry</h2>
+            <p>Enter the new MAL ID for this anime:</p>
+            <input type="number" id="newAnimeId" placeholder="Enter MAL ID">
+            <button id="confirmEdit">Update</button>
+            <div id="editStatus" class="status-area"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
