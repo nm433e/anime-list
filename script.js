@@ -20,9 +20,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearListBtn = document.getElementById('clearListBtn');
     const exportListBtn = document.getElementById('exportListBtn');
     const importListInput = document.getElementById('importListInput');
+    const minScore = document.getElementById('minScore');
+    const maxScore = document.getElementById('maxScore');
+    const minMembers = document.getElementById('minMembers');
+    const maxMembers = document.getElementById('maxMembers');
+    const yearFilter = document.getElementById('yearFilter');
+    const seasonFilter = document.getElementById('seasonFilter');
+    const genreFilterList = document.getElementById('genreFilterList');
+    const statusFilter = document.getElementById('statusFilter');
+    const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+    const batchModeBtn = document.getElementById('batchModeBtn');
+    const batchModeSection = document.getElementById('batchModeSection');
+    const batchStartSeason = document.getElementById('batchStartSeason');
+    const batchStartYear = document.getElementById('batchStartYear');
+    const batchEndSeason = document.getElementById('batchEndSeason');
+    const batchEndYear = document.getElementById('batchEndYear');
+    const batchFetchBtn = document.getElementById('batchFetchBtn');
+    const batchStatus = document.getElementById('batchStatus');
 
     // --- State Variables ---
     let animeList = []; // Array to hold anime objects
+    let filteredList = null;
+    let availableGenres = new Set();
+    let selectedGenres = new Set();
+    let genreFilterMode = 'inclusive'; // 'inclusive' or 'exclusive'
     const JIKAN_API_BASE_URL = 'https://api.jikan.moe/v4';
     const INPUT_MODE_DELAY = 1500; // 1.5 seconds delay between requests in input mode
     let currentSortColumn = 'name'; // Default sort column
@@ -40,8 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 animeList = JSON.parse(storedList);
                 // Ensure members and score are numbers for sorting
                 animeList.forEach(anime => {
-                    if (typeof anime.members !== 'number') {
-                        anime.members = parseInt(anime.members, 10) || 0;
+                    if (typeof anime.members === 'string') {
+                        // Remove commas and convert to number
+                        anime.members = parseInt(anime.members.replace(/,/g, ''), 10) || 0;
+                    } else if (typeof anime.members !== 'number') {
+                        anime.members = 0;
                     }
                     if (typeof anime.score !== 'number') {
                         anime.score = parseFloat(anime.score) || 0;
@@ -50,14 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         anime.year = parseInt(anime.year, 10) || 0;
                     }
                 });
+                collectAvailableGenres();
+                populateGenreFilter();
+                filteredList = [...animeList];
             } catch (e) {
                 console.error("Failed to parse anime list from localStorage:", e);
-                animeList = []; // Reset if parsing fails
+                animeList = [];
+                filteredList = null;
             }
         } else {
             animeList = [];
+            filteredList = null;
         }
-        renderAnimeList(); // Render the list after loading
+        renderAnimeList();
     };
 
     // Function to save list to local storage
@@ -72,18 +102,28 @@ document.addEventListener('DOMContentLoaded', () => {
         animeTableBody.innerHTML = '';
         emptyListMessage.classList.add('hidden');
 
-        if (animeList.length === 0) {
+        // Use filteredList if filters are active, otherwise use animeList
+        const listToRender = filteredList !== null ? filteredList : animeList;
+        
+        console.log('Rendering list:', listToRender);
+        
+        if (listToRender.length === 0) {
             emptyListMessage.classList.remove('hidden');
             return;
         }
 
-        const sortedList = sortAnimeList(animeList, currentSortColumn, currentSortDirection);
+        const sortedList = sortAnimeList(listToRender, currentSortColumn, currentSortDirection);
 
         sortedList.forEach((anime, index) => {
             const row = animeTableBody.insertRow();
             
+            // # column
+            const numberCell = row.insertCell(0);
+            numberCell.textContent = index + 1;
+            numberCell.className = 'number-column';
+            
             // Name cell with link and tooltip
-            const nameCell = row.insertCell(0);
+            const nameCell = row.insertCell(1);
             const nameLink = document.createElement('a');
             nameLink.href = `https://myanimelist.net/anime/${anime.mal_id}`;
             nameLink.target = '_blank';
@@ -98,19 +138,19 @@ document.addEventListener('DOMContentLoaded', () => {
             nameCell.appendChild(nameLink);
 
             // Season & Year cell
-            row.insertCell(1).textContent = `${anime.season || 'N/A'} ${anime.year || 'N/A'}`;
+            row.insertCell(2).textContent = `${anime.season || 'N/A'} ${anime.year || 'N/A'}`;
             
             // Members cell
-            row.insertCell(2).textContent = anime.members.toLocaleString();
+            row.insertCell(3).textContent = anime.members.toLocaleString();
             
             // Score cell
-            row.insertCell(3).textContent = anime.score ? anime.score.toFixed(2) : 'N/A';
+            row.insertCell(4).textContent = anime.score ? anime.score.toFixed(2) : 'N/A';
 
             // Episodes cell
-            row.insertCell(4).textContent = anime.episodes || '?';
+            row.insertCell(5).textContent = anime.episodes || '?';
 
             // Genres cell
-            const genresCell = row.insertCell(5);
+            const genresCell = row.insertCell(6);
             const genreList = document.createElement('div');
             genreList.className = 'genre-list';
             
@@ -130,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             genresCell.appendChild(genreList);
             
             // Actions cell
-            const actionsCell = row.insertCell(6);
+            const actionsCell = row.insertCell(7);
             
             // Toggle Added button
             const toggleBtn = document.createElement('button');
@@ -160,6 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Function to sort the anime list
+    const SEASON_ORDER = { Winter: 0, Spring: 1, Summer: 2, Fall: 3 };
+
     const sortAnimeList = (list, column, direction) => {
         return [...list].sort((a, b) => {
             let comparison = 0;
@@ -167,15 +209,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const bValue = b[column];
 
             if (column === 'seasonYear') {
+                // Sort by year, then by season order
                 const aYear = a.year || 0;
                 const bYear = b.year || 0;
-                const aSeason = a.season || '';
-                const bSeason = b.season || '';
-
                 if (aYear !== bYear) {
                     comparison = aYear - bYear;
                 } else {
-                    comparison = aSeason.localeCompare(bSeason);
+                    const aSeason = (a.season || '').toString();
+                    const bSeason = (b.season || '').toString();
+                    comparison = (SEASON_ORDER[aSeason] ?? -1) - (SEASON_ORDER[bSeason] ?? -1);
                 }
             } else if (column === 'genres') {
                 // Sort by first genre name
@@ -311,13 +353,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const adultGenres = ['Erotica', 'Ecchi', 'Hentai'];
         const hasAdultGenre = genres.some(genre => adultGenres.includes(genre));
 
+        // Convert members to number, removing commas if present
+        const members = typeof apiData.members === 'string' 
+            ? parseInt(apiData.members.replace(/,/g, ''), 10) || 0
+            : apiData.members || 0;
+
         return {
             mal_id: apiData.mal_id,
             name: apiData.title || apiData.title_english || apiData.title_japanese || 'Unknown Title',
             season: apiData.season,
-            year: apiData.year,
-            members: apiData.members || 0,
-            score: apiData.score || 0,
+            year: parseInt(apiData.year, 10) || 0,
+            members: members,
+            score: parseFloat(apiData.score) || 0,
             episodes: apiData.episodes || 0,
             genres: genres,
             hasAdultGenre: hasAdultGenre,
@@ -622,6 +669,262 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.value = '';
         }
     });
+
+    // --- Filter Functions ---
+    const collectAvailableGenres = () => {
+        availableGenres.clear();
+        animeList.forEach(anime => {
+            if (anime.genres) {
+                anime.genres.forEach(genre => availableGenres.add(genre));
+            }
+        });
+    };
+
+    const populateGenreFilter = () => {
+        genreFilterList.innerHTML = '';
+        const sortedGenres = Array.from(availableGenres).sort();
+        
+        sortedGenres.forEach(genre => {
+            const genreItem = document.createElement('div');
+            genreItem.className = `genre-filter-item ${selectedGenres.has(genre) ? 'selected' : ''} ${['Erotica', 'Ecchi', 'Hentai'].includes(genre) ? 'adult' : ''}`;
+            genreItem.textContent = genre;
+            genreItem.onclick = () => {
+                if (selectedGenres.has(genre)) {
+                    selectedGenres.delete(genre);
+                    genreItem.classList.remove('selected');
+                } else {
+                    selectedGenres.add(genre);
+                    genreItem.classList.add('selected');
+                }
+            };
+            genreFilterList.appendChild(genreItem);
+        });
+    };
+
+    const applyFilters = () => {
+        console.log('Applying filters...');
+        console.log('Current anime list:', animeList);
+        
+        // Check if any filters are active
+        const hasActiveFilters = minScore.value || maxScore.value || minMembers.value || maxMembers.value || 
+            yearFilter.value || seasonFilter.value || statusFilter.value || selectedGenres.size > 0;
+        
+        if (hasActiveFilters) {
+            filteredList = animeList.filter(anime => {
+                console.log('\nChecking anime:', anime.name);
+                
+                // Score filter
+                const minScoreValue = parseFloat(minScore.value);
+                const maxScoreValue = parseFloat(maxScore.value);
+                if (!isNaN(minScoreValue) && anime.score < minScoreValue) {
+                    console.log('Filtered by min score:', anime.score, '<', minScoreValue);
+                    return false;
+                }
+                if (!isNaN(maxScoreValue) && anime.score > maxScoreValue) {
+                    console.log('Filtered by max score:', anime.score, '>', maxScoreValue);
+                    return false;
+                }
+
+                // Members filter
+                const minMembersValue = parseInt(minMembers.value);
+                const maxMembersValue = parseInt(maxMembers.value);
+                console.log('Members check:', {
+                    animeMembers: anime.members,
+                    minMembersValue,
+                    maxMembersValue
+                });
+                if (!isNaN(minMembersValue) && anime.members < minMembersValue) {
+                    console.log('Filtered by min members:', anime.members, '<', minMembersValue);
+                    return false;
+                }
+                if (!isNaN(maxMembersValue) && anime.members > maxMembersValue) {
+                    console.log('Filtered by max members:', anime.members, '>', maxMembersValue);
+                    return false;
+                }
+
+                // Year filter
+                const yearValue = parseInt(yearFilter.value);
+                console.log('Year check:', {
+                    animeYear: anime.year,
+                    yearValue
+                });
+                if (!isNaN(yearValue) && anime.year !== yearValue) {
+                    console.log('Filtered by year:', anime.year, '!==', yearValue);
+                    return false;
+                }
+
+                // Season filter
+                if (seasonFilter.value) {
+                    const animeSeason = (anime.season || '').toLowerCase();
+                    const filterSeason = seasonFilter.value.toLowerCase();
+                    console.log('Season check:', {
+                        animeSeason,
+                        filterSeason
+                    });
+                    if (animeSeason !== filterSeason) {
+                        console.log('Filtered by season:', animeSeason, '!==', filterSeason);
+                        return false;
+                    }
+                }
+
+                // Genre filter
+                if (selectedGenres.size > 0) {
+                    console.log('Genre check:', {
+                        animeGenres: anime.genres,
+                        selectedGenres: Array.from(selectedGenres),
+                        mode: genreFilterMode
+                    });
+                    if (genreFilterMode === 'inclusive') {
+                        if (!anime.genres.some(genre => selectedGenres.has(genre))) {
+                            console.log('Filtered by inclusive genres');
+                            return false;
+                        }
+                    } else {
+                        if (!selectedGenres.every(genre => anime.genres.includes(genre))) {
+                            console.log('Filtered by exclusive genres');
+                            return false;
+                        }
+                    }
+                }
+
+                // Status filter
+                if (statusFilter.value) {
+                    console.log('Status check:', {
+                        animeAdded: anime.added,
+                        filterStatus: statusFilter.value
+                    });
+                    if (statusFilter.value === 'added' && !anime.added) {
+                        console.log('Filtered by status: not added');
+                        return false;
+                    }
+                    if (statusFilter.value === 'not-added' && anime.added) {
+                        console.log('Filtered by status: added');
+                        return false;
+                    }
+                }
+
+                console.log('Anime passed all filters');
+                return true;
+            });
+        } else {
+            // If no filters are active, reset to full list
+            filteredList = null;
+        }
+
+        console.log('Filtered list:', filteredList);
+        renderAnimeList();
+    };
+
+    const resetFilters = () => {
+        minScore.value = '';
+        maxScore.value = '';
+        minMembers.value = '';
+        maxMembers.value = '';
+        yearFilter.value = '';
+        seasonFilter.value = '';
+        statusFilter.value = '';
+        selectedGenres.clear();
+        genreFilterMode = 'inclusive';
+        document.querySelector('input[name="genreFilterMode"][value="inclusive"]').checked = true;
+        populateGenreFilter();
+        filteredList = null;
+        renderAnimeList();
+    };
+
+    // --- Event Handlers ---
+    applyFiltersBtn.addEventListener('click', applyFilters);
+    resetFiltersBtn.addEventListener('click', resetFilters);
+
+    document.querySelectorAll('input[name="genreFilterMode"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            genreFilterMode = e.target.value;
+        });
+    });
+
+    // --- Batch Mode Elements ---
+    batchModeBtn.addEventListener('click', () => {
+        batchModeSection.classList.remove('hidden');
+        inputModeSection.classList.add('hidden');
+        searchModeSection.classList.add('hidden');
+        batchModeBtn.classList.add('active');
+        inputModeBtn.classList.remove('active');
+        searchModeBtn.classList.remove('active');
+        inputStatus.textContent = '';
+        searchResultsDropdown.innerHTML = '';
+    });
+
+    // --- Batch Mode Logic ---
+    const SEASONS = ['Winter', 'Spring', 'Summer', 'Fall'];
+    function getSeasonInterval(startSeason, startYear, endSeason, endYear) {
+        const result = [];
+        let year = startYear;
+        let seasonIdx = SEASONS.indexOf(startSeason);
+        const endIdx = SEASONS.indexOf(endSeason);
+        while (year < endYear || (year === endYear && seasonIdx <= endIdx)) {
+            result.push({ season: SEASONS[seasonIdx], year });
+            if (seasonIdx === 3) {
+                seasonIdx = 0;
+                year++;
+            } else {
+                seasonIdx++;
+            }
+        }
+        return result;
+    }
+
+    async function fetchBatchAnime() {
+        const startSeason = batchStartSeason.value;
+        const startYear = parseInt(batchStartYear.value);
+        const endSeason = batchEndSeason.value;
+        const endYear = parseInt(batchEndYear.value);
+        if (!startSeason || isNaN(startYear) || !endSeason || isNaN(endYear)) {
+            batchStatus.textContent = 'Please select valid start and end seasons/years.';
+            return;
+        }
+        batchStatus.textContent = 'Preparing batch fetch...';
+        batchFetchBtn.disabled = true;
+        let addedCount = 0;
+        let checkedCount = 0;
+        const interval = getSeasonInterval(startSeason, startYear, endSeason, endYear);
+        for (let i = 0; i < interval.length; i++) {
+            const { season, year } = interval[i];
+            for (let page = 1; page <= 4; page++) {
+                batchStatus.textContent = `Fetching ${season} ${year}, page ${page}... (added: ${addedCount})`;
+                try {
+                    const resp = await fetch(`https://api.jikan.moe/v4/seasons/${year}/${season.toLowerCase()}?page=${page}`);
+                    if (!resp.ok) {
+                        batchStatus.textContent = `Error fetching ${season} ${year} page ${page}: ${resp.status}`;
+                        await new Promise(r => setTimeout(r, 1000));
+                        continue;
+                    }
+                    const data = await resp.json();
+                    if (data.data && Array.isArray(data.data)) {
+                        for (const anime of data.data) {
+                            checkedCount++;
+                            if (!animeList.some(a => a.mal_id === anime.mal_id)) {
+                                // Set season/year if missing
+                                if (!anime.season) anime.season = season.toLowerCase;
+                                if (!anime.year) anime.year = year;
+                                const animeData = extractAnimeData(anime);
+                                animeData.searchTerm = `${anime.title} (batch)`;
+                                animeList.push(animeData);
+                                addedCount++;
+                            }
+                        }
+                        saveListToLocalStorage();
+                        renderAnimeList();
+                    }
+                } catch (e) {
+                    batchStatus.textContent = `Error: ${e.message}`;
+                }
+                await new Promise(r => setTimeout(r, 1000));
+            }
+        }
+        batchStatus.textContent = `Batch complete! Added ${addedCount} new anime (checked ${checkedCount}).`;
+        batchFetchBtn.disabled = false;
+    }
+
+    batchFetchBtn.addEventListener('click', fetchBatchAnime);
 
     // --- Initialization ---
     loadListFromLocalStorage();

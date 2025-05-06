@@ -6,14 +6,16 @@
     <title>Jikan Anime List App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
 </head>
 <body>
 
     <h1>Jikan Anime List App</h1>
 
     <div class="mode-switcher">
-        <button id="inputModeBtn" class="active">Input Mode</button>
+        <button id="inputModeBtn" class="active">List Mode</button>
         <button id="searchModeBtn">Search Mode</button>
+        <button id="batchModeBtn">Batch Mode</button>
     </div>
 
     <div id="inputModeSection" class="mode-section">
@@ -32,6 +34,35 @@
             </div>
         </div>
 
+    <div id="batchModeSection" class="mode-section hidden">
+        <h2>Batch Add Anime by Season Interval</h2>
+        <div class="batch-controls">
+            <div class="batch-group">
+                <label for="batchStartSeason">Start Season</label>
+                <select id="batchStartSeason">
+                    <option value="Winter">Winter</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Fall">Fall</option>
+                </select>
+                <input type="number" id="batchStartYear" min="1900" max="2100" placeholder="Year">
+            </div>
+            <span style="align-self: flex-end;">to</span>
+            <div class="batch-group">
+                <label for="batchEndSeason">End Season</label>
+                <select id="batchEndSeason">
+                    <option value="Winter">Winter</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Fall">Fall</option>
+                </select>
+                <input type="number" id="batchEndYear" min="1900" max="2100" placeholder="Year">
+            </div>
+            <button id="batchFetchBtn">Fetch & Add Batch</button>
+        </div>
+        <div id="batchStatus" class="status-area"></div>
+    </div>
+
     <hr>
 
     <div class="anime-list-section">
@@ -42,17 +73,81 @@
             <label for="importListInput" class="import-btn">Import List
                 <input type="file" id="importListInput" accept=".json" style="display: none;">
             </label>
+            <div class="filter-buttons-inline">
+                <button id="applyFiltersBtn">Apply Filters</button>
+                <button id="resetFiltersBtn">Reset Filters</button>
+            </div>
         </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h3>Filters</h3>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="minScore">Min Score</label>
+                    <input type="number" id="minScore" min="0" max="10" step="0.1" placeholder="0">
+                </div>
+                <div class="filter-group">
+                    <label for="maxScore">Max Score</label>
+                    <input type="number" id="maxScore" min="0" max="10" step="0.1" placeholder="10">
+                </div>
+                <div class="filter-group">
+                    <label for="minMembers">Min Members</label>
+                    <input type="number" id="minMembers" min="0" placeholder="0">
+                </div>
+                <div class="filter-group">
+                    <label for="maxMembers">Max Members</label>
+                    <input type="number" id="maxMembers" min="0" placeholder="1000000">
+                </div>
+                <div class="filter-group">
+                    <label for="yearFilter">Year</label>
+                    <input type="number" id="yearFilter" min="1900" max="2100" placeholder="Year">
+                </div>
+                <div class="filter-group">
+                    <label for="seasonFilter">Season</label>
+                    <select id="seasonFilter">
+                        <option value="">All Seasons</option>
+                        <option value="Winter">Winter</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Fall">Fall</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter">Status</label>
+                    <select id="statusFilter">
+                        <option value="">All</option>
+                        <option value="added">Added to List</option>
+                        <option value="not-added">Not Added</option>
+                    </select>
+                </div>
+            </div>
+            <div class="genre-row">
+                <div class="genre-filter-mode">
+                    <label>
+                        <input type="radio" name="genreFilterMode" value="inclusive" checked>
+                        Include any selected
+                    </label>
+                    <label>
+                        <input type="radio" name="genreFilterMode" value="exclusive">
+                        Include all selected
+                    </label>
+                </div>
+                <div id="genreFilterList" class="genre-filter-list"></div>
+            </div>
+        </div>
+
         <table id="animeTable">
             <thead>
                 <tr>
+                    <th class="number-column">#</th>
                     <th data-sort-by="name">Name</th>
                     <th data-sort-by="seasonYear">Season & Year</th>
                     <th data-sort-by="members">Members</th>
                     <th data-sort-by="score">Score</th>
-                    <th data-sort-by="episodes">Episodes</th>
+                    <th data-sort-by="episodes">Ep</th>
                     <th>Genres</th>
-                    <th>Actions</th>
+                    <th class="actions-column" style="min-width: 100px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
