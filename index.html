@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="favicon.png" type="image/png">
 </head>
+
 <body>
 
-    <h1>Jikan Anime List App</h1>
+    <h1>My Anime List</h1>
 
     <div class="mode-switcher">
         <button id="inputModeBtn" class="active">List Mode</button>
         <button id="searchModeBtn">Search Mode</button>
         <button id="batchModeBtn">Batch Mode</button>
+        <button id="hideModeBtn">Hidden Mode</button>
     </div>
 
     <div id="inputModeSection" class="mode-section">
@@ -31,8 +34,8 @@
         <p>Type an anime name to search.</p>
         <input type="text" id="animeSearchInput" placeholder="Search for an anime...">
         <div id="searchResultsDropdown" class="dropdown-results">
-            </div>
         </div>
+    </div>
 
     <div id="batchModeSection" class="mode-section hidden">
         <h2>Batch Add Anime by Season Interval</h2>
@@ -58,30 +61,45 @@
                 </select>
                 <input type="number" id="batchEndYear" min="1900" max="2100" placeholder="Year">
             </div>
+            <div class="batch-group">
+                <label for="initialPage">Initial Page</label>
+                <input type="number" id="initialPage" min="1" placeholder="1">
+            </div>
+            <div class="batch-group">
+                <label for="finalPage">Final Page</label>
+                <input type="number" id="finalPage" min="1" placeholder="4">
+            </div>
+            <div class="batch-group" style="align-self: flex-end;">
+                <label style="font-weight: normal;">
+                    <input type="checkbox" id="batchMinMembersCheckbox"> Only add anime with at least 1000 members
+                </label>
+            </div>
             <button id="batchFetchBtn">Fetch & Add Batch</button>
         </div>
         <div id="batchStatus" class="status-area"></div>
     </div>
-
-    <hr>
-
     <div class="anime-list-section">
-        <h2>My Anime List</h2>
         <div class="list-actions">
             <button id="clearListBtn" class="clear-btn">Clear List</button>
             <button id="exportListBtn" class="export-btn">Export List</button>
             <label for="importListInput" class="import-btn">Import List
-                <input type="file" id="importListInput" accept=".json" style="display: none;">
+                <input class="import-btn" type="file" id="importListInput" accept=".json" style="display: none;">
             </label>
             <div class="filter-buttons-inline">
                 <button id="applyFiltersBtn">Apply Filters</button>
                 <button id="resetFiltersBtn">Reset Filters</button>
+                <button id="previousYearBtn"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="year-season-btn">Year</span>
+                <button id="nextYearBtn"><i class="fa-solid fa-arrow-right"></i></button>
+                <button id="previousSeasonBtn"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="year-season-btn">Season</span>
+                <button id="nextSeasonBtn"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
 
         <!-- Filter Section -->
         <div class="filter-section">
-            <h3>Filters</h3>
+            <!-- <h3>Filters</h3> -->
             <div class="filter-row">
                 <div class="filter-group">
                     <label for="minScore">Min Score</label>
@@ -101,7 +119,7 @@
                 </div>
                 <div class="filter-group">
                     <label for="yearFilter">Year</label>
-                    <input type="number" id="yearFilter" min="1900" max="2100" placeholder="Year">
+                    <input type="number" id="yearFilter" min="1900" max="2100" placeholder="Year" value="2025">
                 </div>
                 <div class="filter-group">
                     <label for="seasonFilter">Season</label>
@@ -151,7 +169,7 @@
                 </tr>
             </thead>
             <tbody>
-                </tbody>
+            </tbody>
         </table>
         <p id="emptyListMessage">Your list is empty.</p>
     </div>
@@ -170,4 +188,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
