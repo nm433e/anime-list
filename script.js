@@ -48,12 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const previousSeasonBtn = document.getElementById('previousSeasonBtn');
     const nextSeasonBtn = document.getElementById('nextSeasonBtn');
 
+    // --- Static Data ---
+    const ALL_STATIC_GENRES = [
+        "Action", "Adventure", "Avant Garde", "Award Winning", "Boys Love", "Comedy", "Drama",
+        "Ecchi", "Erotica", "Fantasy", "Girls Love", "Gourmet", "Hentai", "Horror", "Mystery",
+        "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Suspense"
+    ].sort(); // Ensure alphabetical order
+
     // --- State Variables ---
     let animeList = []; // Array to hold anime objects
     let filteredList = null;
-    let availableGenres = new Set();
     let selectedGenres = new Set();
-    let genreFilterMode = 'inclusive'; // 'inclusive' or 'exclusive'
+    let genreFilterMode = 'inclusive'; // 'inclusive', 'all_selected', or 'none_selected'
     const JIKAN_API_BASE_URL = 'https://api.jikan.moe/v4';
     const INPUT_MODE_DELAY = 1500; // 1.5 seconds delay between requests in input mode
     let currentSortColumn = 'name'; // Default sort column
@@ -84,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         anime.year = parseInt(anime.year, 10) || 0;
                     }
                 });
-                collectAvailableGenres();
                 populateGenreFilter();
                 filteredList = [...animeList];
             } catch (e) {
@@ -302,17 +307,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Delete Function ---
     const deleteAnime = (index) => {
         if (confirm('Are you sure you want to delete this anime from your list?')) {
-            // Get the anime from the sorted list
-            const sortedList = sortAnimeList(animeList, currentSortColumn, currentSortDirection);
-            const animeToDelete = sortedList[index];
-            
-            // Find the actual index in the original list using MAL ID
-            const actualIndex = animeList.findIndex(anime => anime.mal_id === animeToDelete.mal_id);
-            
-            if (actualIndex !== -1) {
-                animeList.splice(actualIndex, 1);
+            const listCurrentlyDisplayed = filteredList !== null ? filteredList : animeList;
+            const sortedDisplayedList = sortAnimeList(listCurrentlyDisplayed, currentSortColumn, currentSortDirection);
+            const animeToDelete = sortedDisplayedList[index];
+
+            if (!animeToDelete) {
+                console.error("Error: Could not find the anime to delete from displayed list at index:", index);
+                return;
+            }
+
+            const actualIndexInMainAnimeList = animeList.findIndex(anime => anime.mal_id === animeToDelete.mal_id);
+
+            if (actualIndexInMainAnimeList !== -1) {
+                animeList.splice(actualIndexInMainAnimeList, 1);
                 saveListToLocalStorage();
-                renderAnimeList();
+
+                if (filteredList !== null) {
+                    applyFilters();
+                } else {
+                    renderAnimeList();
+                }
+            } else {
+                console.error("Error: Anime found in displayed list for deletion but not in main animeList. MAL_ID:", animeToDelete.mal_id);
             }
         }
     };
@@ -389,14 +405,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to toggle anime added status
     const toggleAnimeAdded = (index) => {
-        const sortedList = sortAnimeList(animeList, currentSortColumn, currentSortDirection);
-        const animeToToggle = sortedList[index];
-        const actualIndex = animeList.findIndex(anime => anime.mal_id === animeToToggle.mal_id);
-        
-        if (actualIndex !== -1) {
-            animeList[actualIndex].added = !animeList[actualIndex].added;
+        const listCurrentlyDisplayed = filteredList !== null ? filteredList : animeList;
+        const sortedDisplayedList = sortAnimeList(listCurrentlyDisplayed, currentSortColumn, currentSortDirection);
+        const animeToToggle = sortedDisplayedList[index];
+
+        if (!animeToToggle) {
+            console.error("Error: Could not find the anime to toggle from displayed list at index:", index);
+            return;
+        }
+
+        const actualIndexInMainAnimeList = animeList.findIndex(a => a.mal_id === animeToToggle.mal_id);
+
+        if (actualIndexInMainAnimeList !== -1) {
+            animeList[actualIndexInMainAnimeList].added = !animeList[actualIndexInMainAnimeList].added;
             saveListToLocalStorage();
-            renderAnimeList();
+
+            if (filteredList !== null) {
+                applyFilters();
+            } else {
+                renderAnimeList();
+            }
+        } else {
+            console.error("Error: Anime found in displayed list for toggle but not in main animeList. MAL_ID:", animeToToggle.mal_id);
         }
     };
 
@@ -690,19 +720,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Filter Functions ---
-    const collectAvailableGenres = () => {
-        availableGenres.clear();
-        animeList.forEach(anime => {
-            if (anime.genres) {
-                anime.genres.forEach(genre => availableGenres.add(genre));
-            }
-        });
-    };
-
     const populateGenreFilter = () => {
         genreFilterList.innerHTML = '';
-        const sortedGenres = Array.from(availableGenres).sort();
-        
+        // Use the static list of genres
+        const sortedGenres = ALL_STATIC_GENRES; // Already sorted during definition
+
         sortedGenres.forEach(genre => {
             const genreItem = document.createElement('div');
             genreItem.className = `genre-filter-item ${selectedGenres.has(genre) ? 'selected' : ''} ${['Erotica', 'Ecchi', 'Hentai'].includes(genre) ? 'adult' : ''}`;
@@ -794,13 +816,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         mode: genreFilterMode
                     });
                     if (genreFilterMode === 'inclusive') {
-                        if (!anime.genres.some(genre => selectedGenres.has(genre))) {
-                            console.log('Filtered by inclusive genres');
+                        if (!anime.genres || !anime.genres.some(genre => selectedGenres.has(genre))) {
+                            console.log('Filtered by inclusive genres - anime does not have any selected genre');
                             return false;
                         }
-                    } else {
-                        if (!selectedGenres.every(genre => anime.genres.includes(genre))) {
-                            console.log('Filtered by exclusive genres');
+                    } else if (genreFilterMode === 'all_selected') { // Anime must have ALL selected genres
+                        if (!anime.genres || !Array.from(selectedGenres).every(selGenre => anime.genres.includes(selGenre))) {
+                            console.log('Filtered by exclusive/all_selected genres - anime does not have all selected genres');
+                            return false;
+                        }
+                    } else if (genreFilterMode === 'none_selected') { // Anime must have NONE of the selected genres
+                        if (anime.genres && anime.genres.some(genre => selectedGenres.has(genre))) {
+                            console.log('Filtered by none_selected (exclude) genres - anime has one or more of the selected genres');
                             return false;
                         }
                     }
@@ -843,8 +870,15 @@ document.addEventListener('DOMContentLoaded', () => {
         seasonFilter.value = '';
         statusFilter.value = '';
         selectedGenres.clear();
-        genreFilterMode = 'inclusive';
+        genreFilterMode = 'inclusive'; // Default mode
         document.querySelector('input[name="genreFilterMode"][value="inclusive"]').checked = true;
+        // Ensure other radio buttons for genre modes are unchecked if they exist
+        if (document.querySelector('input[name="genreFilterMode"][value="all_selected"]')) {
+            document.querySelector('input[name="genreFilterMode"][value="all_selected"]').checked = false;
+        }
+        if (document.querySelector('input[name="genreFilterMode"][value="none_selected"]')) {
+            document.querySelector('input[name="genreFilterMode"][value="none_selected"]').checked = false;
+        }
         populateGenreFilter();
         filteredList = null;
         renderAnimeList();
@@ -902,7 +936,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const endSeason = batchEndSeason.value;
         const endYear = parseInt(batchEndYear.value);
         const minMembersEnabled = batchMinMembersCheckbox.checked;
-        const minMembersValue = 1000;
+        const minMembersValue = 10000;
         if (!startSeason || isNaN(startYear) || !endSeason || isNaN(endYear)) {
             batchStatus.textContent = 'Please select valid start and end seasons/years.';
             return;

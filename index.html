@@ -119,7 +119,7 @@
                 </div>
                 <div class="filter-group">
                     <label for="yearFilter">Year</label>
-                    <input type="number" id="yearFilter" min="1900" max="2100" placeholder="Year" value="2025">
+                    <input type="number" id="yearFilter" min="1900" max="2100" placeholder="Year">
                 </div>
                 <div class="filter-group">
                     <label for="seasonFilter">Season</label>
@@ -142,13 +142,17 @@
             </div>
             <div class="genre-row">
                 <div class="genre-filter-mode">
-                    <label>
-                        <input type="radio" name="genreFilterMode" value="inclusive" checked>
-                        Include any selected
+                    <label for="genreFilterModeInclusive">
+                        <input type="radio" id="genreFilterModeInclusive" name="genreFilterMode" value="inclusive" checked>
+                        Include Any Selected (Default)
                     </label>
-                    <label>
-                        <input type="radio" name="genreFilterMode" value="exclusive">
-                        Include all selected
+                    <label for="genreFilterModeAll">
+                        <input type="radio" id="genreFilterModeAll" name="genreFilterMode" value="all_selected">
+                        Include All Selected
+                    </label>
+                    <label for="genreFilterModeNone">
+                        <input type="radio" id="genreFilterModeNone" name="genreFilterMode" value="none_selected">
+                        Exclude All Selected
                     </label>
                 </div>
                 <div id="genreFilterList" class="genre-filter-list"></div>
