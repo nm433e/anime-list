@@ -421,11 +421,16 @@ hr {
     color: #222;
 }
 
+label.filter-modes{
+    width: 100%;
+    font-size: 0.9em;
+}
+
 .genre-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 20px;
+    gap: 0px;
     margin-top: 10px;
 }
 
@@ -433,12 +438,13 @@ hr {
     display: flex;
     gap: 15px;
     align-items: center;
+    min-width: 25%;
 }
 
 .genre-filter-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
     padding: 8px 0;
     background: none;
     border: none;
@@ -449,9 +455,9 @@ hr {
 .genre-filter-item {
     background: #e0e0e0;
     color: #333;
-    padding: 5px 12px;
+    padding: 2px 5px;
     border-radius: 15px;
-    font-size: 0.95em;
+    font-size: 0.75em;
     cursor: pointer;
     transition: all 0.2s;
     border: 1px solid #ccc;
@@ -513,6 +519,12 @@ hr {
     background: #545b62;
 }
 
+.results-count-message {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 0.95em;
+    color: #555;
+}
 
 @media (max-width: 900px) {
     .filter-row, .genre-row {
@@ -532,7 +544,6 @@ hr {
         justify-content: flex-end;
     }
 }
-
 
 #animeTable {
     width: 100%;
@@ -604,7 +615,12 @@ hr {
 
 #animeTable th:nth-child(7),
 #animeTable td:nth-child(7) {
-    width: 20%;      /* Adjust as needed */
+    width: 20%;      /* Genres */
+}
+
+#animeTable th:nth-child(8),
+#animeTable td:nth-child(8) {
+    width: 20%;      /* Themes - New Column */
 }
 
 .actions-column {
@@ -625,4 +641,47 @@ button.year-season-btn:hover{
 }
 #resetFiltersBtn{
     margin-right: 15px;
+}
+
+/* Theme Filter Styling (mirroring Genre) */
+.theme-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.theme-filter-mode {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    min-width: 25%;
+}
+
+.theme-filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px 0;
+    background: none;
+    border: none;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.theme-filter-item {
+    background: #e0e0e0;
+    color: #333;
+    padding: 2px 5px;
+    border-radius: 15px;
+    font-size: 0.75em;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #ccc;
+}
+
+.theme-filter-item.selected {
+    background: #17a2b8; /* Different color for themes for visual distinction */
+    color: #fff;
+    border-color: #17a2b8;
 }

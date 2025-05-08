@@ -1,4 +1,19 @@
+// Clean v2 rules are the following:
+// Rule 0: Remove Hentai
+// Rule 1: More than 50k members special rules
+// Rule 2: Remove less than 25k members
+// Rule 3a: Ecchi/Erotica with score < 5.5
+// Rule 3b: Not Ecchi/Erotica with score < 6.0
+// Rule 4: Remove if year is before 2005 (DEFAULT, THERE'S NO ANIME BEFORE 2005 IN THE DATABASE)
+
 const fs = require('node:fs/promises');
+
+// Configuration
+const yearMin = 2005;
+const yearMax = 2025;
+const globalScore = 6;
+const ecchiGlobalScore = 5.5;
+const minimumMembers = 25000;
 
 async function cleanAnimeDatabase(inputFilePath) {
     try {
@@ -8,11 +23,12 @@ async function cleanAnimeDatabase(inputFilePath) {
         const cleanedList = animeList.filter(anime => {
             
             const isEcchiOrErotica = anime.genres.includes("Ecchi") || anime.genres.includes("Erotica");
-            // Rule 0: Remove Hentai
+            // Rule 0a: Remove Hentai
             if (anime.genres.includes("Hentai")) {
                 return false;
             }
-            if(anime.year < 2015){
+            // Rule 0b: Remove if year X
+            if(yearMin && yearMax && (anime.year < yearMin || anime.year > yearMax)){
                 return false;
             }
             // Rule 1: More than 50k members special rules
@@ -24,16 +40,16 @@ async function cleanAnimeDatabase(inputFilePath) {
             }
 
             // Rule 2: Remove less than 25k viewers
-            if (anime.members < 25000) {
+            if (anime.members < minimumMembers) {
                 return false;
             }
             // Rule 3a: Ecchi/Erotica with score < 5.5
-            if (isEcchiOrErotica && anime.score < 5.5) {
+            if (isEcchiOrErotica && anime.score < ecchiGlobalScore) {
                 return false;
             }
 
             // Rule 3b: Not Ecchi/Erotica with score < 6.0
-            if (!isEcchiOrErotica && anime.score < 6.0) {
+            if (!isEcchiOrErotica && anime.score < globalScore) {
                 return false;
             }
 

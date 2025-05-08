@@ -15,13 +15,13 @@
     <h1>My Anime List</h1>
 
     <div class="mode-switcher">
-        <button id="inputModeBtn" class="active">List Mode</button>
+        <button id="inputModeBtn">List Mode</button>
         <button id="searchModeBtn">Search Mode</button>
         <button id="batchModeBtn">Batch Mode</button>
-        <button id="hideModeBtn">Hidden Mode</button>
+        <button id="hideModeBtn" class="active">Hidden Mode</button>
     </div>
 
-    <div id="inputModeSection" class="mode-section">
+    <div id="inputModeSection" class="mode-section hidden">
         <h2>Add Anime from List</h2>
         <p>Paste anime names or IDs, one per line.</p>
         <textarea id="animeInputList" rows="10" cols="50" placeholder="Enter anime names or IDs here..."></textarea>
@@ -118,6 +118,14 @@
                     <input type="number" id="maxMembers" min="0" placeholder="1000000">
                 </div>
                 <div class="filter-group">
+                    <label for="minEpisodesFilter">Min Episodes</label>
+                    <input type="number" id="minEpisodesFilter" min="0" placeholder="0">
+                </div>
+                <div class="filter-group">
+                    <label for="maxEpisodesFilter">Max Episodes</label>
+                    <input type="number" id="maxEpisodesFilter" min="0" placeholder="e.g. 100">
+                </div>
+                <div class="filter-group">
                     <label for="yearFilter">Year</label>
                     <input type="number" id="yearFilter" min="1900" max="2100" placeholder="Year">
                 </div>
@@ -142,22 +150,46 @@
             </div>
             <div class="genre-row">
                 <div class="genre-filter-mode">
-                    <label for="genreFilterModeInclusive">
+                    <label for="genreFilterModeInclusive" class="filter-modes">
                         <input type="radio" id="genreFilterModeInclusive" name="genreFilterMode" value="inclusive" checked>
-                        Include Any Selected (Default)
+                        Any Selected
                     </label>
-                    <label for="genreFilterModeAll">
+                    <label for="genreFilterModeAll" class="filter-modes">
                         <input type="radio" id="genreFilterModeAll" name="genreFilterMode" value="all_selected">
-                        Include All Selected
+                        All Selected
                     </label>
-                    <label for="genreFilterModeNone">
+                    <label for="genreFilterModeNone" class="filter-modes">
                         <input type="radio" id="genreFilterModeNone" name="genreFilterMode" value="none_selected">
-                        Exclude All Selected
+                        Exclude All
                     </label>
                 </div>
                 <div id="genreFilterList" class="genre-filter-list"></div>
             </div>
+            <div class="theme-row">
+                <div class="theme-filter-mode">
+                    <label for="themeFilterModeInclusive" class="filter-modes"  >
+                        <input type="radio" id="themeFilterModeInclusive" name="themeFilterMode" value="inclusive" checked>
+                        Any Selected
+                    </label>
+                    <label for="themeFilterModeAll" class="filter-modes">
+                        <input type="radio" id="themeFilterModeAll" name="themeFilterMode" value="all_selected">
+                        All Selected
+                    </label>
+                    <label for="themeFilterModeNone" class="filter-modes">
+                        <input type="radio" id="themeFilterModeNone" name="themeFilterMode" value="none_selected">
+                        Exclude All
+                    </label>
+                </div>
+                <div id="themeFilterList" class="theme-filter-list"></div>
+            </div>
         </div>
+
+        <!-- Theme Filter Section -->
+        <div class="filter-section" id="themeFilterSection">
+
+        </div>
+
+        <div id="resultsCountMessage" class="results-count-message"></div>
 
         <table id="animeTable">
             <thead>
@@ -169,6 +201,7 @@
                     <th data-sort-by="score">Score</th>
                     <th data-sort-by="episodes">Ep</th>
                     <th>Genres</th>
+                    <th>Themes</th>
                     <th class="actions-column" style="min-width: 100px;">Actions</th>
                 </tr>
             </thead>
