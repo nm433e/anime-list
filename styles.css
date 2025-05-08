@@ -1,143 +1,628 @@
-/* Filter Section */
-.filter-section {
-    background: #2a2a2a;
-    border-radius: 8px;
-    padding: 20px;
+/* Basic body styling */
+body {
+    font-family: sans-serif; /* Use a common sans-serif font */
+    margin: 20px; /* Add some margin around the content */
+    line-height: 1.6; /* Improve readability */
+    background-color: #f4f4f4; /* Light background */
+    color: #333; /* Dark text */
+}
+
+/* Heading styling */
+h1, h2 {
+    color: #555;
+}
+
+/* Mode switcher buttons */
+.mode-switcher {
     margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mode-switcher button {
+    padding: 10px 15px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    background-color: #c3acd8;
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.mode-switcher button.active {
+    background-color: #6217c4;
+    background-color: #6217c4; /* Highlight active button */
+    color: white;
+    border-color: #6217c4;
+}
+
+.mode-switcher button:hover:not(.active) {
+    background-color: #ddd;
+}
+
+/* Mode sections */
+.mode-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Hide sections that are not active */
+.mode-section.hidden {
+    display: none;
+}
+
+/* Textarea and Input styling */
+textarea, input[type="text"] {
+    width: calc(100% - 22px); /* Adjust width considering padding and border */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Button styling */
+button {
+    padding: 10px 15px;
+    background-color: #681bb1; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Status area for messages */
+.status-area {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    min-height: 1.6em; /* Ensure it has some height even when empty */
+}
+
+/* Horizontal rule */
+hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* Anime List Section */
+.anime-list-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+#animeTable {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between borders */
+    margin-top: 15px;
+}
+
+#animeTable th, #animeTable td {
+    border: 1px solid #ddd; /* Add borders */
+    padding: 5px 7px 5px 7px;
+    text-align: left;
+}
+
+#animeTable th {
+    background-color: #6217c4; /* Header background */
+    color: white;
+    cursor: pointer; /* Indicate clickable headers */
+    transition: background-color 0.3s ease;
+}
+
+#animeTable th:hover {
+    background-color: #0056b3;
+}
+
+#animeTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Zebra striping for rows */
+}
+
+/* Message for empty list */
+#emptyListMessage {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Dropdown results for search mode */
+.dropdown-results {
+    border: 1px solid #ccc;
+    border-top: none; /* No top border to connect to input */
+    max-height: 200px; /* Limit height and add scroll */
+    overflow-y: auto;
+    position: absolute; /* Position relative to the input */
+    z-index: 100; /* Ensure it's above other content */
+    background-color: #fff;
+    width: calc(100% - 40px); /* Match input width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 4px 4px; /* Rounded bottom corners */
+}
+
+.dropdown-results div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee; /* Separator between results */
+}
+
+.dropdown-results div:last-child {
+    border-bottom: none;
+}
+
+.dropdown-results div:hover {
+    background-color: #f8f9fa;
+}
+
+/* Hide dropdown initially */
+.dropdown-results:empty {
+    display: none;
+}
+
+/* Action buttons */
+.action-btn {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.action-btn i {
+    font-size: 1em;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.toggle-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.toggle-btn.added {
+    background-color: #28a745;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+/* Anime name link */
+.anime-name-link {
+    color: #6217c4;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.anime-name-link:hover {
+    text-decoration: underline;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#newAnimeId {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#confirmEdit {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* List Actions */
+.list-actions {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Clear List Button */
+.clear-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: sans-serif;
+    font-size: medium;
+}
+
+.clear-btn:hover {
+    background-color: #c82333;
+}
+
+/* Export Button */
+.export-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: medium;
+    font-family: sans-serif;
+}
+
+.export-btn:hover {
+    background-color: #218838;
+}
+
+/* Import Button */
+.import-btn {
+    font-size: medium;
+    font-family: sans-serif;
+    background-color: #17a2b8;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.import-btn:hover {
+    background-color: #138496;
+}
+
+/* Adult Genre Styling */
+.genre.adult {
+    color: #ff69b4; /* Hot pink */
+}
+
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.genre {
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+}
+
+/* Filter Section Modern Layout */
+.filter-section {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .filter-section h3 {
-    color: #fff;
-    margin: 0 0 15px 0;
-    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #222;
 }
 
-.filter-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+    margin-bottom: 10px;
 }
 
 .filter-group {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    min-width: 140px;
+    flex: 1 1 140px;
+    gap: 4px;
 }
 
 .filter-group label {
-    color: #ccc;
-    font-size: 0.9em;
+    color: #555;
+    font-size: 0.95em;
+    margin-bottom: 2px;
 }
 
 .filter-group input,
 .filter-group select {
-    background: #3a3a3a;
-    border: 1px solid #4a4a4a;
+    padding: 7px 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    color: #fff;
-    padding: 8px;
-    font-size: 0.9em;
+    font-size: 1em;
+    background: #f8f8f8;
+    color: #222;
 }
 
-.filter-group input:focus,
-.filter-group select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.genre-filter {
-    margin-top: 15px;
-}
-
-.genre-filter-header {
+.genre-row {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 20px;
+    margin-top: 10px;
 }
 
 .genre-filter-mode {
     display: flex;
     gap: 15px;
-}
-
-.genre-filter-mode label {
-    display: flex;
     align-items: center;
-    gap: 5px;
-    color: #ccc;
-    font-size: 0.9em;
-    cursor: pointer;
 }
 
 .genre-filter-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    max-height: 150px;
+    padding: 8px 0;
+    background: none;
+    border: none;
+    max-height: 100px;
     overflow-y: auto;
-    padding: 10px;
-    background: #3a3a3a;
-    border-radius: 4px;
 }
 
 .genre-filter-item {
-    background: #4a4a4a;
-    color: #fff;
-    padding: 5px 10px;
+    background: #e0e0e0;
+    color: #333;
+    padding: 5px 12px;
     border-radius: 15px;
-    font-size: 0.9em;
+    font-size: 0.95em;
     cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.genre-filter-item:hover {
-    background: #5a5a5a;
+    transition: all 0.2s;
+    border: 1px solid #ccc;
 }
 
 .genre-filter-item.selected {
-    background: #007bff;
+    background: #6217c4;
+    color: #fff;
+    border-color: #6217c4;
 }
 
 .genre-filter-item.adult {
-    background: #ff4444;
+    background: #ffecf0;
+    color: #e75480;
+    border-color: #e75480;
 }
 
-.genre-filter-item.adult:hover {
-    background: #ff6666;
+.genre-filter-item.selected.adult {
+    background: #e75480;
+    color: #fff;
+    border-color: #e75480;
 }
 
-.filter-buttons {
+/* Inline filter buttons with list actions */
+.list-actions {
     display: flex;
     gap: 10px;
-    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
-.filter-buttons button {
+.filter-buttons-inline {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.filter-buttons-inline button {
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
-    font-size: 0.9em;
+    font-size: 0.95em;
     cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#applyFiltersBtn {
-    background: #007bff;
+    background: #9133e9;
     color: white;
+    transition: background-color 0.2s;
 }
 
-#applyFiltersBtn:hover {
-    background: #0056b3;
+.filter-buttons-inline button:hover {
+    background: #511985;
 }
 
 #resetFiltersBtn {
     background: #6c757d;
-    color: white;
 }
 
 #resetFiltersBtn:hover {
-    background: #5a6268;
-} 
+    background: #545b62;
+}
+
+
+@media (max-width: 900px) {
+    .filter-row, .genre-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .filter-group {
+        min-width: 100%;
+        flex: 1 1 100%;
+    }
+    .list-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-buttons-inline {
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+}
+
+
+#animeTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    table-layout: fixed; /* Keep this for predictable behavior */
+}
+
+#animeTable th, #animeTable td {
+    border: 1px solid #ddd;
+    padding: 5px 7px 5px 7px;
+    text-align: left;
+    overflow: hidden; /* Prevent content overflow */
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+#animeTable th {
+    background-color: #6217c4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#animeTable th:hover {
+    background-color: #0056b3;
+}
+
+#animeTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Message for empty list */
+#emptyListMessage {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* --- Column Widths --- */
+#animeTable th[data-sort-by="name"],
+#animeTable td:nth-child(1) {
+    width: 4%;      /* Adjust as needed - Main content column */
+}
+#animeTable th[data-sort-by="name"],
+#animeTable td:nth-child(2) {
+    width: 40%;      /* Adjust as needed - Main content column */
+}
+
+#animeTable th[data-sort-by="seasonYear"],
+#animeTable td:nth-child(3) {
+    width: 8%;      /* Adjust as needed */
+}
+
+#animeTable th[data-sort-by="members"],
+#animeTable td:nth-child(4) {
+    width: 6%;      /* Adjust as needed */
+}
+
+#animeTable th[data-sort-by="score"],
+#animeTable td:nth-child(5) {
+    width: 3%;       /* Adjust as needed - Smaller column */
+}
+
+#animeTable th[data-sort-by="episodes"],
+#animeTable td:nth-child(6) {
+    width: 3%;       /* Adjust as needed - Smaller column */
+}
+
+#animeTable th:nth-child(7),
+#animeTable td:nth-child(7) {
+    width: 20%;      /* Adjust as needed */
+}
+
+.actions-column {
+    width: 6%;      /* Set a reasonable width */
+    /* min-width: 80px; And a minimum */
+}
+th.number-column{
+    width: 3%; 
+}
+
+button.year-season-btn{
+    cursor: default;
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+}
+button.year-season-btn:hover{
+    background-color: #9133e9;
+}
+#resetFiltersBtn{
+    margin-right: 15px;
+}
