@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Global Tooltip Element ---
+    let globalTooltip = null; // Will be created once
+    function createGlobalTooltip() {
+        if (!globalTooltip) {
+            globalTooltip = document.createElement('div');
+            globalTooltip.id = 'globalAnimeTooltip';
+            // Base styles will be in CSS, initially hidden
+            document.body.appendChild(globalTooltip);
+        }
+    }
+    createGlobalTooltip(); // Create it on DOM ready
+
     // --- Element References ---
     const inputModeBtn = document.getElementById('inputModeBtn');
     const searchModeBtn = document.getElementById('searchModeBtn');
@@ -106,6 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (typeof anime.year !== 'number') {
                         anime.year = parseInt(anime.year, 10) || 0;
                     }
+                    if (!anime.themes) {
+                        anime.themes = [];
+                    }
+                    if (anime.cover === undefined) {
+                        anime.cover = '';
+                    }
+                    if (anime.synopsis === undefined) {
+                        anime.synopsis = 'Synopsis not available.';
+                    }
                 });
                 populateGenreFilter();
                 populateThemeFilter();
@@ -156,18 +177,72 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Name cell with link and tooltip
             const nameCell = row.insertCell(1);
+            
             const nameLink = document.createElement('a');
             nameLink.href = `https://myanimelist.net/anime/${anime.mal_id}`;
             nameLink.target = '_blank';
-            nameLink.className = 'anime-name-link tooltip';
+            nameLink.className = 'anime-name-link';
             nameLink.textContent = anime.name;
             
-            // Add tooltip
-            const tooltip = document.createElement('span');
-            tooltip.className = 'tooltip-text';
-            tooltip.textContent = `Search term: ${anime.searchTerm || anime.name}`;
-            nameLink.appendChild(tooltip);
             nameCell.appendChild(nameLink);
+
+            // Tooltip positioning and visibility logic using GLOBAL tooltip
+            nameLink.addEventListener('mouseenter', (event) => {
+                // 1. Populate globalTooltip content
+                globalTooltip.innerHTML = `
+                    <h4 class="tooltip-title">${anime.name}</h4>
+                    <div class="tooltip-middle-section">
+                        <img src="${anime.cover || 'placeholder.png'}" alt="${anime.name} cover" class="tooltip-cover-image">
+                        <p class="tooltip-synopsis">${anime.synopsis}</p>
+                    </div>
+                    <div class="tooltip-stats-section">
+                        ${anime.genres && anime.genres.length > 0 ? `<div class="tooltip-genres"><strong>Genres:</strong> ${anime.genres.map(g => `<span class="tooltip-genre-pill">${g}</span>`).join(' ')}</div>` : ''}
+                        ${anime.themes && anime.themes.length > 0 ? `<div class="tooltip-themes"><strong>Themes:</strong> ${anime.themes.map(t => `<span class="tooltip-theme-pill">${t}</span>`).join(' ')}</div>` : ''}
+                        <div class="tooltip-members-score">
+                            <span class="tooltip-stat"><i class="fas fa-users"></i> ${anime.members.toLocaleString()}</span>
+                            <span class="tooltip-stat"><i class="fas fa-star"></i> ${anime.score ? anime.score.toFixed(2) : 'N/A'}</span>
+                        </div>
+                    </div>
+                `;
+
+                // 2. Calculate Position
+                const linkRect = nameLink.getBoundingClientRect();
+                const tooltipRect = globalTooltip.getBoundingClientRect(); // Get its dimensions AFTER content is set
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                const scrollX = window.scrollX;
+
+                let top = linkRect.top + scrollY - tooltipRect.height - 10; // 10px above the link
+                let left = linkRect.left + scrollX + (linkRect.width / 2) - (tooltipRect.width / 2); // Centered
+
+                // Adjust for viewport boundaries
+                if (top < scrollY + 10) { // Too high, flip below if space
+                    top = linkRect.bottom + scrollY + 10;
+                    if (top + tooltipRect.height > scrollY + viewportHeight - 10) {
+                        top = scrollY + viewportHeight - tooltipRect.height - 10; // Stick to bottom if no space below either
+                    }
+                }
+                if (left < scrollX + 10) { 
+                    left = scrollX + 10; 
+                }
+                if (left + tooltipRect.width > scrollX + viewportWidth - 10) { 
+                    left = scrollX + viewportWidth - tooltipRect.width - 10; 
+                }
+                if (top + tooltipRect.height > scrollY + viewportHeight - 10 && top > scrollY + (viewportHeight/2) ) { //if its still overflowing downwards and its on the lower half of the screen stick it to the bottom
+                     top = scrollY + viewportHeight - tooltipRect.height - 10;
+                }
+
+
+                globalTooltip.style.top = `${top}px`;
+                globalTooltip.style.left = `${left}px`;
+                globalTooltip.style.transform = ''; // No translateX(-50%) needed with this direct positioning
+                globalTooltip.classList.add('active');
+            });
+
+            nameLink.addEventListener('mouseleave', () => {
+                globalTooltip.classList.remove('active');
+            });
 
             // Season & Year cell
             row.insertCell(2).textContent = `${anime.season || 'N/A'} ${anime.year || 'N/A'}`;
@@ -437,6 +512,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Extract theme names
         const themes = (apiData.themes || []).map(theme => theme.name);
 
+        // Extract cover image (webp, regular size)
+        let coverImageUrl = '';
+        if (apiData.images && apiData.images.webp && apiData.images.webp.image_url) {
+            coverImageUrl = apiData.images.webp.image_url;
+        }
+
+        // Extract synopsis
+        const synopsisText = apiData.synopsis || 'Synopsis not available.';
+
         // Convert members to number, removing commas if present
         const members = typeof apiData.members === 'string' 
             ? parseInt(apiData.members.replace(/,/g, ''), 10) || 0
@@ -452,6 +536,8 @@ document.addEventListener('DOMContentLoaded', () => {
             episodes: apiData.episodes || 0,
             genres: genres,
             themes: themes,
+            cover: coverImageUrl,
+            synopsis: synopsisText,
             hasAdultGenre: hasAdultGenre,
             searchTerm: apiData.searchTerm,
             added: false
@@ -863,6 +949,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Min Episodes filter
                 const minEpisodesValue = parseInt(minEpisodesFilter.value);
+                if(anime.episodes === "?	"){
+                    return false;
+                }
                 if (!isNaN(minEpisodesValue) && minEpisodesValue > 0) {
                     // Ensure anime.episodes is a number; treat 0 or non-numeric as not meeting criteria if minEpisodesValue > 0
                     const animeEpisodes = typeof anime.episodes === 'number' ? anime.episodes : 0;
@@ -1073,87 +1162,103 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchBatchAnime() {
-        if(!finalPage.value && !batchMinMembersCheckbox.checked)
-        {
-            window.alert('insert a final page value');
-            return;
-        }
         const startSeason = batchStartSeason.value;
         const startYear = parseInt(batchStartYear.value);
         const endSeason = batchEndSeason.value;
         const endYear = parseInt(batchEndYear.value);
         const minMembersEnabled = batchMinMembersCheckbox.checked;
-        const minMembersValue = 10000;
+        const minMembersValue = 1000;
+
         if (!startSeason || isNaN(startYear) || !endSeason || isNaN(endYear)) {
             batchStatus.textContent = 'Please select valid start and end seasons/years.';
             return;
         }
+
         batchStatus.textContent = 'Preparing batch fetch...';
         batchFetchBtn.disabled = true;
         let addedCount = 0;
         let checkedCount = 0;
         const interval = getSeasonInterval(startSeason, startYear, endSeason, endYear);
+
         for (let i = 0; i < interval.length; i++) {
             const { season, year } = interval[i];
             let page = 1;
-            let keepFetching = true;
-            while (keepFetching) {
-                batchStatus.textContent = `Fetching ${season} ${year}, page ${page}... (added: ${addedCount})`;
+            let seasonFetchingActive = true;
+
+            while (seasonFetchingActive) {
+                batchStatus.textContent = `Fetching ${season} ${year}, page ${page}... (added: ${addedCount}, checked: ${checkedCount})`;
                 try {
-                    const resp = await fetch(`https://api.jikan.moe/v4/seasons/${year}/${season.toLowerCase()}?page=${page}`);
+                    const apiUrl = `${JIKAN_API_BASE_URL}/seasons/${year}/${season.toLowerCase()}?page=${page}`;
+                    const resp = await fetch(apiUrl);
+
                     if (!resp.ok) {
-                        batchStatus.textContent = `Error fetching ${season} ${year} page ${page}: ${resp.status}`;
-                        await new Promise(r => setTimeout(r, 1000));
-                        break;
+                        batchStatus.textContent = `Error fetching ${season} ${year} page ${page}: ${resp.status}. Skipping to next season/year or ending.`;
+                        await new Promise(r => setTimeout(r, 1500));
+                        seasonFetchingActive = false;
+                        continue;
                     }
+
                     const data = await resp.json();
-                    if (data.data && Array.isArray(data.data)) {
-                        let allBelowThreshold = true;
-                        for (const anime of data.data) {
+
+                    if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+                        let allOnPageBelowThreshold = true;
+
+                        for (const animeEntry of data.data) {
                             checkedCount++;
-                            let animeMembers = typeof anime.members === 'string' ? parseInt(anime.members.replace(/,/g, ''), 10) : anime.members;
-                            if (!animeList.some(a => a.mal_id === anime.mal_id) && (!minMembersEnabled || (animeMembers >= minMembersValue))) {
-                                if (!anime.season) anime.season = season.toLowerCase();
-                                if (!anime.year) anime.year = year;
-                                const animeData = extractAnimeData(anime);
-                                animeData.searchTerm = `${anime.title} (batch)`;
-                                animeList.push(animeData);
-                                addedCount++;
-                            }
-                            if (animeMembers >= minMembersValue) {
-                                allBelowThreshold = false;
+                            const animeMembers = typeof animeEntry.members === 'string' 
+                                ? parseInt(animeEntry.members.replace(/,/g, ''), 10) 
+                                : (animeEntry.members || 0);
+
+                            if (minMembersEnabled) {
+                                if (animeMembers >= minMembersValue) {
+                                    allOnPageBelowThreshold = false;
+                                    if (!animeList.some(a => a.mal_id === animeEntry.mal_id)) {
+                                        const animeData = extractAnimeData(animeEntry);
+                                        if (!animeData.season) animeData.season = season.toLowerCase();
+                                        if (!animeData.year) animeData.year = year;
+                                        animeData.searchTerm = `${animeData.name || 'Anime'} (batch)`;
+                                        animeList.push(animeData);
+                                        addedCount++;
+                                    }
+                                }
+                            } else {
+                                allOnPageBelowThreshold = false;
+                                if (!animeList.some(a => a.mal_id === animeEntry.mal_id)) {
+                                    const animeData = extractAnimeData(animeEntry);
+                                    if (!animeData.season) animeData.season = season.toLowerCase();
+                                    if (!animeData.year) animeData.year = year;
+                                    animeData.searchTerm = `${animeData.name || 'Anime'} (batch)`;
+                                    animeList.push(animeData);
+                                    addedCount++;
+                                }
                             }
                         }
                         saveListToLocalStorage();
                         renderAnimeList();
-                        if (minMembersEnabled) {
-                            if (allBelowThreshold || data.data.length === 0) {
-                                keepFetching = false;
-                            } else {
-                                page++;
-                                await new Promise(r => setTimeout(r, 1000));
-                            }
+
+                        let hasNextPageAccordingToAPI = data.pagination && data.pagination.has_next_page;
+
+                        if (minMembersEnabled && allOnPageBelowThreshold) {
+                            batchStatus.textContent = `Stopping ${season} ${year} after page ${page}: all on page below ${minMembersValue} members.`;
+                            seasonFetchingActive = false;
+                        } else if (!hasNextPageAccordingToAPI) {
+                            seasonFetchingActive = false;
                         } else {
-                            // Use initial/final page fields
-                            if (page >= parseInt(finalPage.value)) {
-                                keepFetching = false;
-                            } else {
-                                page++;
-                                await new Promise(r => setTimeout(r, 1000));
-                            }
+                            page++;
+                            await new Promise(r => setTimeout(r, 1500));
                         }
                     } else {
-                        keepFetching = false;
+                        seasonFetchingActive = false;
                     }
                 } catch (e) {
-                    batchStatus.textContent = `Error: ${e.message}`;
-                    keepFetching = false;
+                    batchStatus.textContent = `Error processing ${season} ${year} page ${page}: ${e.message}. Skipping to next season/year.`;
+                    seasonFetchingActive = false;
                 }
             }
         }
+
         batchStatus.textContent = `Batch complete! Added ${addedCount} new anime (checked ${checkedCount}).`;
         batchFetchBtn.disabled = false;
-        renderAnimeList();
     }
 
     batchFetchBtn.addEventListener('click', fetchBatchAnime);
@@ -1231,6 +1336,27 @@ document.addEventListener('DOMContentLoaded', () => {
     previousSeasonBtn.addEventListener('click', navigateToPreviousSeason);
     nextSeasonBtn.addEventListener('click', navigateToNextSeason);
 
+    // Preset Filter Button Logic
+    document.querySelectorAll('.preset-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const minMembersVal = button.dataset.minMembers;
+            const maxMembersVal = button.dataset.maxMembers;
+            const minScoreVal = button.dataset.minScore;
+            const maxScoreVal = button.dataset.maxScore;
+
+            if (minMembersVal !== undefined && maxMembersVal !== undefined) {
+                minMembers.value = minMembersVal;
+                maxMembers.value = maxMembersVal;
+            }
+
+            if (minScoreVal !== undefined && maxScoreVal !== undefined) {
+                minScore.value = minScoreVal;
+                maxScore.value = maxScoreVal;
+            }
+            
+            applyFilters();
+        });
+    });
 
     // --- Initialization ---
     loadListFromLocalStorage();

@@ -110,9 +110,11 @@ hr {
 }
 
 #animeTable th, #animeTable td {
-    border: 1px solid #ddd; /* Add borders */
+    border: 1px solid #ddd;
     padding: 5px 7px 5px 7px;
     text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #animeTable th {
@@ -188,6 +190,7 @@ hr {
 .edit-btn {
     background-color: #ffc107;
     color: #000;
+    display: none;
 }
 
 .delete-btn {
@@ -214,45 +217,158 @@ hr {
     color: #6217c4;
     text-decoration: none;
     cursor: pointer;
+    /* For text overflow handling directly on the link */
+    display: block; /* Or inline-block, needs a block-like nature for overflow */
+    width: 100%;    /* Take full width of parent cell for proper truncation */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* .tooltip class (which is on this <a> tag) already provides position:relative */
 }
 
 .anime-name-link:hover {
     text-decoration: underline;
 }
 
-/* Tooltip */
-.tooltip {
-    position: relative;
-    display: inline-block;
+/* Tooltip Styling - Ensure these are clear and take precedence */
+.tooltip { /* This is the <a> tag wrapping the name and the tooltip content */
+    position: relative; /* Crucial for absolute positioning of the child tooltip */
+    display: inline-block; /* Or block, depending on how you want the link to behave */
 }
 
-.tooltip .tooltip-text {
-    visibility: hidden;
-    width: 200px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
+.tooltip .tooltip-content { /* This is the actual tooltip div */
+    /* Initial Hidden State & Absolute Positioning */
+    visibility: visible !important; /* DEBUG: FORCE VISIBLE */
+    opacity: 1 !important;          /* DEBUG: FORCE VISIBLE */
+    position: absolute !important;   /* DEBUG: FORCE ABSOLUTE */
+    z-index: 1000 !important;       /* DEBUG: FORCE HIGH Z-INDEX */
+    background-color: yellow !important; /* DEBUG: MAKE IT OBVIOUS */
+    border: 2px solid red !important;   /* DEBUG: MAKE IT OBVIOUS */
+    color: black !important;            /* DEBUG: Ensure text is visible */
+    
+    /* Default positioning - centered above the parent */
+    bottom: 105%; 
     left: 50%;
-    margin-left: -100px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    transform: translateX(-50%);
+    
+    /* Appearance */
+    width: 450px;
+    max-width: 90vw;
+    /* background-color: #fff; -- overridden by debug */
+    /* color: #333; -- overridden by debug */
+    /* border: 1px solid #ddd; -- overridden by debug */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-size: 0.9rem;
+    text-align: left;
+    
+    /* Transition for smooth show/hide via .active class */
+    /* transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; -- DEBUG: Disable transitions */
 }
 
-.tooltip:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
+.tooltip-content.active { /* Added by JavaScript on mouseenter, removed on mouseleave */
+    /* visibility: visible; -- Handled by DEBUG above */
+    /* opacity: 1; -- Handled by DEBUG above */
+    /* This class now primarily serves as a hook for JS if needed, debug styles override */
+}
+
+/* Remove the old .tooltip:hover .tooltip-content if it still exists elsewhere */
+/* Ensure no other global styles are setting .tooltip-content to display: block or similar without position: absolute */
+
+.tooltip-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #6217c4;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tooltip-middle-section {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.tooltip-cover-image {
+    width: 100px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 150px; /* Limit height */
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.tooltip-synopsis {
+    flex: 1;
+    min-width: 0; /* Added for flex item overflow prevention */
+    font-size: 0.85em;
+    line-height: 1.5;
+    max-height: 150px; /* Match image max height */
+    overflow-y: auto;
+    margin: 0;
+    padding-right: 5px; /* For scrollbar */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.tooltip-stats-section {
+    font-size: 0.85em;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.tooltip-genres, .tooltip-themes {
+    margin-bottom: 8px;
+}
+
+.tooltip-genre-pill, .tooltip-theme-pill {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.tooltip-members-score {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.tooltip-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #444;
+}
+
+.tooltip-stat i {
+    color: #6217c4; /* Accent color for icons */
+}
+
+.tooltip-search-term {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 8px;
+    font-style: italic;
 }
 
 /* Modal */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -373,6 +489,20 @@ hr {
     padding: 2px 6px;
     border-radius: 3px;
     background-color: #f0f0f0;
+}
+
+/* Theme display in table */
+.theme-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.theme {
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background-color: #e8f0f0; /* Slightly different background for themes in table */
 }
 
 /* Filter Section Modern Layout */
@@ -556,9 +686,8 @@ label.filter-modes{
     border: 1px solid #ddd;
     padding: 5px 7px 5px 7px;
     text-align: left;
-    overflow: hidden; /* Prevent content overflow */
-    text-overflow: ellipsis; /* Add ellipsis for long text */
-    white-space: nowrap; /* Prevent text wrapping */
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #animeTable th {
@@ -684,4 +813,162 @@ button.year-season-btn:hover{
     background: #17a2b8; /* Different color for themes for visual distinction */
     color: #fff;
     border-color: #17a2b8;
+}
+
+/* Preset Filter Buttons Styling */
+.preset-filter-groups {
+    display: flex;
+    flex-direction: column; /* Stack groups vertically */
+    gap: 8px; /* Space between member and score groups */
+    margin-bottom: 15px; /* Space above the main filter section */
+}
+
+.preset-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap to next line if needed */
+    gap: 6px; /* Space between buttons */
+    align-items: center;
+}
+
+.preset-group-label {
+    font-size: 0.9em;
+    color: #555;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.preset-btn {
+    padding: 4px 8px;
+    font-size: 0.85em;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.preset-btn:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+}
+
+/* Global Tooltip Styling */
+#globalAnimeTooltip {
+    position: absolute; /* Or fixed, if you don't want it to scroll with the page */
+    visibility: hidden;
+    opacity: 0;
+    z-index: 10000; /* Very high z-index */
+    width: 450px;
+    max-width: 90vw;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    font-size: 0.9rem;
+    text-align: left;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    /* `left` and `top` will be set by JavaScript */
+}
+
+#globalAnimeTooltip.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Remove or comment out old .tooltip and .tooltip .tooltip-content specific styles 
+   if they are no longer needed or conflict. 
+   The inner styles like .tooltip-title, .tooltip-middle-section, etc., 
+   can remain as they style the content now within #globalAnimeTooltip. */
+
+/* Example: Comment out old parent-child tooltip positioning styles if they were specific */
+/* .tooltip { 
+    position: relative; 
+    display: inline-block; 
+} */
+/* .tooltip .tooltip-content { ... old positioning ... } */
+
+
+.tooltip-title {
+/* ... existing .tooltip-title, .tooltip-middle-section, .tooltip-cover-image, etc. styles should still work ... */
+/* ... ensure they are not too specific to the old parent-child structure if that caused issues ... */
+    font-size: 1.2em;
+/* ... existing code ... */
+}
+
+.tooltip-middle-section {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.tooltip-cover-image {
+    width: 100px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 150px; /* Limit height */
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.tooltip-synopsis {
+    flex: 1;
+    min-width: 0; /* Added for flex item overflow prevention */
+    font-size: 0.85em;
+    line-height: 1.5;
+    max-height: 150px; /* Match image max height */
+    overflow-y: auto;
+    margin: 0;
+    padding-right: 5px; /* For scrollbar */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.tooltip-stats-section {
+    font-size: 0.85em;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.tooltip-genres, .tooltip-themes {
+    margin-bottom: 8px;
+}
+
+.tooltip-genre-pill, .tooltip-theme-pill {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.tooltip-members-score {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.tooltip-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #444;
+}
+
+.tooltip-stat i {
+    color: #6217c4; /* Accent color for icons */
+}
+
+.tooltip-search-term {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 8px;
+    font-style: italic;
 }

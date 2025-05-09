@@ -61,14 +61,7 @@
                 </select>
                 <input type="number" id="batchEndYear" min="1900" max="2100" placeholder="Year">
             </div>
-            <div class="batch-group">
-                <label for="initialPage">Initial Page</label>
-                <input type="number" id="initialPage" min="1" placeholder="1">
-            </div>
-            <div class="batch-group">
-                <label for="finalPage">Final Page</label>
-                <input type="number" id="finalPage" min="1" placeholder="4">
-            </div>
+
             <div class="batch-group" style="align-self: flex-end;">
                 <label style="font-weight: normal;">
                     <input type="checkbox" id="batchMinMembersCheckbox"> Only add anime with at least 1000 members
@@ -94,6 +87,30 @@
                 <button id="previousSeasonBtn"><i class="fa-solid fa-arrow-left"></i></button>
                 <button class="year-season-btn">Season</span>
                 <button id="nextSeasonBtn"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Preset Filter Buttons -->
+        <div class="preset-filter-groups">
+            <div class="preset-group" id="memberPresetButtons">
+                <span class="preset-group-label">Members:</span>
+                <button class="preset-btn" data-min-members="10000" data-max-members="25000">10k-25k</button>
+                <button class="preset-btn" data-min-members="25001" data-max-members="50000">25k-50k</button>
+                <button class="preset-btn" data-min-members="50001" data-max-members="100000">50k-100k</button>
+                <button class="preset-btn" data-min-members="100001" data-max-members="200000">100k-200k</button>
+                <button class="preset-btn" data-min-members="200001" data-max-members="">200k+</button>
+            </div>
+            <div class="preset-group" id="scorePresetButtons">
+                <span class="preset-group-label">Score:</span>
+                <button class="preset-btn" data-min-score="5.00" data-max-score="5.49">5-5.49</button>
+                <button class="preset-btn" data-min-score="5.50" data-max-score="5.99">5.5-5.99</button>
+                <button class="preset-btn" data-min-score="6.00" data-max-score="6.49">6-6.49</button>
+                <button class="preset-btn" data-min-score="6.50" data-max-score="6.99">6.5-6.99</button>
+                <button class="preset-btn" data-min-score="7.00" data-max-score="7.49">7-7.49</button>
+                <button class="preset-btn" data-min-score="7.50" data-max-score="7.99">7.5-7.99</button>
+                <button class="preset-btn" data-min-score="8.00" data-max-score="8.49">8-8.49</button>
+                <button class="preset-btn" data-min-score="8.50" data-max-score="8.99">8.5-8.99</button>
+                <button class="preset-btn" data-min-score="9.00" data-max-score="10.00">9.0+</button>
             </div>
         </div>
 
