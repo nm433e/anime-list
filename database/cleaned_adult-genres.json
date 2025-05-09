@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "exportDate": "2025-05-08T20:50:48.093Z",
+  "exportDate": "2025-05-08T23:59:55.302Z",
   "animeList": [
     {
       "mal_id": 101,
@@ -534,24 +534,6 @@
       "added": false
     },
     {
-      "mal_id": 2136,
-      "name": "Front Innocent: Mou Hitotsu no Lady Innocent",
-      "season": "winter",
-      "year": 2005,
-      "members": 14822,
-      "score": 6.86,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Historical"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Front Innocent: Mou Hitotsu no Lady Innocent (batch)",
-      "added": false
-    },
-    {
       "mal_id": 2515,
       "name": "Meitantei Conan OVA 05: Hyouteki wa Kogorou!! Shounen Tanteidan Maruchichousa",
       "season": "winter",
@@ -587,22 +569,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Jinki:Extend (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 2396,
-      "name": "Milk Junkie: Shimai-hen",
-      "season": "winter",
-      "year": 2005,
-      "members": 12501,
-      "score": 6.77,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Milk Junkie: Shimai-hen (batch)",
       "added": false
     },
     {
@@ -1397,22 +1363,6 @@
       "added": false
     },
     {
-      "mal_id": 2841,
-      "name": "Kuro Ai: Hitoyozumakan Inkou Rannyuuroku",
-      "season": "spring",
-      "year": 2005,
-      "members": 11900,
-      "score": 6.65,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kuro Ai: Hitoyozumakan Inkou Rannyuuroku (batch)",
-      "added": false
-    },
-    {
       "mal_id": 706,
       "name": "Comic Party Revolution",
       "season": "spring",
@@ -1944,22 +1894,6 @@
       "added": false
     },
     {
-      "mal_id": 2873,
-      "name": "Bible Black Only Version",
-      "season": "summer",
-      "year": 2005,
-      "members": 19818,
-      "score": 6.76,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Bible Black Only Version (batch)",
-      "added": false
-    },
-    {
       "mal_id": 609,
       "name": "Saishuu Heiki Kanojo: Another Love Song",
       "season": "summer",
@@ -1996,38 +1930,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Seikai no Senki III (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 5347,
-      "name": "Bible Black: Imari Ryoujoku Genba",
-      "season": "summer",
-      "year": 2005,
-      "members": 14176,
-      "score": 6.45,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Bible Black: Imari Ryoujoku Genba (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 2413,
-      "name": "Boin",
-      "season": "summer",
-      "year": 2005,
-      "members": 13808,
-      "score": 6.59,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Boin (batch)",
       "added": false
     },
     {
@@ -2086,22 +1988,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Okusama wa Mahou Shoujo (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 2446,
-      "name": "Nikuyome: Takayanagi Ke no Hitobito",
-      "season": "summer",
-      "year": 2005,
-      "members": 10254,
-      "score": 7.02,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Nikuyome: Takayanagi Ke no Hitobito (batch)",
       "added": false
     },
     {
@@ -2915,22 +2801,6 @@
       "added": false
     },
     {
-      "mal_id": 3771,
-      "name": "Nee, Chanto Shiyou Yo!",
-      "season": "fall",
-      "year": 2005,
-      "members": 13615,
-      "score": 6.94,
-      "episodes": 5,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Nee, Chanto Shiyou Yo! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 825,
       "name": "King of Fighters: Another Day",
       "season": "fall",
@@ -2945,22 +2815,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "King of Fighters: Another Day (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 2411,
-      "name": "Ane to Boin",
-      "season": "fall",
-      "year": 2005,
-      "members": 12959,
-      "score": 6.65,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane to Boin (batch)",
       "added": false
     },
     {
@@ -3495,22 +3349,6 @@
       "added": false
     },
     {
-      "mal_id": 3559,
-      "name": "Stringendo: Angel-tachi no Private Lesson",
-      "season": "winter",
-      "year": 2006,
-      "members": 17353,
-      "score": 7.37,
-      "episodes": 12,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Stringendo: Angel-tachi no Private Lesson (batch)",
-      "added": false
-    },
-    {
       "mal_id": 1368,
       "name": "Meitantei Conan OVA 06: Kieta Daiya wo Oe! Conan & Heiji VS Kid!",
       "season": "winter",
@@ -3584,22 +3422,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Futari wa Precure: Splash☆Star (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 3537,
-      "name": "Cleavage",
-      "season": "winter",
-      "year": 2006,
-      "members": 15520,
-      "score": 6.66,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Cleavage (batch)",
       "added": false
     },
     {
@@ -3736,22 +3558,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Meitantei Conan Movie 10: Tantei-tachi no Requiem Recap (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 3888,
-      "name": "Toumei Ningen (OVA)",
-      "season": "winter",
-      "year": 2006,
-      "members": 10114,
-      "score": 6.54,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Toumei Ningen (OVA) (batch)",
       "added": false
     },
     {
@@ -4775,27 +4581,6 @@
       "added": false
     },
     {
-      "mal_id": 3992,
-      "name": "Himekishi Lilia",
-      "season": "spring",
-      "year": 2006,
-      "members": 12567,
-      "score": 6.75,
-      "episodes": 6,
-      "genres": [
-        "Fantasy",
-        "Horror",
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [
-        "Mythology"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Himekishi Lilia (batch)",
-      "added": false
-    },
-    {
       "mal_id": 2294,
       "name": "Kidou Senshi Gundam SEED Destiny Special Edition",
       "season": "spring",
@@ -5015,23 +4800,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Naruto Movie 3: Dai Koufun! Mikazuki Jima no Animaru Panic Dattebayo! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 1639,
-      "name": "Boku no Pico",
-      "season": "summer",
-      "year": 2006,
-      "members": 184646,
-      "score": 4.22,
-      "episodes": 1,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Boku no Pico (batch)",
       "added": false
     },
     {
@@ -5440,24 +5208,6 @@
       "added": false
     },
     {
-      "mal_id": 2135,
-      "name": "Sora no Iro, Mizu no Iro",
-      "season": "summer",
-      "year": 2006,
-      "members": 17926,
-      "score": 7.13,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Love Polygon"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Sora no Iro, Mizu no Iro (batch)",
-      "added": false
-    },
-    {
       "mal_id": 1830,
       "name": "Utawarerumono Specials",
       "season": "summer",
@@ -5493,22 +5243,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Pokemon Fushigi no Dungeon: Shutsudou Pokemon Kyuujotai Ganbaruzu! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 2866,
-      "name": "Ane☆Haramix",
-      "season": "summer",
-      "year": 2006,
-      "members": 14662,
-      "score": 6.8,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane☆Haramix (batch)",
       "added": false
     },
     {
@@ -6565,22 +6299,6 @@
       "added": false
     },
     {
-      "mal_id": 2867,
-      "name": "Ane Jiru The Animation: Shirakawa Sanshimai ni Omakase",
-      "season": "fall",
-      "year": 2006,
-      "members": 16373,
-      "score": 6.9,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane Jiru The Animation: Shirakawa Sanshimai ni Omakase (batch)",
-      "added": false
-    },
-    {
       "mal_id": 1654,
       "name": "Kashimashi: Girl Meets Girl - Shoujo wa Shoujo ni Koi wo Shita",
       "season": "fall",
@@ -6733,25 +6451,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Tokyo Tribe 2 (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 4399,
-      "name": "Honoo no Haramase Tenkousei",
-      "season": "fall",
-      "year": 2006,
-      "members": 11147,
-      "score": 6.67,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem",
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Honoo no Haramase Tenkousei (batch)",
       "added": false
     },
     {
@@ -7277,27 +6976,6 @@
       "added": false
     },
     {
-      "mal_id": 3479,
-      "name": "Taimanin Asagi",
-      "season": "winter",
-      "year": 2007,
-      "members": 22377,
-      "score": 6.83,
-      "episodes": 4,
-      "genres": [
-        "Action",
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [
-        "Martial Arts",
-        "Mythology"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Taimanin Asagi (batch)",
-      "added": false
-    },
-    {
       "mal_id": 2238,
       "name": "Fuyu no Semi",
       "season": "winter",
@@ -7433,22 +7111,6 @@
       "added": false
     },
     {
-      "mal_id": 2852,
-      "name": "Accelerando: Datenshi-tachi no Sasayaki",
-      "season": "winter",
-      "year": 2007,
-      "members": 13959,
-      "score": 6.82,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Accelerando: Datenshi-tachi no Sasayaki (batch)",
-      "added": false
-    },
-    {
       "mal_id": 1988,
       "name": "Himawari!!",
       "season": "winter",
@@ -7483,22 +7145,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Koisuru Tenshi Angelique: Kagayaki no Ashita (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 3970,
-      "name": "Sentakuya Shin-chan",
-      "season": "winter",
-      "year": 2007,
-      "members": 11848,
-      "score": 6.97,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Sentakuya Shin-chan (batch)",
       "added": false
     },
     {
@@ -7920,23 +7566,6 @@
       "added": false
     },
     {
-      "mal_id": 5391,
-      "name": "Pico to Chico",
-      "season": "spring",
-      "year": 2007,
-      "members": 73338,
-      "score": 4.36,
-      "episodes": 1,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Pico to Chico (batch)",
-      "added": false
-    },
-    {
       "mal_id": 1815,
       "name": "Shakugan no Shana Movie",
       "season": "spring",
@@ -8286,22 +7915,6 @@
       "added": false
     },
     {
-      "mal_id": 2798,
-      "name": "Hatsu Inu The Animation",
-      "season": "spring",
-      "year": 2007,
-      "members": 27085,
-      "score": 7.26,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Hatsu Inu The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 2905,
       "name": "Ikkitousen: Dragon Destiny Specials",
       "season": "spring",
@@ -8462,22 +8075,6 @@
       "themes": [],
       "hasAdultGenre": true,
       "searchTerm": "Inukami! The Movie: Tokumei Reiteki Sousakan Karina Shirou! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 3102,
-      "name": "Kateikyoushi no Oneesan The Animation: H no Hensachi Agechaimasu",
-      "season": "spring",
-      "year": 2007,
-      "members": 14228,
-      "score": 7.15,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kateikyoushi no Oneesan The Animation: H no Hensachi Agechaimasu (batch)",
       "added": false
     },
     {
@@ -8662,22 +8259,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Wellber no Monogatari: Sisters of Wellber (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 3944,
-      "name": "Dokidoki Oyako Lesson: Oshiete H na Obenkyou",
-      "season": "spring",
-      "year": 2007,
-      "members": 10182,
-      "score": 6.66,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Dokidoki Oyako Lesson: Oshiete H na Obenkyou (batch)",
       "added": false
     },
     {
@@ -9452,22 +9033,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Sola Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 4600,
-      "name": "Aneki... My Sweet Elder Sister The Animation",
-      "season": "summer",
-      "year": 2007,
-      "members": 14884,
-      "score": 6.8,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aneki... My Sweet Elder Sister The Animation (batch)",
       "added": false
     },
     {
@@ -10271,22 +9836,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Juushin Enbu: Hero Tales (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 3918,
-      "name": "Resort Boin",
-      "season": "fall",
-      "year": 2007,
-      "members": 28596,
-      "score": 7.34,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Resort Boin (batch)",
       "added": false
     },
     {
@@ -11190,41 +10739,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Mai-Otome 0: S.ifr (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 4010,
-      "name": "Alignment You! You! The Animation",
-      "season": "winter",
-      "year": 2008,
-      "members": 14247,
-      "score": 6.72,
-      "episodes": 2,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Alignment You! You! The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 3939,
-      "name": "Kafun Shoujo Chuuihou! The Animation",
-      "season": "winter",
-      "year": 2008,
-      "members": 14045,
-      "score": 7.06,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kafun Shoujo Chuuihou! The Animation (batch)",
       "added": false
     },
     {
@@ -12236,22 +11750,6 @@
       "added": false
     },
     {
-      "mal_id": 4358,
-      "name": "Aniyome wa Ijippari",
-      "season": "spring",
-      "year": 2008,
-      "members": 23214,
-      "score": 7.13,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aniyome wa Ijippari (batch)",
-      "added": false
-    },
-    {
       "mal_id": 4772,
       "name": "Aria the Origination: Sono Choppiri Himitsu no Basho ni...",
       "season": "spring",
@@ -12366,22 +11864,6 @@
       "added": false
     },
     {
-      "mal_id": 4502,
-      "name": "Stringendo+Accelerando Ultimatum Sera",
-      "season": "spring",
-      "year": 2008,
-      "members": 15842,
-      "score": 7.19,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Stringendo+Accelerando Ultimatum Sera (batch)",
-      "added": false
-    },
-    {
       "mal_id": 4798,
       "name": "Druaga no Tou: The Aegis of Uruk - Jil no Bouken",
       "season": "spring",
@@ -12456,24 +11938,6 @@
       "added": false
     },
     {
-      "mal_id": 4360,
-      "name": "Uchuu Kaizoku Sara",
-      "season": "spring",
-      "year": 2008,
-      "members": 12667,
-      "score": 6.8,
-      "episodes": 4,
-      "genres": [
-        "Sci-Fi",
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Uchuu Kaizoku Sara (batch)",
-      "added": false
-    },
-    {
       "mal_id": 5196,
       "name": "Aria the Origination Picture Drama",
       "season": "spring",
@@ -12507,22 +11971,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Fireball (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 4763,
-      "name": "Tsuma Shibori",
-      "season": "spring",
-      "year": 2008,
-      "members": 10137,
-      "score": 7.09,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tsuma Shibori (batch)",
       "added": false
     },
     {
@@ -13181,23 +12629,6 @@
       "added": false
     },
     {
-      "mal_id": 4473,
-      "name": "Shoujo Sect",
-      "season": "summer",
-      "year": 2008,
-      "members": 31917,
-      "score": 6.66,
-      "episodes": 3,
-      "genres": [
-        "Girls Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shoujo Sect (batch)",
-      "added": false
-    },
-    {
       "mal_id": 4094,
       "name": "Batman: Gotham Knight",
       "season": "summer",
@@ -13389,22 +12820,6 @@
       "added": false
     },
     {
-      "mal_id": 5097,
-      "name": "Hatsu Inu 2 The Animation: Strange Kind of Woman - Again",
-      "season": "summer",
-      "year": 2008,
-      "members": 15616,
-      "score": 7.09,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Hatsu Inu 2 The Animation: Strange Kind of Woman - Again (batch)",
-      "added": false
-    },
-    {
       "mal_id": 5493,
       "name": "Ranma ½: Akumu! Shunmin Kou",
       "season": "summer",
@@ -13423,22 +12838,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Ranma ½: Akumu! Shunmin Kou (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 5194,
-      "name": "Aneimo",
-      "season": "summer",
-      "year": 2008,
-      "members": 14216,
-      "score": 6.88,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aneimo (batch)",
       "added": false
     },
     {
@@ -14189,23 +13588,6 @@
       "added": false
     },
     {
-      "mal_id": 4866,
-      "name": "Pico x CoCo x Chico",
-      "season": "fall",
-      "year": 2008,
-      "members": 67183,
-      "score": 4.34,
-      "episodes": 1,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Pico x CoCo x Chico (batch)",
-      "added": false
-    },
-    {
       "mal_id": 4879,
       "name": "Mouryou no Hako",
       "season": "fall",
@@ -14581,22 +13963,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Tytania (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 5464,
-      "name": "Cafe Junkie",
-      "season": "fall",
-      "year": 2008,
-      "members": 18608,
-      "score": 6.75,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Cafe Junkie (batch)",
       "added": false
     },
     {
@@ -15484,22 +14850,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Maria-sama ga Miteru 4th (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 5959,
-      "name": "Mizugi Kanojo The Animation",
-      "season": "winter",
-      "year": 2009,
-      "members": 21132,
-      "score": 7.27,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Mizugi Kanojo The Animation (batch)",
       "added": false
     },
     {
@@ -16652,26 +16002,6 @@
       "added": false
     },
     {
-      "mal_id": 6590,
-      "name": "Makai Kishi Ingrid",
-      "season": "spring",
-      "year": 2009,
-      "members": 15314,
-      "score": 6.93,
-      "episodes": 4,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [
-        "Martial Arts",
-        "Mythology"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Makai Kishi Ingrid (batch)",
-      "added": false
-    },
-    {
       "mal_id": 6399,
       "name": "Higashi no Eden: Falling Down",
       "season": "spring",
@@ -16721,22 +16051,6 @@
       "added": false
     },
     {
-      "mal_id": 6194,
-      "name": "Stretta The Animation",
-      "season": "spring",
-      "year": 2009,
-      "members": 11216,
-      "score": 6.9,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Stretta The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 6275,
       "name": "Pokemon Fushigi no Dungeon: Sora no Tankentai - Toki to Yami wo Meguru Saigo no Bouken",
       "season": "spring",
@@ -16751,22 +16065,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Pokemon Fushigi no Dungeon: Sora no Tankentai - Toki to Yami wo Meguru Saigo no Bouken (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 6465,
-      "name": "Kangoku Senkan",
-      "season": "spring",
-      "year": 2009,
-      "members": 10921,
-      "score": 6.9,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kangoku Senkan (batch)",
       "added": false
     },
     {
@@ -17450,25 +16748,6 @@
       "added": false
     },
     {
-      "mal_id": 5762,
-      "name": "15 Bishoujo Hyouryuuki",
-      "season": "summer",
-      "year": 2009,
-      "members": 25753,
-      "score": 6.77,
-      "episodes": 3,
-      "genres": [
-        "Comedy",
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "15 Bishoujo Hyouryuuki (batch)",
-      "added": false
-    },
-    {
       "mal_id": 6380,
       "name": "Tetsuwan Birdy Decode: The Cipher",
       "season": "summer",
@@ -17653,22 +16932,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Sono Hanabira ni Kuchizuke wo: Reo x Mai Diaries (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 6892,
-      "name": "Yokorenbo: Immoral Mother",
-      "season": "summer",
-      "year": 2009,
-      "members": 12535,
-      "score": 6.8,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Yokorenbo: Immoral Mother (batch)",
       "added": false
     },
     {
@@ -18260,22 +17523,6 @@
       "added": false
     },
     {
-      "mal_id": 6893,
-      "name": "Oni Chichi",
-      "season": "fall",
-      "year": 2009,
-      "members": 58994,
-      "score": 6.9,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi (batch)",
-      "added": false
-    },
-    {
       "mal_id": 6633,
       "name": "Queen's Blade: Gyokuza wo Tsugu Mono",
       "season": "fall",
@@ -18330,24 +17577,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "White Album 2nd Season (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 7411,
-      "name": "Kanojo x Kanojo x Kanojo: Sanshimai to no Dokidoki Kyoudou Seikatsu",
-      "season": "fall",
-      "year": 2009,
-      "members": 52054,
-      "score": 7.5,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Kanojo x Kanojo x Kanojo: Sanshimai to no Dokidoki Kyoudou Seikatsu (batch)",
       "added": false
     },
     {
@@ -18579,22 +17808,6 @@
       ],
       "hasAdultGenre": true,
       "searchTerm": "Akikan!: Kan Ippatsu!? Onsen Panic (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 7053,
-      "name": "Fault!!",
-      "season": "fall",
-      "year": 2009,
-      "members": 25633,
-      "score": 7.05,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Fault!! (batch)",
       "added": false
     },
     {
@@ -18928,22 +18141,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Princess Lover!: Magical Knight Maria-chan (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 7730,
-      "name": "Issho ni H Shiyo",
-      "season": "fall",
-      "year": 2009,
-      "members": 11035,
-      "score": 6.77,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Issho ni H Shiyo (batch)",
       "added": false
     },
     {
@@ -19826,22 +19023,6 @@
       "added": false
     },
     {
-      "mal_id": 7456,
-      "name": "Discipline Zero",
-      "season": "winter",
-      "year": 2010,
-      "members": 12889,
-      "score": 6.54,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Discipline Zero (batch)",
-      "added": false
-    },
-    {
       "mal_id": 7463,
       "name": "Weiß Survive R",
       "season": "winter",
@@ -19858,22 +19039,6 @@
       ],
       "hasAdultGenre": true,
       "searchTerm": "Weiß Survive R (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 8039,
-      "name": "Oppai no Ouja 48",
-      "season": "winter",
-      "year": 2010,
-      "members": 11076,
-      "score": 6.96,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oppai no Ouja 48 (batch)",
       "added": false
     },
     {
@@ -19910,22 +19075,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Kobato.: Hajimete no Kobato. (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 7708,
-      "name": "Machi Gurumi no Wana: Hakudaku ni Mamireta Shitai",
-      "season": "winter",
-      "year": 2010,
-      "members": 10485,
-      "score": 6.46,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Machi Gurumi no Wana: Hakudaku ni Mamireta Shitai (batch)",
       "added": false
     },
     {
@@ -20906,22 +20055,6 @@
       "added": false
     },
     {
-      "mal_id": 8110,
-      "name": "Fukubiki! Triangle: Miharu After",
-      "season": "spring",
-      "year": 2010,
-      "members": 17772,
-      "score": 7,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Fukubiki! Triangle: Miharu After (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9023,
       "name": "Katekyou Hitman Reborn!: Mr. Rebokku no Ciao Ciao Interview",
       "season": "spring",
@@ -20992,38 +20125,6 @@
       "added": false
     },
     {
-      "mal_id": 8293,
-      "name": "Gakuen Saimin Reido",
-      "season": "spring",
-      "year": 2010,
-      "members": 12962,
-      "score": 6.66,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Gakuen Saimin Reido (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 8291,
-      "name": "Ojousama wa H ga Osuki: The Animation",
-      "season": "spring",
-      "year": 2010,
-      "members": 12740,
-      "score": 7.11,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ojousama wa H ga Osuki: The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 8331,
       "name": "Meitantei Conan Magic File 4: Osaka Okonomiyaki Odyssey",
       "season": "spring",
@@ -21076,22 +20177,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Code Geass: Hangyaku no Lelouch - Kiseki no Birthday Omake Flash (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 7969,
-      "name": "Rin x Sen: Hakudaku Onna Kyoushi to Yaroudomo",
-      "season": "spring",
-      "year": 2010,
-      "members": 10291,
-      "score": 6.52,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Rin x Sen: Hakudaku Onna Kyoushi to Yaroudomo (batch)",
       "added": false
     },
     {
@@ -21683,25 +20768,6 @@
       "added": false
     },
     {
-      "mal_id": 7748,
-      "name": "Sono Hanabira ni Kuchizuke wo: Anata to Koibito Tsunagi",
-      "season": "summer",
-      "year": 2010,
-      "members": 55144,
-      "score": 7.24,
-      "episodes": 1,
-      "genres": [
-        "Girls Love",
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Sono Hanabira ni Kuchizuke wo: Anata to Koibito Tsunagi (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9355,
       "name": "Sekirei: Pure Engagement Episode 0",
       "season": "summer",
@@ -21810,22 +20876,6 @@
       "themes": [],
       "hasAdultGenre": true,
       "searchTerm": "Toaru Kagaku no Railgun: Entenka no Satsuei Model mo Raku Ja Arimasen wa ne. (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 8918,
-      "name": "Princess Lover! OVA",
-      "season": "summer",
-      "year": 2010,
-      "members": 38329,
-      "score": 6.7,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Princess Lover! OVA (batch)",
       "added": false
     },
     {
@@ -21939,23 +20989,6 @@
       "themes": [],
       "hasAdultGenre": true,
       "searchTerm": "Queen's Blade: Utsukushiki Toushi-tachi (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 7110,
-      "name": "Shounen Maid Kuuro-kun: Tenshi no Uta",
-      "season": "summer",
-      "year": 2010,
-      "members": 21741,
-      "score": 5.47,
-      "episodes": 1,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shounen Maid Kuuro-kun: Tenshi no Uta (batch)",
       "added": false
     },
     {
@@ -22083,22 +21116,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Yume-iro Pâtissière: Mune Kyun Tropical Island! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 9328,
-      "name": "Shoujo Senki Soul Eater",
-      "season": "summer",
-      "year": 2010,
-      "members": 11284,
-      "score": 6.29,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shoujo Senki Soul Eater (batch)",
       "added": false
     },
     {
@@ -22938,22 +21955,6 @@
       "added": false
     },
     {
-      "mal_id": 9322,
-      "name": "HHH Triple Ecchi",
-      "season": "fall",
-      "year": 2010,
-      "members": 34855,
-      "score": 7.28,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "HHH Triple Ecchi (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9581,
       "name": "MM! Specials",
       "season": "fall",
@@ -23033,22 +22034,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Hidamari Sketch x ☆☆☆ Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 9308,
-      "name": "Oni Chichi 2",
-      "season": "fall",
-      "year": 2010,
-      "members": 27053,
-      "score": 6.64,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi 2 (batch)",
       "added": false
     },
     {
@@ -23215,22 +22200,6 @@
       "added": false
     },
     {
-      "mal_id": 9435,
-      "name": "Ane Jiru 2 The Animation: Shirakawa Sanshimai ni Omakase",
-      "season": "fall",
-      "year": 2010,
-      "members": 14866,
-      "score": 6.89,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane Jiru 2 The Animation: Shirakawa Sanshimai ni Omakase (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9723,
       "name": "Hakuouki: Hekketsuroku - Kyoto Kaisouroku",
       "season": "fall",
@@ -23324,38 +22293,6 @@
       "added": false
     },
     {
-      "mal_id": 9721,
-      "name": "Aisai Nikki",
-      "season": "fall",
-      "year": 2010,
-      "members": 11654,
-      "score": 6.4,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aisai Nikki (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 9442,
-      "name": "Bust to Bust: Chichi wa Chichi ni",
-      "season": "fall",
-      "year": 2010,
-      "members": 11460,
-      "score": 6.73,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Bust to Bust: Chichi wa Chichi ni (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9241,
       "name": "Super Robot Taisen OG: The Inspector",
       "season": "fall",
@@ -23392,22 +22329,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Seikimatsu Occult Gakuin Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 9311,
-      "name": "Kateikyoushi no Oneesan 2 The Animation: H no Hensachi Agechaimasu",
-      "season": "fall",
-      "year": 2010,
-      "members": 10655,
-      "score": 7.02,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kateikyoushi no Oneesan 2 The Animation: H no Hensachi Agechaimasu (batch)",
       "added": false
     },
     {
@@ -24418,24 +23339,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Kuragehime: Eiyuu Retsuden☆ (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 10106,
-      "name": "Sweet Home: H na Oneesan wa Suki desu ka?",
-      "season": "winter",
-      "year": 2011,
-      "members": 15878,
-      "score": 7.16,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Sweet Home: H na Oneesan wa Suki desu ka? (batch)",
       "added": false
     },
     {
@@ -25540,22 +24443,6 @@
       "added": false
     },
     {
-      "mal_id": 10380,
-      "name": "Oni Chichi: Re-birth",
-      "season": "spring",
-      "year": 2011,
-      "members": 36568,
-      "score": 7.01,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi: Re-birth (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9745,
       "name": "Sengoku Basara Movie: The Last Party",
       "season": "spring",
@@ -25851,23 +24738,6 @@
       "added": false
     },
     {
-      "mal_id": 10683,
-      "name": "Tentacle and Witches",
-      "season": "spring",
-      "year": 2011,
-      "members": 18787,
-      "score": 7.09,
-      "episodes": 4,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tentacle and Witches (batch)",
-      "added": false
-    },
-    {
       "mal_id": 8487,
       "name": "Onigamiden",
       "season": "spring",
@@ -25965,22 +24835,6 @@
       "added": false
     },
     {
-      "mal_id": 10419,
-      "name": "Menkui!",
-      "season": "spring",
-      "year": 2011,
-      "members": 13917,
-      "score": 7.07,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Menkui! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 10703,
       "name": "Meitantei Conan OVA 11: London kara no Maru Hi Shirei",
       "season": "spring",
@@ -26001,22 +24855,6 @@
       "added": false
     },
     {
-      "mal_id": 9638,
-      "name": "Ore wa Kanojo wo Shinjiteru!",
-      "season": "spring",
-      "year": 2011,
-      "members": 12435,
-      "score": 6.29,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ore wa Kanojo wo Shinjiteru! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 29998,
       "name": "Asobi ni Iku yo!: Asobi ni Oide - Owari",
       "season": "spring",
@@ -26030,42 +24868,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Asobi ni Iku yo!: Asobi ni Oide - Owari (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 10590,
-      "name": "Reunion",
-      "season": "spring",
-      "year": 2011,
-      "members": 11404,
-      "score": 6.55,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Reunion (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 10488,
-      "name": "Shocking Pink!",
-      "season": "spring",
-      "year": 2011,
-      "members": 11356,
-      "score": 6.82,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Shocking Pink! (batch)",
       "added": false
     },
     {
@@ -26084,22 +24886,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Danball Senki (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 10458,
-      "name": "Ran->Sem: Hakudaku Delmo Tsuma no Miira Tori",
-      "season": "spring",
-      "year": 2011,
-      "members": 11174,
-      "score": 6.78,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ran->Sem: Hakudaku Delmo Tsuma no Miira Tori (batch)",
       "added": false
     },
     {
@@ -26159,22 +24945,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Tiger & Bunny Pilot (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 10457,
-      "name": "JK to Inkou Kyoushi 4",
-      "season": "spring",
-      "year": 2011,
-      "members": 10006,
-      "score": 6.58,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "JK to Inkou Kyoushi 4 (batch)",
       "added": false
     },
     {
@@ -26763,22 +25533,6 @@
       "added": false
     },
     {
-      "mal_id": 10779,
-      "name": "Eroge! H mo Game mo Kaihatsu Zanmai",
-      "season": "summer",
-      "year": 2011,
-      "members": 63225,
-      "score": 7.55,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Eroge! H mo Game mo Kaihatsu Zanmai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9917,
       "name": "Pokemon Movie 14 White: Victini to Kuroki Eiyuu Zekrom",
       "season": "summer",
@@ -27185,22 +25939,6 @@
       "added": false
     },
     {
-      "mal_id": 10694,
-      "name": "Bloods: Inraku no Ketsuzoku 2",
-      "season": "summer",
-      "year": 2011,
-      "members": 16665,
-      "score": 6.89,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Bloods: Inraku no Ketsuzoku 2 (batch)",
-      "added": false
-    },
-    {
       "mal_id": 10219,
       "name": "Oniichan no Koto nanka Zenzen Suki ja Nai n da kara ne!! Special",
       "season": "summer",
@@ -27322,23 +26060,6 @@
       "added": false
     },
     {
-      "mal_id": 10827,
-      "name": "Wizard Girl Ambitious",
-      "season": "summer",
-      "year": 2011,
-      "members": 12337,
-      "score": 6.59,
-      "episodes": 1,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Wizard Girl Ambitious (batch)",
-      "added": false
-    },
-    {
       "mal_id": 10573,
       "name": "Tennis no Oujisama: Another Story II - Ano Toki no Bokura",
       "season": "summer",
@@ -27373,22 +26094,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Tennis no Oujisama Movie 2: Eikokushiki Teikyuu Shiro Kessen! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 10695,
-      "name": "Yume Kui: Tsurumiku Shiki Game Seisaku",
-      "season": "summer",
-      "year": 2011,
-      "members": 10806,
-      "score": 6.67,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Yume Kui: Tsurumiku Shiki Game Seisaku (batch)",
       "added": false
     },
     {
@@ -27997,22 +26702,6 @@
       "added": false
     },
     {
-      "mal_id": 10851,
-      "name": "Euphoria",
-      "season": "fall",
-      "year": 2011,
-      "members": 86379,
-      "score": 5.81,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Euphoria (batch)",
-      "added": false
-    },
-    {
       "mal_id": 9000,
       "name": "Toaru Hikuushi e no Tsuioku",
       "season": "fall",
@@ -28276,22 +26965,6 @@
       "added": false
     },
     {
-      "mal_id": 11879,
-      "name": "Oni Chichi: Re-born",
-      "season": "fall",
-      "year": 2011,
-      "members": 33785,
-      "score": 7.25,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi: Re-born (batch)",
-      "added": false
-    },
-    {
       "mal_id": 11161,
       "name": "Hoshizora e Kakaru Hashi: Kakaru ka? Gakuensai ni Koi no Hashi",
       "season": "fall",
@@ -28309,22 +26982,6 @@
       ],
       "hasAdultGenre": true,
       "searchTerm": "Hoshizora e Kakaru Hashi: Kakaru ka? Gakuensai ni Koi no Hashi (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 11321,
-      "name": "Nee Summer!",
-      "season": "fall",
-      "year": 2011,
-      "members": 30516,
-      "score": 7.12,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Nee Summer! (batch)",
       "added": false
     },
     {
@@ -28528,22 +27185,6 @@
       "added": false
     },
     {
-      "mal_id": 10668,
-      "name": "Imouto Paradise!",
-      "season": "fall",
-      "year": 2011,
-      "members": 21002,
-      "score": 6.58,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Imouto Paradise! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 10999,
       "name": "Inazuma Eleven Go: Kyuukyoku no Kizuna Gryphon",
       "season": "fall",
@@ -28583,22 +27224,6 @@
       ],
       "hasAdultGenre": true,
       "searchTerm": "R-15: R15 Shounen Hyouryuuki (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 11467,
-      "name": "TSF Monogatari",
-      "season": "fall",
-      "year": 2011,
-      "members": 19033,
-      "score": 6.6,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "TSF Monogatari (batch)",
       "added": false
     },
     {
@@ -28653,22 +27278,6 @@
       "themes": [],
       "hasAdultGenre": true,
       "searchTerm": "Queen's Blade OVA (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 12143,
-      "name": "Swing Out Sisters",
-      "season": "fall",
-      "year": 2011,
-      "members": 17533,
-      "score": 7.25,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Swing Out Sisters (batch)",
       "added": false
     },
     {
@@ -28729,22 +27338,6 @@
       "added": false
     },
     {
-      "mal_id": 11745,
-      "name": "Aku no Onna Kanbu",
-      "season": "fall",
-      "year": 2011,
-      "members": 12841,
-      "score": 6.65,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aku no Onna Kanbu (batch)",
-      "added": false
-    },
-    {
       "mal_id": 12447,
       "name": "Ben-To Picture Drama",
       "season": "fall",
@@ -28758,22 +27351,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Ben-To Picture Drama (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 11185,
-      "name": "Kowaku no Toki",
-      "season": "fall",
-      "year": 2011,
-      "members": 12334,
-      "score": 5.89,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kowaku no Toki (batch)",
       "added": false
     },
     {
@@ -28793,38 +27370,6 @@
       "themes": [],
       "hasAdultGenre": true,
       "searchTerm": "Queen's Blade OVA Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 11349,
-      "name": "Soredemo Tsuma wo Aishiteru",
-      "season": "fall",
-      "year": 2011,
-      "members": 11299,
-      "score": 6.47,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Soredemo Tsuma wo Aishiteru (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 11067,
-      "name": "Oppai Heart: Kanojo wa Kedamono Hatsujouki!?",
-      "season": "fall",
-      "year": 2011,
-      "members": 10206,
-      "score": 6.75,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oppai Heart: Kanojo wa Kedamono Hatsujouki!? (batch)",
       "added": false
     },
     {
@@ -29465,24 +28010,6 @@
       "added": false
     },
     {
-      "mal_id": 11827,
-      "name": "Kuroinu: Kedakaki Seijo wa Hakudaku ni Somaru",
-      "season": "winter",
-      "year": 2012,
-      "members": 40123,
-      "score": 7.35,
-      "episodes": 6,
-      "genres": [
-        "Action",
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kuroinu: Kedakaki Seijo wa Hakudaku ni Somaru (batch)",
-      "added": false
-    },
-    {
       "mal_id": 12419,
       "name": "Guilty Crown: Kiseki - Reassortment",
       "season": "winter",
@@ -29586,22 +28113,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Sakasama no Patema: Beginning of the Day (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 12375,
-      "name": "Maki-chan to Now.",
-      "season": "winter",
-      "year": 2012,
-      "members": 29600,
-      "score": 7.37,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Maki-chan to Now. (batch)",
       "added": false
     },
     {
@@ -29881,22 +28392,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Mogyutto \"Love\" de Sekkinchuu! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 13057,
-      "name": "Peace Hame!",
-      "season": "winter",
-      "year": 2012,
-      "members": 12392,
-      "score": 7.07,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Peace Hame! (batch)",
       "added": false
     },
     {
@@ -30836,25 +29331,6 @@
       "added": false
     },
     {
-      "mal_id": 13221,
-      "name": "Kyonyuu Fantasy",
-      "season": "spring",
-      "year": 2012,
-      "members": 30030,
-      "score": 7.35,
-      "episodes": 2,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Kyonyuu Fantasy (batch)",
-      "added": false
-    },
-    {
       "mal_id": 12505,
       "name": "C³: Rinkan Gakkou Confusion!",
       "season": "spring",
@@ -30954,22 +29430,6 @@
       "added": false
     },
     {
-      "mal_id": 12059,
-      "name": "Otome Dori",
-      "season": "spring",
-      "year": 2012,
-      "members": 24419,
-      "score": 5.54,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Otome Dori (batch)",
-      "added": false
-    },
-    {
       "mal_id": 11889,
       "name": "The iDOLM@STER: 765 Pro to Iu Monogatari",
       "season": "spring",
@@ -31048,39 +29508,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Pokemon Black and White 2: Introduction Movie (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 12997,
-      "name": "Please ♥♥♥♥ Me!",
-      "season": "spring",
-      "year": 2012,
-      "members": 18666,
-      "score": 6.75,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Please ♥♥♥♥ Me! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 12055,
-      "name": "Brandish",
-      "season": "spring",
-      "year": 2012,
-      "members": 17673,
-      "score": 6.65,
-      "episodes": 2,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Brandish (batch)",
       "added": false
     },
     {
@@ -31169,38 +29596,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Shin Tennis no Oujisama Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 13595,
-      "name": "Suki de Suki de, Suki de The Animation",
-      "season": "spring",
-      "year": 2012,
-      "members": 12726,
-      "score": 6.8,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Suki de Suki de, Suki de The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 13785,
-      "name": "Uhou Renka",
-      "season": "spring",
-      "year": 2012,
-      "members": 12609,
-      "score": 6.65,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Uhou Renka (batch)",
       "added": false
     },
     {
@@ -32769,24 +31164,6 @@
       "added": false
     },
     {
-      "mal_id": 14543,
-      "name": "Koutetsu no Majo Annerose",
-      "season": "summer",
-      "year": 2012,
-      "members": 16154,
-      "score": 6.77,
-      "episodes": 4,
-      "genres": [
-        "Action",
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Koutetsu no Majo Annerose (batch)",
-      "added": false
-    },
-    {
       "mal_id": 14951,
       "name": "Wonderful Rush",
       "season": "summer",
@@ -32801,22 +31178,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Wonderful Rush (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 14127,
-      "name": "Papa Love: Papa to Icha Ero Shitai Musume-tachi to Hitotsu Yane no Shita de",
-      "season": "summer",
-      "year": 2012,
-      "members": 14623,
-      "score": 6.77,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Papa Love: Papa to Icha Ero Shitai Musume-tachi to Hitotsu Yane no Shita de (batch)",
       "added": false
     },
     {
@@ -32835,54 +31196,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Recorder to Randoseru (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 14539,
-      "name": "Love 2 Quad",
-      "season": "summer",
-      "year": 2012,
-      "members": 13673,
-      "score": 6.71,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Love 2 Quad (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 12057,
-      "name": "My Imouto: Koakuma na A-Cup",
-      "season": "summer",
-      "year": 2012,
-      "members": 12565,
-      "score": 6.61,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "My Imouto: Koakuma na A-Cup (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 14129,
-      "name": "Starless: 21st Century Nymphomaniacs",
-      "season": "summer",
-      "year": 2012,
-      "members": 11653,
-      "score": 6.5,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Starless: 21st Century Nymphomaniacs (batch)",
       "added": false
     },
     {
@@ -32923,38 +31236,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Eureka Seven AO: Jungfrau no Hanabana-tachi (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 15409,
-      "name": "Oyakodon: Oppai Tokumori Bonyuu Tsuyudaku de",
-      "season": "summer",
-      "year": 2012,
-      "members": 10814,
-      "score": 6.7,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oyakodon: Oppai Tokumori Bonyuu Tsuyudaku de (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 14993,
-      "name": "Gogo no Kouchou: Junai Mellow yori",
-      "season": "summer",
-      "year": 2012,
-      "members": 10513,
-      "score": 6.75,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Gogo no Kouchou: Junai Mellow yori (batch)",
       "added": false
     },
     {
@@ -34205,22 +32486,6 @@
       "added": false
     },
     {
-      "mal_id": 15097,
-      "name": "Tropical Kiss",
-      "season": "fall",
-      "year": 2012,
-      "members": 27532,
-      "score": 7.08,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tropical Kiss (batch)",
-      "added": false
-    },
-    {
       "mal_id": 11239,
       "name": "Hidamari Sketch x Honeycomb",
       "season": "fall",
@@ -34297,42 +32562,6 @@
       "added": false
     },
     {
-      "mal_id": 15537,
-      "name": "Tsugou no Yoi Sexfriend?",
-      "season": "fall",
-      "year": 2012,
-      "members": 24629,
-      "score": 7.4,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Tsugou no Yoi Sexfriend? (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 14991,
-      "name": "Harem Time The Animation",
-      "season": "fall",
-      "year": 2012,
-      "members": 23299,
-      "score": 7.12,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Harem Time The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 14373,
       "name": "Arata naru Sekai: World's/Start/Load/End",
       "season": "fall",
@@ -34402,22 +32631,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Girls & Panzer: Shoukai Shimasu! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 15843,
-      "name": "Koiito Kinenbi The Animation",
-      "season": "fall",
-      "year": 2012,
-      "members": 20116,
-      "score": 7.41,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Koiito Kinenbi The Animation (batch)",
       "added": false
     },
     {
@@ -34577,39 +32790,6 @@
       "added": false
     },
     {
-      "mal_id": 16059,
-      "name": "Aku no Onna Kanbu: Full Moon Night",
-      "season": "fall",
-      "year": 2012,
-      "members": 12880,
-      "score": 6.69,
-      "episodes": 1,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aku no Onna Kanbu: Full Moon Night (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 15867,
-      "name": "Zettai Junshu☆Kyousei Kozukuri Kyokashou!!",
-      "season": "fall",
-      "year": 2012,
-      "members": 12754,
-      "score": 6.58,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Zettai Junshu☆Kyousei Kozukuri Kyokashou!! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 15313,
       "name": "Wooser no Sono Higurashi",
       "season": "fall",
@@ -34644,22 +32824,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Inferno Cop: Fact Files (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 12959,
-      "name": "Ojousama☆Yomeiri Kousou!",
-      "season": "fall",
-      "year": 2012,
-      "members": 12027,
-      "score": 6.88,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ojousama☆Yomeiri Kousou! (batch)",
       "added": false
     },
     {
@@ -35747,22 +33911,6 @@
       "added": false
     },
     {
-      "mal_id": 15841,
-      "name": "Tsun Tsun Maid wa Ero Ero desu",
-      "season": "winter",
-      "year": 2013,
-      "members": 19213,
-      "score": 7.08,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tsun Tsun Maid wa Ero Ero desu (batch)",
-      "added": false
-    },
-    {
       "mal_id": 17345,
       "name": "Senran Kagura Specials",
       "season": "winter",
@@ -35851,22 +33999,6 @@
       "added": false
     },
     {
-      "mal_id": 16472,
-      "name": "Sei Yariman Gakuen Enkou Nikki The Animation",
-      "season": "winter",
-      "year": 2013,
-      "members": 15383,
-      "score": 7.12,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Sei Yariman Gakuen Enkou Nikki The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 17277,
       "name": "Code Geass: Soubou no Oz Picture Drama",
       "season": "winter",
@@ -35942,22 +34074,6 @@
       "added": false
     },
     {
-      "mal_id": 16642,
-      "name": "Ane Koi: Suki Kirai Daisuki.",
-      "season": "winter",
-      "year": 2013,
-      "members": 14189,
-      "score": 6.9,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane Koi: Suki Kirai Daisuki. (batch)",
-      "added": false
-    },
-    {
       "mal_id": 14347,
       "name": "Ryo",
       "season": "winter",
@@ -35975,41 +34091,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Ryo (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 16638,
-      "name": "Fault!! Service: Aratanaru Rival",
-      "season": "winter",
-      "year": 2013,
-      "members": 13646,
-      "score": 6.94,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Fault!! Service: Aratanaru Rival (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 17371,
-      "name": "Natsuyasumi.",
-      "season": "winter",
-      "year": 2013,
-      "members": 13506,
-      "score": 5.82,
-      "episodes": 3,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Natsuyasumi. (batch)",
       "added": false
     },
     {
@@ -36034,22 +34115,6 @@
       "added": false
     },
     {
-      "mal_id": 16189,
-      "name": "Miboujin Nikki: Akogare no Ano Hito to Hitotsu Yane no Shita",
-      "season": "winter",
-      "year": 2013,
-      "members": 12841,
-      "score": 6.96,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Miboujin Nikki: Akogare no Ano Hito to Hitotsu Yane no Shita (batch)",
-      "added": false
-    },
-    {
       "mal_id": 38971,
       "name": "Nekomonogatari: Kuro Recap",
       "season": "winter",
@@ -36063,22 +34128,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Nekomonogatari: Kuro Recap (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 16474,
-      "name": "Soushisouai Note The Animation",
-      "season": "winter",
-      "year": 2013,
-      "members": 11708,
-      "score": 7.24,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Soushisouai Note The Animation (batch)",
       "added": false
     },
     {
@@ -36132,22 +34181,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Kidou Senshi Gundam: Dai 08 MS Shoutai - Sanjigen to no Tatakai (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 16914,
-      "name": "Chu Shite Agechau: Oshikake Oneesan no Seikou Chiryou",
-      "season": "winter",
-      "year": 2013,
-      "members": 10192,
-      "score": 6.93,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Chu Shite Agechau: Oshikake Oneesan no Seikou Chiryou (batch)",
       "added": false
     },
     {
@@ -37141,22 +35174,6 @@
       "added": false
     },
     {
-      "mal_id": 17867,
-      "name": "Nuki Doki! Tenshi to Akuma no Sakusei Battle",
-      "season": "spring",
-      "year": 2013,
-      "members": 17270,
-      "score": 6.9,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Nuki Doki! Tenshi to Akuma no Sakusei Battle (batch)",
-      "added": false
-    },
-    {
       "mal_id": 19255,
       "name": "Hyakka Ryouran: Samurai Bride Specials",
       "season": "spring",
@@ -37190,22 +35207,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Pretty Rhythm: Rainbow Live (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 17745,
-      "name": "Kakushi Dere",
-      "season": "spring",
-      "year": 2013,
-      "members": 13942,
-      "score": 6.94,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kakushi Dere (batch)",
       "added": false
     },
     {
@@ -37283,22 +35284,6 @@
       "added": false
     },
     {
-      "mal_id": 17491,
-      "name": "Garden",
-      "season": "spring",
-      "year": 2013,
-      "members": 11480,
-      "score": 6.44,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Garden (batch)",
-      "added": false
-    },
-    {
       "mal_id": 17849,
       "name": "Sparrow's Hotel",
       "season": "spring",
@@ -37315,22 +35300,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Sparrow's Hotel (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 18525,
-      "name": "Rin x Sen + Ran -> Sem: Cross Mix",
-      "season": "spring",
-      "year": 2013,
-      "members": 10779,
-      "score": 6.96,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Rin x Sen + Ran -> Sem: Cross Mix (batch)",
       "added": false
     },
     {
@@ -38734,54 +36703,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Houseki no Kuni PV (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 18655,
-      "name": "Koikishi Purely☆Kiss The Animation",
-      "season": "summer",
-      "year": 2013,
-      "members": 17362,
-      "score": 7.16,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Koikishi Purely☆Kiss The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 19051,
-      "name": "Imouto Paradise! 2",
-      "season": "summer",
-      "year": 2013,
-      "members": 17271,
-      "score": 7.05,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Imouto Paradise! 2 (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 18691,
-      "name": "Joshikousei no Koshitsuki",
-      "season": "summer",
-      "year": 2013,
-      "members": 17043,
-      "score": 7.21,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Joshikousei no Koshitsuki (batch)",
       "added": false
     },
     {
@@ -40214,22 +38135,6 @@
       "added": false
     },
     {
-      "mal_id": 21097,
-      "name": "Oni Chichi: Rebuild",
-      "season": "fall",
-      "year": 2013,
-      "members": 27515,
-      "score": 7.12,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi: Rebuild (batch)",
-      "added": false
-    },
-    {
       "mal_id": 20673,
       "name": "Hinata no Aoshigure",
       "season": "fall",
@@ -40268,25 +38173,6 @@
       "added": false
     },
     {
-      "mal_id": 20801,
-      "name": "Koakuma Kanojo The Animation",
-      "season": "fall",
-      "year": 2013,
-      "members": 24468,
-      "score": 7.22,
-      "episodes": 2,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Koakuma Kanojo The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 21235,
       "name": "Imanara Maniau! Log Horizon",
       "season": "fall",
@@ -40304,22 +38190,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Imanara Maniau! Log Horizon (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 20849,
-      "name": "Oni Chichi 2: Revenge",
-      "season": "fall",
-      "year": 2013,
-      "members": 19611,
-      "score": 6.73,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi 2: Revenge (batch)",
       "added": false
     },
     {
@@ -40375,22 +38245,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Code Geass: Boukoku no Akito 2 - Hikisakareshi Yokuryuu Picture Drama (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 21069,
-      "name": "Amanee!: Tomodachinchi de Konna Koto ni Naru Nante!",
-      "season": "fall",
-      "year": 2013,
-      "members": 16955,
-      "score": 7.08,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Amanee!: Tomodachinchi de Konna Koto ni Naru Nante! (batch)",
       "added": false
     },
     {
@@ -40450,22 +38304,6 @@
       "added": false
     },
     {
-      "mal_id": 18693,
-      "name": "Tenioha!: Onnanoko datte Honto wa Ecchi da yo?",
-      "season": "fall",
-      "year": 2013,
-      "members": 15212,
-      "score": 7.09,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tenioha!: Onnanoko datte Honto wa Ecchi da yo? (batch)",
-      "added": false
-    },
-    {
       "mal_id": 19261,
       "name": "Gintama x Mameshiba",
       "season": "fall",
@@ -40481,22 +38319,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Gintama x Mameshiba (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 21001,
-      "name": "Dekakute Ecchi na Ore no Ane",
-      "season": "fall",
-      "year": 2013,
-      "members": 14093,
-      "score": 6.95,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Dekakute Ecchi na Ore no Ane (batch)",
       "added": false
     },
     {
@@ -40590,43 +38412,6 @@
       "added": false
     },
     {
-      "mal_id": 19631,
-      "name": "Tayu Tayu",
-      "season": "fall",
-      "year": 2013,
-      "members": 13310,
-      "score": 7.03,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Tayu Tayu (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 20757,
-      "name": "Taimanin Yukikaze",
-      "season": "fall",
-      "year": 2013,
-      "members": 12802,
-      "score": 6.5,
-      "episodes": 3,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [
-        "Mythology"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Taimanin Yukikaze (batch)",
-      "added": false
-    },
-    {
       "mal_id": 20723,
       "name": "Kyousou Giga (TV) Recaps",
       "season": "fall",
@@ -40660,22 +38445,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Teekyuu 2 Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 20377,
-      "name": "Dorei Usagi to Anthony The Animation",
-      "season": "fall",
-      "year": 2013,
-      "members": 10559,
-      "score": 7.13,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Dorei Usagi to Anthony The Animation (batch)",
       "added": false
     },
     {
@@ -41293,23 +39062,6 @@
       "added": false
     },
     {
-      "mal_id": 22429,
-      "name": "Itadaki! Seieki♥",
-      "season": "winter",
-      "year": 2014,
-      "members": 70137,
-      "score": 7.4,
-      "episodes": 1,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Itadaki! Seieki♥ (batch)",
-      "added": false
-    },
-    {
       "mal_id": 20371,
       "name": "Sekaiichi Hatsukoi Movie: Yokozawa Takafumi no Baai",
       "season": "winter",
@@ -41742,57 +39494,6 @@
       "added": false
     },
     {
-      "mal_id": 21829,
-      "name": "Fella Pure: Mitarashi-san Chi no Jijou The Animation",
-      "season": "winter",
-      "year": 2014,
-      "members": 33085,
-      "score": 7.38,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Fella Pure: Mitarashi-san Chi no Jijou The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 23479,
-      "name": "Itadaki! Seieki♥ Special",
-      "season": "winter",
-      "year": 2014,
-      "members": 30868,
-      "score": 7.15,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Itadaki! Seieki♥ Special (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 21521,
-      "name": "Futa-bu!",
-      "season": "winter",
-      "year": 2014,
-      "members": 30645,
-      "score": 7.15,
-      "episodes": 2,
-      "genres": [
-        "Girls Love",
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Futa-bu! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 20423,
       "name": "Kamisama no Inai Nichiyoubi: Kioku",
       "season": "winter",
@@ -41956,22 +39657,6 @@
       "added": false
     },
     {
-      "mal_id": 22069,
-      "name": "Swing Out Sisters (2014)",
-      "season": "winter",
-      "year": 2014,
-      "members": 22934,
-      "score": 7.47,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Swing Out Sisters (2014) (batch)",
-      "added": false
-    },
-    {
       "mal_id": 19799,
       "name": "Robot Girls Z",
       "season": "winter",
@@ -42074,22 +39759,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Tsubasa to Hotaru (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 21751,
-      "name": "Okusama wa Moto Yariman",
-      "season": "winter",
-      "year": 2014,
-      "members": 15147,
-      "score": 7.03,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Okusama wa Moto Yariman (batch)",
       "added": false
     },
     {
@@ -42294,22 +39963,6 @@
       "added": false
     },
     {
-      "mal_id": 21597,
-      "name": "Yabai! Fukushuu Yami Site",
-      "season": "winter",
-      "year": 2014,
-      "members": 10827,
-      "score": 6.66,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Yabai! Fukushuu Yami Site (batch)",
-      "added": false
-    },
-    {
       "mal_id": 22661,
       "name": "One Piece: Cry Heart",
       "season": "winter",
@@ -42343,22 +39996,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Hetalia: The Beautiful World Extra Disc (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 22039,
-      "name": "Mou Hasamazu ni wa Irarenai♥: Hoshi ni Onegai shitara Konnani Okkiku Nacchatta!",
-      "season": "winter",
-      "year": 2014,
-      "members": 10198,
-      "score": 6.71,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Mou Hasamazu ni wa Irarenai♥: Hoshi ni Onegai shitara Konnani Okkiku Nacchatta! (batch)",
       "added": false
     },
     {
@@ -43608,38 +41245,6 @@
       "added": false
     },
     {
-      "mal_id": 23033,
-      "name": "Furueru Kuchibiru",
-      "season": "spring",
-      "year": 2014,
-      "members": 16768,
-      "score": 6.74,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Furueru Kuchibiru (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 21925,
-      "name": "Chichiiro Toiki",
-      "season": "spring",
-      "year": 2014,
-      "members": 16451,
-      "score": 7.07,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Chichiiro Toiki (batch)",
-      "added": false
-    },
-    {
       "mal_id": 23579,
       "name": "12-sai.",
       "season": "spring",
@@ -43726,22 +41331,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Gudetama (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 22543,
-      "name": "Kyonyuu Kazoku Saimin",
-      "season": "spring",
-      "year": 2014,
-      "members": 13328,
-      "score": 6.81,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kyonyuu Kazoku Saimin (batch)",
       "added": false
     },
     {
@@ -43861,38 +41450,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Majin Bone (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 23047,
-      "name": "Tennen Koi-iro Alcohol",
-      "season": "spring",
-      "year": 2014,
-      "members": 10158,
-      "score": 6.83,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tennen Koi-iro Alcohol (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 24987,
-      "name": "Furueru Kuchibiru Episode 0",
-      "season": "spring",
-      "year": 2014,
-      "members": 10132,
-      "score": 6.71,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Furueru Kuchibiru Episode 0 (batch)",
       "added": false
     },
     {
@@ -45011,22 +42568,6 @@
       "added": false
     },
     {
-      "mal_id": 24641,
-      "name": "Baku Ane: Otouto Shibocchau zo! The Animation",
-      "season": "summer",
-      "year": 2014,
-      "members": 40598,
-      "score": 7.4,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Baku Ane: Otouto Shibocchau zo! The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 21435,
       "name": "Yama no Susume Second Season",
       "season": "summer",
@@ -45399,22 +42940,6 @@
       "added": false
     },
     {
-      "mal_id": 24967,
-      "name": "Ane Kyun!: Joshi ga Ie ni Kita!",
-      "season": "summer",
-      "year": 2014,
-      "members": 12084,
-      "score": 6.61,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane Kyun!: Joshi ga Ie ni Kita! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 27503,
       "name": "Karen Senki",
       "season": "summer",
@@ -45483,22 +43008,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Francesca (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 24377,
-      "name": "Spocon!",
-      "season": "summer",
-      "year": 2014,
-      "members": 10051,
-      "score": 6.89,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Spocon! (batch)",
       "added": false
     },
     {
@@ -46680,23 +44189,6 @@
       "added": false
     },
     {
-      "mal_id": 25345,
-      "name": "Rance 01: Hikari wo Motomete The Animation",
-      "season": "fall",
-      "year": 2014,
-      "members": 39837,
-      "score": 7.56,
-      "episodes": 4,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Rance 01: Hikari wo Motomete The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 25285,
       "name": "Seireitsukai no Blade Dance Specials",
       "season": "fall",
@@ -46924,24 +44416,6 @@
       "added": false
     },
     {
-      "mal_id": 25667,
-      "name": "Boy Meets Harem The Animation",
-      "season": "fall",
-      "year": 2014,
-      "members": 23214,
-      "score": 7.12,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Boy Meets Harem The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 23459,
       "name": "Sekai Seifuku: Bouryaku no Zvezda - Shin Zvezda Daisakusen",
       "season": "fall",
@@ -47008,25 +44482,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Diamond no Ace OVA (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 28961,
-      "name": "Idol☆Sister",
-      "season": "fall",
-      "year": 2014,
-      "members": 17910,
-      "score": 7.08,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem",
-        "Music"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Idol☆Sister (batch)",
       "added": false
     },
     {
@@ -47098,22 +44553,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Madan no Ou to Vanadis: Tigre-kun to Vanadi-chu (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 28157,
-      "name": "Sei Brunehilde Gakuen Shoujo Kishidan to Junpaku no Panty The Animation",
-      "season": "fall",
-      "year": 2014,
-      "members": 16694,
-      "score": 7.23,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Sei Brunehilde Gakuen Shoujo Kishidan to Junpaku no Panty The Animation (batch)",
       "added": false
     },
     {
@@ -47254,22 +44693,6 @@
       "added": false
     },
     {
-      "mal_id": 28311,
-      "name": "Koi Maguwai",
-      "season": "fall",
-      "year": 2014,
-      "members": 13167,
-      "score": 6.81,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Koi Maguwai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 23787,
       "name": "Hi☆sCoool! SeHa Girls",
       "season": "fall",
@@ -47305,22 +44728,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Yama no Susume Second Season Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 27603,
-      "name": "Jutaijima",
-      "season": "fall",
-      "year": 2014,
-      "members": 11256,
-      "score": 6.73,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Jutaijima (batch)",
       "added": false
     },
     {
@@ -48038,22 +45445,6 @@
       "added": false
     },
     {
-      "mal_id": 29575,
-      "name": "Mankitsu Happening",
-      "season": "winter",
-      "year": 2015,
-      "members": 58631,
-      "score": 7.7,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Mankitsu Happening (batch)",
-      "added": false
-    },
-    {
       "mal_id": 24913,
       "name": "Bokura wa Minna Kawai-sou: Hajimete no",
       "season": "winter",
@@ -48356,25 +45747,6 @@
       "added": false
     },
     {
-      "mal_id": 28779,
-      "name": "Futa-bu!!",
-      "season": "winter",
-      "year": 2015,
-      "members": 21950,
-      "score": 7.22,
-      "episodes": 2,
-      "genres": [
-        "Girls Love",
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Futa-bu!! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 27967,
       "name": "Senran Kagura Estival Versus: Mizugi-darake no Zenyasai",
       "season": "winter",
@@ -48433,22 +45805,6 @@
       "added": false
     },
     {
-      "mal_id": 28309,
-      "name": "Oni Chichi 2: Harvest",
-      "season": "winter",
-      "year": 2015,
-      "members": 15792,
-      "score": 6.64,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi 2: Harvest (batch)",
-      "added": false
-    },
-    {
       "mal_id": 29223,
       "name": "Aldnoah.Zero Extra Archives",
       "season": "winter",
@@ -48465,22 +45821,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Aldnoah.Zero Extra Archives (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 28313,
-      "name": "Kanojo wa Dare to demo Sex Suru.",
-      "season": "winter",
-      "year": 2015,
-      "members": 14464,
-      "score": 6.68,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kanojo wa Dare to demo Sex Suru. (batch)",
       "added": false
     },
     {
@@ -48538,22 +45878,6 @@
       "added": false
     },
     {
-      "mal_id": 29083,
-      "name": "Lovely x Cation The Animation",
-      "season": "winter",
-      "year": 2015,
-      "members": 12321,
-      "score": 7.21,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Lovely x Cation The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 25801,
       "name": "Shouwa Genroku Rakugo Shinjuu: Yotarou Hourou-hen",
       "season": "winter",
@@ -48608,22 +45932,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Tantei Kageki Milky Holmes TD (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 29085,
-      "name": "Sei Yariman Sisters Pakopako Nikki The Animation",
-      "season": "winter",
-      "year": 2015,
-      "members": 10265,
-      "score": 6.82,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Sei Yariman Sisters Pakopako Nikki The Animation (batch)",
       "added": false
     },
     {
@@ -49913,22 +47221,6 @@
       "added": false
     },
     {
-      "mal_id": 30243,
-      "name": "Gakuen de Jikan yo Tomare",
-      "season": "spring",
-      "year": 2015,
-      "members": 24872,
-      "score": 7.02,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Gakuen de Jikan yo Tomare (batch)",
-      "added": false
-    },
-    {
       "mal_id": 26395,
       "name": "Teekyuu 4",
       "season": "spring",
@@ -49982,57 +47274,6 @@
       "added": false
     },
     {
-      "mal_id": 29808,
-      "name": "Namaiki: Kissuisou e Youkoso! The Animation",
-      "season": "spring",
-      "year": 2015,
-      "members": 17196,
-      "score": 7.14,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Namaiki: Kissuisou e Youkoso! The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 29261,
-      "name": "Genkaku Cool na Sensei ga Aheboteochi!",
-      "season": "spring",
-      "year": 2015,
-      "members": 16795,
-      "score": 7.27,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Genkaku Cool na Sensei ga Aheboteochi! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 30583,
-      "name": "Futa-bu! Mix: Futanari World",
-      "season": "spring",
-      "year": 2015,
-      "members": 16700,
-      "score": 6.72,
-      "episodes": 1,
-      "genres": [
-        "Girls Love",
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Futa-bu! Mix: Futanari World (batch)",
-      "added": false
-    },
-    {
       "mal_id": 28861,
       "name": "Takamiya Nasuno desu! Teekyuu Spin-off",
       "season": "spring",
@@ -50046,38 +47287,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Takamiya Nasuno desu! Teekyuu Spin-off (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 29809,
-      "name": "3Ping Lovers!☆Ippu Nisai no Sekai e Youkoso♪ The Animation",
-      "season": "spring",
-      "year": 2015,
-      "members": 15454,
-      "score": 6.86,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "3Ping Lovers!☆Ippu Nisai no Sekai e Youkoso♪ The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 30702,
-      "name": "Victorian Maid Maria no Houshi",
-      "season": "spring",
-      "year": 2015,
-      "members": 14083,
-      "score": 7.36,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Victorian Maid Maria no Houshi (batch)",
       "added": false
     },
     {
@@ -50132,22 +47341,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Code Geass: Boukoku no Akito 3 - Kagayaku Mono Ten yori Otsu Picture Drama (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 29705,
-      "name": "Shoujo Kyouiku",
-      "season": "spring",
-      "year": 2015,
-      "members": 11785,
-      "score": 6.5,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shoujo Kyouiku (batch)",
       "added": false
     },
     {
@@ -51544,22 +48737,6 @@
       "added": false
     },
     {
-      "mal_id": 30891,
-      "name": "Oni Chichi: Refresh♥",
-      "season": "summer",
-      "year": 2015,
-      "members": 20287,
-      "score": 6.83,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi: Refresh♥ (batch)",
-      "added": false
-    },
-    {
       "mal_id": 29876,
       "name": "Chu Feng: B.E.E",
       "season": "summer",
@@ -51641,38 +48818,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Rokka no Yuusha Picture Drama (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 31189,
-      "name": "Watashi ga Toriko ni Natte Yaru",
-      "season": "summer",
-      "year": 2015,
-      "members": 12583,
-      "score": 6.86,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Watashi ga Toriko ni Natte Yaru (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 30812,
-      "name": "Gyakuten Majo Saiban: Chijo na Majo ni Sabakarechau The Animation",
-      "season": "summer",
-      "year": 2015,
-      "members": 12206,
-      "score": 6.63,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Gyakuten Majo Saiban: Chijo na Majo ni Sabakarechau The Animation (batch)",
       "added": false
     },
     {
@@ -53273,22 +50418,6 @@
       "added": false
     },
     {
-      "mal_id": 30614,
-      "name": "Ane Yome Quartet",
-      "season": "fall",
-      "year": 2015,
-      "members": 20943,
-      "score": 7.25,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane Yome Quartet (batch)",
-      "added": false
-    },
-    {
       "mal_id": 31283,
       "name": "Bikini Warriors Special",
       "season": "fall",
@@ -53404,22 +50533,6 @@
       "added": false
     },
     {
-      "mal_id": 31117,
-      "name": "Ano Ko to Ii Koto",
-      "season": "fall",
-      "year": 2015,
-      "members": 15229,
-      "score": 6.8,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ano Ko to Ii Koto (batch)",
-      "added": false
-    },
-    {
       "mal_id": 31221,
       "name": "Tantei Team KZ Jiken Note",
       "season": "fall",
@@ -53506,38 +50619,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Cardfight!! Vanguard G: GIRS Crisis-hen (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 31788,
-      "name": "Ero Manga! H mo Manga mo Step-up♪",
-      "season": "fall",
-      "year": 2015,
-      "members": 11953,
-      "score": 6.73,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ero Manga! H mo Manga mo Step-up♪ (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 31397,
-      "name": "Mesu Kyoushi 4: Kegasareta Kyoudan",
-      "season": "fall",
-      "year": 2015,
-      "members": 11629,
-      "score": 6.89,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Mesu Kyoushi 4: Kegasareta Kyoudan (batch)",
       "added": false
     },
     {
@@ -53629,22 +50710,6 @@
       ],
       "hasAdultGenre": true,
       "searchTerm": "Code Geass: Boukoku no Akito 4 - Nikushimi no Kioku kara Picture Drama (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 31400,
-      "name": "Rinkan Biyaku Chuudoku: Nigeba Nashi! 1428-nin no Seito Zenin ni Sex Sareru Reijou Sayaka",
-      "season": "fall",
-      "year": 2015,
-      "members": 10212,
-      "score": 6.57,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Rinkan Biyaku Chuudoku: Nigeba Nashi! 1428-nin no Seito Zenin ni Sex Sareru Reijou Sayaka (batch)",
       "added": false
     },
     {
@@ -54662,24 +51727,6 @@
       "added": false
     },
     {
-      "mal_id": 31886,
-      "name": "Dropout",
-      "season": "winter",
-      "year": 2016,
-      "members": 37165,
-      "score": 6.85,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Dropout (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35815,
       "name": "Boku dake ga Inai Machi Recaps",
       "season": "winter",
@@ -54697,22 +51744,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Boku dake ga Inai Machi Recaps (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 32355,
-      "name": "Toshi Densetsu Series",
-      "season": "winter",
-      "year": 2016,
-      "members": 34685,
-      "score": 7.35,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Toshi Densetsu Series (batch)",
       "added": false
     },
     {
@@ -54879,22 +51910,6 @@
       "added": false
     },
     {
-      "mal_id": 31810,
-      "name": "Amakano",
-      "season": "winter",
-      "year": 2016,
-      "members": 16604,
-      "score": 6.87,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Amakano (batch)",
-      "added": false
-    },
-    {
       "mal_id": 31884,
       "name": "Mahoutsukai Precure!",
       "season": "winter",
@@ -54943,22 +51958,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Okusama ga Seitokaichou! OVA: Okusama Gekijou (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 32864,
-      "name": "JK to Ero Konbini Tenchou",
-      "season": "winter",
-      "year": 2016,
-      "members": 14603,
-      "score": 6.63,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "JK to Ero Konbini Tenchou (batch)",
       "added": false
     },
     {
@@ -55061,38 +52060,6 @@
       "added": false
     },
     {
-      "mal_id": 32423,
-      "name": "Pretty x Cation The Animation",
-      "season": "winter",
-      "year": 2016,
-      "members": 12802,
-      "score": 7.17,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Pretty x Cation The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 32405,
-      "name": "Marshmallow★Imouto★Succubus★",
-      "season": "winter",
-      "year": 2016,
-      "members": 12222,
-      "score": 6.91,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Marshmallow★Imouto★Succubus★ (batch)",
-      "added": false
-    },
-    {
       "mal_id": 32026,
       "name": "Osomatsu-san Special",
       "season": "winter",
@@ -55128,22 +52095,6 @@
       "added": false
     },
     {
-      "mal_id": 32063,
-      "name": "Kyonyuu Hitozuma Onna Kyoushi Saimin",
-      "season": "winter",
-      "year": 2016,
-      "members": 11826,
-      "score": 7.11,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kyonyuu Hitozuma Onna Kyoushi Saimin (batch)",
-      "added": false
-    },
-    {
       "mal_id": 31883,
       "name": "Bakuon!! OVA",
       "season": "winter",
@@ -55160,22 +52111,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Bakuon!! OVA (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 32267,
-      "name": "Kowaremono: Risa The Animation",
-      "season": "winter",
-      "year": 2016,
-      "members": 10656,
-      "score": 6.52,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kowaremono: Risa The Animation (batch)",
       "added": false
     },
     {
@@ -55212,22 +52147,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Tabi Machi Late Show (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 32239,
-      "name": "Shinsei: Futanari Idol - Dekatama-kei!",
-      "season": "winter",
-      "year": 2016,
-      "members": 10025,
-      "score": 6.62,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shinsei: Futanari Idol - Dekatama-kei! (batch)",
       "added": false
     },
     {
@@ -56563,22 +53482,6 @@
       "added": false
     },
     {
-      "mal_id": 32667,
-      "name": "Baka na Imouto wo Rikou ni Suru no wa Ore no xx dake na Ken ni Tsuite",
-      "season": "spring",
-      "year": 2016,
-      "members": 22944,
-      "score": 7.1,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Baka na Imouto wo Rikou ni Suru no wa Ore no xx dake na Ken ni Tsuite (batch)",
-      "added": false
-    },
-    {
       "mal_id": 33254,
       "name": "Arslan Senki (TV) Gaiden",
       "season": "spring",
@@ -56618,22 +53521,6 @@
       "added": false
     },
     {
-      "mal_id": 32872,
-      "name": "Energy Kyouka!!",
-      "season": "spring",
-      "year": 2016,
-      "members": 21299,
-      "score": 6.93,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Energy Kyouka!! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 32682,
       "name": "Kagewani: Shou",
       "season": "spring",
@@ -56649,38 +53536,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Kagewani: Shou (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 32833,
-      "name": "Nudist Beach ni Shuugaku Ryokou de!! The Animation",
-      "season": "spring",
-      "year": 2016,
-      "members": 18806,
-      "score": 6.96,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Nudist Beach ni Shuugaku Ryokou de!! The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 31789,
-      "name": "Oni Chichi: Vacation",
-      "season": "spring",
-      "year": 2016,
-      "members": 16587,
-      "score": 6.74,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oni Chichi: Vacation (batch)",
       "added": false
     },
     {
@@ -56795,22 +53650,6 @@
       "added": false
     },
     {
-      "mal_id": 32620,
-      "name": "Koinaka: Koinaka de Hatsukoi x Nakadashi Sexual Life The Animation",
-      "season": "spring",
-      "year": 2016,
-      "members": 12476,
-      "score": 7.03,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Koinaka: Koinaka de Hatsukoi x Nakadashi Sexual Life The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 32802,
       "name": "Cardfight!! Vanguard G: Stride Gate-hen",
       "season": "spring",
@@ -56863,22 +53702,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Jie Mo Ren (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 32895,
-      "name": "Chijoku no Seifuku",
-      "season": "spring",
-      "year": 2016,
-      "members": 10054,
-      "score": 6.91,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Chijoku no Seifuku (batch)",
       "added": false
     },
     {
@@ -58124,22 +54947,6 @@
       "added": false
     },
     {
-      "mal_id": 33322,
-      "name": "JK Bitch ni Shiboraretai",
-      "season": "summer",
-      "year": 2016,
-      "members": 31074,
-      "score": 7.25,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "JK Bitch ni Shiboraretai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 32961,
       "name": "Regalia: The Three Sacred Stars",
       "season": "summer",
@@ -58509,22 +55316,6 @@
       "added": false
     },
     {
-      "mal_id": 33962,
-      "name": "Shoujo-tachi no Sadism The Animation",
-      "season": "summer",
-      "year": 2016,
-      "members": 13241,
-      "score": 6.84,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shoujo-tachi no Sadism The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 33302,
       "name": "Yowamushi Pedal: Spare Bike",
       "season": "summer",
@@ -58577,22 +55368,6 @@
       "added": false
     },
     {
-      "mal_id": 33505,
-      "name": "Tsumamigui 3 The Animation",
-      "season": "summer",
-      "year": 2016,
-      "members": 12144,
-      "score": 7.2,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tsumamigui 3 The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 34349,
       "name": "Diamond no Ace: Second Season OVA",
       "season": "summer",
@@ -58609,22 +55384,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Diamond no Ace: Second Season OVA (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 33993,
-      "name": "300 En no Otsukiai Anime Edition",
-      "season": "summer",
-      "year": 2016,
-      "members": 10891,
-      "score": 6.22,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "300 En no Otsukiai Anime Edition (batch)",
       "added": false
     },
     {
@@ -58660,22 +55419,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Katekyou Hitman Reborn! x ēlDLIVE Special (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 33291,
-      "name": "Pinkerton",
-      "season": "summer",
-      "year": 2016,
-      "members": 10000,
-      "score": 6.63,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Pinkerton (batch)",
       "added": false
     },
     {
@@ -59853,22 +56596,6 @@
       "added": false
     },
     {
-      "mal_id": 32587,
-      "name": "Shoujo Ramune",
-      "season": "fall",
-      "year": 2016,
-      "members": 39180,
-      "score": 6.77,
-      "episodes": 0,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shoujo Ramune (batch)",
-      "added": false
-    },
-    {
       "mal_id": 34036,
       "name": "Meitantei Conan: Episode One - Chiisaku Natta Meitantei",
       "season": "fall",
@@ -60492,39 +57219,6 @@
       "added": false
     },
     {
-      "mal_id": 33231,
-      "name": "Fella Hame Lips",
-      "season": "fall",
-      "year": 2016,
-      "members": 14899,
-      "score": 7.19,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Fella Hame Lips (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 34659,
-      "name": "Otokonoko ♂ Delivery",
-      "season": "fall",
-      "year": 2016,
-      "members": 14786,
-      "score": 5.78,
-      "episodes": 1,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Otokonoko ♂ Delivery (batch)",
-      "added": false
-    },
-    {
       "mal_id": 33795,
       "name": "Mahou Shoujo Nante Mou Ii desu kara. Second Season",
       "season": "fall",
@@ -60612,71 +57306,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Cardfight!! Vanguard G Next (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 33865,
-      "name": "8-shaku 8-wa Kerakumeguri: Igyou Kaikitan The Animation",
-      "season": "fall",
-      "year": 2016,
-      "members": 11958,
-      "score": 6.35,
-      "episodes": 3,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "8-shaku 8-wa Kerakumeguri: Igyou Kaikitan The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 33768,
-      "name": "Oide yo! Shiritsu Yarimakuri Gakuen",
-      "season": "fall",
-      "year": 2016,
-      "members": 11247,
-      "score": 6.88,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oide yo! Shiritsu Yarimakuri Gakuen (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 33979,
-      "name": "Kowaremono: Risa Plus The Animation",
-      "season": "fall",
-      "year": 2016,
-      "members": 10566,
-      "score": 6.7,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kowaremono: Risa Plus The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 33769,
-      "name": "Imouto to Sono Yuujin ga Ero Sugite Ore no Kokan ga Yabai",
-      "season": "fall",
-      "year": 2016,
-      "members": 10480,
-      "score": 6.79,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Imouto to Sono Yuujin ga Ero Sugite Ore no Kokan ga Yabai (batch)",
       "added": false
     },
     {
@@ -62148,22 +58777,6 @@
       "added": false
     },
     {
-      "mal_id": 34388,
-      "name": "Shikkoku no Shaga The Animation",
-      "season": "winter",
-      "year": 2017,
-      "members": 15484,
-      "score": 7.31,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shikkoku no Shaga The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 36491,
       "name": "Doupo Cangqiong",
       "season": "winter",
@@ -62203,22 +58816,6 @@
       "added": false
     },
     {
-      "mal_id": 34638,
-      "name": "Jitaku Keibiin",
-      "season": "winter",
-      "year": 2017,
-      "members": 14531,
-      "score": 6.64,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Jitaku Keibiin (batch)",
-      "added": false
-    },
-    {
       "mal_id": 33035,
       "name": "Yuyushiki: Komarasetari, Komarasaretari",
       "season": "winter",
@@ -62236,38 +58833,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Yuyushiki: Komarasetari, Komarasaretari (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 34759,
-      "name": "Green Eyes: Ane Kyun! yori The Animation",
-      "season": "winter",
-      "year": 2017,
-      "members": 12464,
-      "score": 6.89,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Green Eyes: Ane Kyun! yori The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 34361,
-      "name": "Kyonyuu Reijou MC Gakuen",
-      "season": "winter",
-      "year": 2017,
-      "members": 11832,
-      "score": 6.87,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kyonyuu Reijou MC Gakuen (batch)",
       "added": false
     },
     {
@@ -62303,22 +58868,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Choboraunyopomi Gekijou Dai San Maku Ai Mai Mii: Surgical Friends (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 34492,
-      "name": "Nuki Doki! Tenshi to Akuma no Sakusei Battle - Revolution",
-      "season": "winter",
-      "year": 2017,
-      "members": 10846,
-      "score": 6.4,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Nuki Doki! Tenshi to Akuma no Sakusei Battle - Revolution (batch)",
       "added": false
     },
     {
@@ -63263,23 +59812,6 @@
       "added": false
     },
     {
-      "mal_id": 34823,
-      "name": "Souryo to Majiwaru Shikiyoku no Yoru ni...",
-      "season": "spring",
-      "year": 2017,
-      "members": 43946,
-      "score": 4.7,
-      "episodes": 12,
-      "genres": [
-        "Drama",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Souryo to Majiwaru Shikiyoku no Yoru ni... (batch)",
-      "added": false
-    },
-    {
       "mal_id": 34427,
       "name": "Frame Arms Girl",
       "season": "spring",
@@ -63680,22 +60212,6 @@
       "added": false
     },
     {
-      "mal_id": 35028,
-      "name": "Baka Dakedo Chinchin Shaburu no dake wa Jouzu na Chii-chan♡",
-      "season": "spring",
-      "year": 2017,
-      "members": 17851,
-      "score": 7.18,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Baka Dakedo Chinchin Shaburu no dake wa Jouzu na Chii-chan♡ (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35676,
       "name": "Berserk: Majo no Tsuisou",
       "season": "spring",
@@ -63778,24 +60294,6 @@
       "added": false
     },
     {
-      "mal_id": 35498,
-      "name": "Boku to Misaki-sensei",
-      "season": "spring",
-      "year": 2017,
-      "members": 16237,
-      "score": 6.71,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Boku to Misaki-sensei (batch)",
-      "added": false
-    },
-    {
       "mal_id": 34375,
       "name": "Yuuki Yuuna wa Yuusha de Aru: Washio Sumi no Shou 2 - Tamashii",
       "season": "spring",
@@ -63811,22 +60309,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Yuuki Yuuna wa Yuusha de Aru: Washio Sumi no Shou 2 - Tamashii (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 34963,
-      "name": "Yarimoku Beach ni Shuugakuryokou de!! The Animation",
-      "season": "spring",
-      "year": 2017,
-      "members": 15053,
-      "score": 7.15,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Yarimoku Beach ni Shuugakuryokou de!! The Animation (batch)",
       "added": false
     },
     {
@@ -63887,22 +60369,6 @@
       "added": false
     },
     {
-      "mal_id": 34747,
-      "name": "Meikoku Gakuen: Jutai-hen",
-      "season": "spring",
-      "year": 2017,
-      "members": 12831,
-      "score": 7.07,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Meikoku Gakuen: Jutai-hen (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35327,
       "name": "Hiyoko no Basket Movie: Last Game 0401",
       "season": "spring",
@@ -63959,23 +60425,6 @@
       "added": false
     },
     {
-      "mal_id": 35446,
-      "name": "Residence",
-      "season": "spring",
-      "year": 2017,
-      "members": 11338,
-      "score": 6.83,
-      "episodes": 3,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Residence (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35720,
       "name": "ACCA: 13-ku Kansatsu-ka Specials",
       "season": "spring",
@@ -63989,25 +60438,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "ACCA: 13-ku Kansatsu-ka Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 35029,
-      "name": "Tensei Kendo no Harem Colosseo",
-      "season": "spring",
-      "year": 2017,
-      "members": 10530,
-      "score": 6.65,
-      "episodes": 4,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Tensei Kendo no Harem Colosseo (batch)",
       "added": false
     },
     {
@@ -64899,25 +61329,6 @@
       "added": false
     },
     {
-      "mal_id": 35629,
-      "name": "Skirt no Naka wa Kedamono deshita.",
-      "season": "summer",
-      "year": 2017,
-      "members": 52967,
-      "score": 5.44,
-      "episodes": 12,
-      "genres": [
-        "Drama",
-        "Hentai"
-      ],
-      "themes": [
-        "Crossdressing"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Skirt no Naka wa Kedamono deshita. (batch)",
-      "added": false
-    },
-    {
       "mal_id": 36275,
       "name": "Natsume Yuujinchou Roku Specials",
       "season": "summer",
@@ -65401,22 +61812,6 @@
       "added": false
     },
     {
-      "mal_id": 34795,
-      "name": "Tamashii Insert",
-      "season": "summer",
-      "year": 2017,
-      "members": 23246,
-      "score": 6.86,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tamashii Insert (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35840,
       "name": "Hataraku Saibou CM",
       "season": "summer",
@@ -65453,22 +61848,6 @@
       "added": false
     },
     {
-      "mal_id": 35581,
-      "name": "Oide yo! Mizuryuu Kei Land",
-      "season": "summer",
-      "year": 2017,
-      "members": 19929,
-      "score": 7.25,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oide yo! Mizuryuu Kei Land (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35134,
       "name": "Koukyoushihen Eureka Seven Hi-Evolution 1",
       "season": "summer",
@@ -65486,22 +61865,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Koukyoushihen Eureka Seven Hi-Evolution 1 (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 35727,
-      "name": "Mayoiga no Oneesan The Animation",
-      "season": "summer",
-      "year": 2017,
-      "members": 18948,
-      "score": 7,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Mayoiga no Oneesan The Animation (batch)",
       "added": false
     },
     {
@@ -65598,25 +61961,6 @@
       "added": false
     },
     {
-      "mal_id": 35512,
-      "name": "Honoo no Haramase Oppai: Ero Appli Gakuen The Animation",
-      "season": "summer",
-      "year": 2017,
-      "members": 14652,
-      "score": 7.19,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem",
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Honoo no Haramase Oppai: Ero Appli Gakuen The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35114,
       "name": "Clione no Akari",
       "season": "summer",
@@ -65652,38 +61996,6 @@
       ],
       "hasAdultGenre": true,
       "searchTerm": "Brave Witches: Petersburg Daisenryaku (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36109,
-      "name": "Boku dake no Hentai Kanojo Motto♥ The Animation",
-      "season": "summer",
-      "year": 2017,
-      "members": 11313,
-      "score": 6.3,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Boku dake no Hentai Kanojo Motto♥ The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 35781,
-      "name": "Boku dake no Hentai Kanojo The Animation",
-      "season": "summer",
-      "year": 2017,
-      "members": 11307,
-      "score": 6.33,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Boku dake no Hentai Kanojo The Animation (batch)",
       "added": false
     },
     {
@@ -66512,24 +62824,6 @@
       "added": false
     },
     {
-      "mal_id": 36198,
-      "name": "Omiai Aite wa Oshiego, Tsuyoki na, Mondaiji.",
-      "season": "fall",
-      "year": 2017,
-      "members": 62078,
-      "score": 5.64,
-      "episodes": 12,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Omiai Aite wa Oshiego, Tsuyoki na, Mondaiji. (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35067,
       "name": "Osomatsu-san 2nd Season",
       "season": "fall",
@@ -66821,22 +63115,6 @@
       "added": false
     },
     {
-      "mal_id": 35936,
-      "name": "Imouto Bitch ni Shiboraretai",
-      "season": "fall",
-      "year": 2017,
-      "members": 25931,
-      "score": 7.16,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Imouto Bitch ni Shiboraretai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 36009,
       "name": "Two Car",
       "season": "fall",
@@ -66885,22 +63163,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Fate/Grand Order: Himuro no Tenchi - 7-nin no Saikyou Ijin-hen (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36225,
-      "name": "Baku Ane 2: Otouto Ippai Shibocchau zo! The Animation",
-      "season": "fall",
-      "year": 2017,
-      "members": 21213,
-      "score": 7.23,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Baku Ane 2: Otouto Ippai Shibocchau zo! The Animation (batch)",
       "added": false
     },
     {
@@ -67054,22 +63316,6 @@
       "added": false
     },
     {
-      "mal_id": 36256,
-      "name": "Katainaka ni Totsuidekita ○-ssia Musume to H Shimakuru Ohanashi",
-      "season": "fall",
-      "year": 2017,
-      "members": 16036,
-      "score": 7.26,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Katainaka ni Totsuidekita ○-ssia Musume to H Shimakuru Ohanashi (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35673,
       "name": "Yama no Susume: Omoide Present",
       "season": "fall",
@@ -67195,40 +63441,6 @@
       "added": false
     },
     {
-      "mal_id": 36755,
-      "name": "Juvenile Pornography The Animation",
-      "season": "fall",
-      "year": 2017,
-      "members": 12678,
-      "score": 6.55,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Juvenile Pornography The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36121,
-      "name": "Ikkyuu Nyuukon",
-      "season": "fall",
-      "year": 2017,
-      "members": 12519,
-      "score": 6.95,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Ikkyuu Nyuukon (batch)",
-      "added": false
-    },
-    {
       "mal_id": 36468,
       "name": "Shoujo Shuumatsu Jugyou",
       "season": "fall",
@@ -67264,38 +63476,6 @@
       "added": false
     },
     {
-      "mal_id": 36010,
-      "name": "Heartful Maman The Animation",
-      "season": "fall",
-      "year": 2017,
-      "members": 11553,
-      "score": 6.83,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Heartful Maman The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36052,
-      "name": "Kyonyuu Daikazoku Saimin",
-      "season": "fall",
-      "year": 2017,
-      "members": 11453,
-      "score": 7.03,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kyonyuu Daikazoku Saimin (batch)",
-      "added": false
-    },
-    {
       "mal_id": 36501,
       "name": "MahoYome: Aisatsu",
       "season": "fall",
@@ -67325,22 +63505,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Dynamic Chord (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 35931,
-      "name": "Kime Koi!",
-      "season": "fall",
-      "year": 2017,
-      "members": 10034,
-      "score": 6.89,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kime Koi! (batch)",
       "added": false
     },
     {
@@ -68422,24 +64586,6 @@
       "added": false
     },
     {
-      "mal_id": 36840,
-      "name": "25-sai no Joshikousei",
-      "season": "winter",
-      "year": 2018,
-      "members": 40699,
-      "score": 5.6,
-      "episodes": 12,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "25-sai no Joshikousei (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35964,
       "name": "Basilisk: Ouka Ninpouchou",
       "season": "winter",
@@ -68540,25 +64686,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Hug tto! Precure (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36720,
-      "name": "Youkoso! Sukebe Elf no Mori e",
-      "season": "winter",
-      "year": 2018,
-      "members": 29716,
-      "score": 7.6,
-      "episodes": 4,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Youkoso! Sukebe Elf no Mori e (batch)",
       "added": false
     },
     {
@@ -68772,22 +64899,6 @@
       "added": false
     },
     {
-      "mal_id": 36737,
-      "name": "Real Eroge Situation! The Animation",
-      "season": "winter",
-      "year": 2018,
-      "members": 15658,
-      "score": 7.22,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Real Eroge Situation! The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 37047,
       "name": "Imouto sae Ireba Ii. (ONA) Specials",
       "season": "winter",
@@ -68908,22 +65019,6 @@
       "added": false
     },
     {
-      "mal_id": 37089,
-      "name": "Cherry & Gal's↑↑",
-      "season": "winter",
-      "year": 2018,
-      "members": 10998,
-      "score": 6.42,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Cherry & Gal's↑↑ (batch)",
-      "added": false
-    },
-    {
       "mal_id": 37370,
       "name": "The Perfect World",
       "season": "winter",
@@ -68958,22 +65053,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Kujira no Kora wa Sajou ni Manabu! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36895,
-      "name": "Nee, ...Shiyo♥",
-      "season": "winter",
-      "year": 2018,
-      "members": 10248,
-      "score": 6.62,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Nee, ...Shiyo♥ (batch)",
       "added": false
     },
     {
@@ -70092,23 +66171,6 @@
       "added": false
     },
     {
-      "mal_id": 37320,
-      "name": "Amai Choubatsu: Watashi wa Kanshu Senyou Pet",
-      "season": "spring",
-      "year": 2018,
-      "members": 34634,
-      "score": 5.6,
-      "episodes": 13,
-      "genres": [
-        "Drama",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Amai Choubatsu: Watashi wa Kanshu Senyou Pet (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35798,
       "name": "Meitantei Conan Movie 22: Zero no Shikkounin",
       "season": "spring",
@@ -70321,38 +66383,6 @@
       "themes": [],
       "hasAdultGenre": true,
       "searchTerm": "Cutie Honey Universe (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 37405,
-      "name": "Dokidoki Little Ooyasan",
-      "season": "spring",
-      "year": 2018,
-      "members": 20215,
-      "score": 7.15,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Dokidoki Little Ooyasan (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 37233,
-      "name": "Muttsuri Dosukebe Tsuyu Gibo Shimai no Honshitsu Minuite Sex Sanmai",
-      "season": "spring",
-      "year": 2018,
-      "members": 18618,
-      "score": 7.39,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Muttsuri Dosukebe Tsuyu Gibo Shimai no Honshitsu Minuite Sex Sanmai (batch)",
       "added": false
     },
     {
@@ -70601,54 +66631,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Souten no Ken: Regenesis (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 37223,
-      "name": "Ore ga Kanojo wo *su Wake",
-      "season": "spring",
-      "year": 2018,
-      "members": 11356,
-      "score": 6.49,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ore ga Kanojo wo *su Wake (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 37474,
-      "name": "Houkago no Yuutousei",
-      "season": "spring",
-      "year": 2018,
-      "members": 11263,
-      "score": 6.89,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Houkago no Yuutousei (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36933,
-      "name": "Ura Jutaijima",
-      "season": "spring",
-      "year": 2018,
-      "members": 10409,
-      "score": 6.81,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ura Jutaijima (batch)",
       "added": false
     },
     {
@@ -71586,25 +67568,6 @@
       "added": false
     },
     {
-      "mal_id": 37281,
-      "name": "Joshiochi! 2-kai kara Onnanoko ga... Futtekita!?",
-      "season": "summer",
-      "year": 2018,
-      "members": 58818,
-      "score": 6.54,
-      "episodes": 9,
-      "genres": [
-        "Comedy",
-        "Hentai"
-      ],
-      "themes": [
-        "Love Polygon"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Joshiochi! 2-kai kara Onnanoko ga... Futtekita!? (batch)",
-      "added": false
-    },
-    {
       "mal_id": 37487,
       "name": "Muhyo to Rouji no Mahouritsu Soudan Jimusho",
       "season": "summer",
@@ -72181,23 +68144,6 @@
       "added": false
     },
     {
-      "mal_id": 38034,
-      "name": "Tiny Evil",
-      "season": "summer",
-      "year": 2018,
-      "members": 19747,
-      "score": 7.08,
-      "episodes": 4,
-      "genres": [
-        "Supernatural",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Tiny Evil (batch)",
-      "added": false
-    },
-    {
       "mal_id": 37481,
       "name": "Ongaku Shoujo (TV)",
       "season": "summer",
@@ -72269,22 +68215,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Senjuushi (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 37699,
-      "name": "Daisuki na Mama",
-      "season": "summer",
-      "year": 2018,
-      "members": 13908,
-      "score": 6.63,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Daisuki na Mama (batch)",
       "added": false
     },
     {
@@ -72403,40 +68333,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Xiao Lu He Xiao Lan (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 38030,
-      "name": "Muchi Muchi Kyousei Seichouchuu!!!",
-      "season": "summer",
-      "year": 2018,
-      "members": 10833,
-      "score": 6.91,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Muchi Muchi Kyousei Seichouchuu!!! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 38037,
-      "name": "Ane Chijo♥Max Heart",
-      "season": "summer",
-      "year": 2018,
-      "members": 10406,
-      "score": 6.65,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane Chijo♥Max Heart (batch)",
       "added": false
     },
     {
@@ -73956,22 +69852,6 @@
       "added": false
     },
     {
-      "mal_id": 38212,
-      "name": "Shuudengo, Capsule Hotel de, Joushi ni Binetsu Tsutawaru Yoru.",
-      "season": "fall",
-      "year": 2018,
-      "members": 20405,
-      "score": 5.58,
-      "episodes": 12,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shuudengo, Capsule Hotel de, Joushi ni Binetsu Tsutawaru Yoru. (batch)",
-      "added": false
-    },
-    {
       "mal_id": 37657,
       "name": "Gakuen Basara",
       "season": "fall",
@@ -74156,22 +70036,6 @@
       "added": false
     },
     {
-      "mal_id": 38330,
-      "name": "Kimi Omou Koi",
-      "season": "fall",
-      "year": 2018,
-      "members": 14335,
-      "score": 7.21,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kimi Omou Koi (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35135,
       "name": "Koukyoushihen Eureka Seven Hi-Evolution 2: Anemone",
       "season": "fall",
@@ -74243,22 +70107,6 @@
       "added": false
     },
     {
-      "mal_id": 36889,
-      "name": "Oyasumi Sex",
-      "season": "fall",
-      "year": 2018,
-      "members": 12286,
-      "score": 6.86,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oyasumi Sex (batch)",
-      "added": false
-    },
-    {
       "mal_id": 38789,
       "name": "One Room: Second Season Special",
       "season": "fall",
@@ -74272,22 +70120,6 @@
       "themes": [],
       "hasAdultGenre": true,
       "searchTerm": "One Room: Second Season Special (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 36689,
-      "name": "Kyonyuu Dosukebe Gakuen",
-      "season": "fall",
-      "year": 2018,
-      "members": 10859,
-      "score": 6.63,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kyonyuu Dosukebe Gakuen (batch)",
       "added": false
     },
     {
@@ -75296,23 +71128,6 @@
       "added": false
     },
     {
-      "mal_id": 38797,
-      "name": "Papa datte, Shitai",
-      "season": "winter",
-      "year": 2019,
-      "members": 34529,
-      "score": 5.98,
-      "episodes": 8,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Papa datte, Shitai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 37302,
       "name": "Kemurikusa (TV)",
       "season": "winter",
@@ -75484,38 +71299,6 @@
       "added": false
     },
     {
-      "mal_id": 38866,
-      "name": "Seikatsu Shuukan The Animation",
-      "season": "winter",
-      "year": 2019,
-      "members": 21256,
-      "score": 7.34,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Seikatsu Shuukan The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 38470,
-      "name": "Saimin Seishidou",
-      "season": "winter",
-      "year": 2019,
-      "members": 19833,
-      "score": 7.33,
-      "episodes": 6,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Saimin Seishidou (batch)",
-      "added": false
-    },
-    {
       "mal_id": 35313,
       "name": "Kemono Friends 2",
       "season": "winter",
@@ -75551,24 +71334,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Circlet Princess (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 39042,
-      "name": "Gaki ni Modotte Yarinaoshi!!!",
-      "season": "winter",
-      "year": 2019,
-      "members": 17169,
-      "score": 6.99,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Gaki ni Modotte Yarinaoshi!!! (batch)",
       "added": false
     },
     {
@@ -75663,22 +71428,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Mahoutsukai no Yome: Gakuin-hen (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 38708,
-      "name": "Wagaya no Liliana-san The Animation",
-      "season": "winter",
-      "year": 2019,
-      "members": 14565,
-      "score": 7.26,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Wagaya no Liliana-san The Animation (batch)",
       "added": false
     },
     {
@@ -76545,23 +72294,6 @@
       "added": false
     },
     {
-      "mal_id": 39337,
-      "name": "Araiya-san!: Ore to Aitsu ga Onnayu de!?",
-      "season": "spring",
-      "year": 2019,
-      "members": 48814,
-      "score": 6.62,
-      "episodes": 8,
-      "genres": [
-        "Comedy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Araiya-san!: Ore to Aitsu ga Onnayu de!? (batch)",
-      "added": false
-    },
-    {
       "mal_id": 38081,
       "name": "Girls & Panzer: Saishuushou Part 2",
       "season": "spring",
@@ -76730,22 +72462,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Promare: Galo-hen (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 39392,
-      "name": "Master Piece The Animation",
-      "season": "spring",
-      "year": 2019,
-      "members": 29868,
-      "score": 7.84,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Master Piece The Animation (batch)",
       "added": false
     },
     {
@@ -77071,22 +72787,6 @@
       "added": false
     },
     {
-      "mal_id": 35926,
-      "name": "Shishunki Sex",
-      "season": "spring",
-      "year": 2019,
-      "members": 14999,
-      "score": 7.17,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Shishunki Sex (batch)",
-      "added": false
-    },
-    {
       "mal_id": 40100,
       "name": "Nu Wushen de Canzhuo",
       "season": "spring",
@@ -77118,22 +72818,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Uta no☆Prince-sama♪ Movie: Maji Love Kingdom (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 39085,
-      "name": "Aikagi The Animation",
-      "season": "spring",
-      "year": 2019,
-      "members": 13361,
-      "score": 7.16,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aikagi The Animation (batch)",
       "added": false
     },
     {
@@ -77190,22 +72874,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Beyblade Burst Gachi (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 39058,
-      "name": "Megane no Megami",
-      "season": "spring",
-      "year": 2019,
-      "members": 11249,
-      "score": 7.35,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Megane no Megami (batch)",
       "added": false
     },
     {
@@ -78220,23 +73888,6 @@
       "added": false
     },
     {
-      "mal_id": 39963,
-      "name": "Yubisaki kara Honki no Netsujou: Osananajimi wa Shouboushi",
-      "season": "summer",
-      "year": 2019,
-      "members": 28967,
-      "score": 6.21,
-      "episodes": 8,
-      "genres": [
-        "Comedy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Yubisaki kara Honki no Netsujou: Osananajimi wa Shouboushi (batch)",
-      "added": false
-    },
-    {
       "mal_id": 38333,
       "name": "Gochuumon wa Usagi desu ka?? Sing for You",
       "season": "summer",
@@ -78331,42 +73982,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Saint Seiya: Knights of the Zodiac (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 39530,
-      "name": "Ecchi na Oneechan ni Shiboraretai",
-      "season": "summer",
-      "year": 2019,
-      "members": 18191,
-      "score": 7.41,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ecchi na Oneechan ni Shiboraretai (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 39800,
-      "name": "Joshi Luck!",
-      "season": "summer",
-      "year": 2019,
-      "members": 17831,
-      "score": 7.38,
-      "episodes": 6,
-      "genres": [
-        "Sports",
-        "Hentai"
-      ],
-      "themes": [
-        "Harem",
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Joshi Luck! (batch)",
       "added": false
     },
     {
@@ -78603,25 +74218,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Doupo Cangqiong 3rd Season (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 39795,
-      "name": "Ochi Mono RPG Seikishi Luvilias",
-      "season": "summer",
-      "year": 2019,
-      "members": 10502,
-      "score": 6.86,
-      "episodes": 4,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [
-        "Mythology"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Ochi Mono RPG Seikishi Luvilias (batch)",
       "added": false
     },
     {
@@ -79733,22 +75329,6 @@
       "added": false
     },
     {
-      "mal_id": 40254,
-      "name": "XL Joushi.",
-      "season": "fall",
-      "year": 2019,
-      "members": 34268,
-      "score": 6.18,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "XL Joushi. (batch)",
-      "added": false
-    },
-    {
       "mal_id": 37828,
       "name": "Bokura no Nanokakan Sensou",
       "season": "fall",
@@ -80066,22 +75646,6 @@
       "added": false
     },
     {
-      "mal_id": 40337,
-      "name": "Aibeya The Animation",
-      "season": "fall",
-      "year": 2019,
-      "members": 14032,
-      "score": 7.26,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Aibeya The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 40280,
       "name": "Toaru Kagaku no Accelerator: Tobidase Ippou-san - Hachamecha Kaishingeki",
       "season": "fall",
@@ -80114,22 +75678,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Shin Chuuka Ichiban! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 40023,
-      "name": "Lovely ♡",
-      "season": "fall",
-      "year": 2019,
-      "members": 11731,
-      "score": 7.11,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Lovely ♡ (batch)",
       "added": false
     },
     {
@@ -80167,22 +75715,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Fate/Grand Order: Zettai Majuu Sensen Babylonia Recaps (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 40521,
-      "name": "Kiss Hug",
-      "season": "fall",
-      "year": 2019,
-      "members": 10492,
-      "score": 6.67,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kiss Hug (batch)",
       "added": false
     },
     {
@@ -80630,24 +76162,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Magia Record: Mahou Shoujo Madoka☆Magica Gaiden (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 40746,
-      "name": "Overflow",
-      "season": "winter",
-      "year": 2020,
-      "members": 154192,
-      "score": 7.24,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Love Polygon"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Overflow (batch)",
       "added": false
     },
     {
@@ -81524,26 +77038,6 @@
       "added": false
     },
     {
-      "mal_id": 40658,
-      "name": "** Kouhai",
-      "season": "winter",
-      "year": 2020,
-      "members": 13029,
-      "score": 7.28,
-      "episodes": 10,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [
-        "Harem",
-        "Mythology"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "** Kouhai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 40873,
       "name": "Granblue Fantasy The Animation Season 2 Extras",
       "season": "winter",
@@ -82327,22 +77821,6 @@
       "added": false
     },
     {
-      "mal_id": 41261,
-      "name": "Ane wa Yanmama Junyuu-chuu",
-      "season": "spring",
-      "year": 2020,
-      "members": 31293,
-      "score": 7.78,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ane wa Yanmama Junyuu-chuu (batch)",
-      "added": false
-    },
-    {
       "mal_id": 41611,
       "name": "Wan Sheng Jie",
       "season": "spring",
@@ -82360,22 +77838,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Wan Sheng Jie (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 41332,
-      "name": "Ore no Yubi de Midarero.: Heitengo Futarikiri no Salon de...",
-      "season": "spring",
-      "year": 2020,
-      "members": 30283,
-      "score": 6.1,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ore no Yubi de Midarero.: Heitengo Futarikiri no Salon de... (batch)",
       "added": false
     },
     {
@@ -82642,22 +78104,6 @@
       "added": false
     },
     {
-      "mal_id": 41260,
-      "name": "Yarichin Kateikyoushi Netori Houkoku",
-      "season": "spring",
-      "year": 2020,
-      "members": 12648,
-      "score": 7.15,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Yarichin Kateikyoushi Netori Houkoku (batch)",
-      "added": false
-    },
-    {
       "mal_id": 47794,
       "name": "MILGЯAM",
       "season": "spring",
@@ -82695,23 +78141,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Majutsushi Orphen Hagure Tabi: Tennin no Isan (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 40819,
-      "name": "Kyonyuu Princess Saimin",
-      "season": "spring",
-      "year": 2020,
-      "members": 10567,
-      "score": 6.95,
-      "episodes": 2,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kyonyuu Princess Saimin (batch)",
       "added": false
     },
     {
@@ -83456,26 +78885,6 @@
       "added": false
     },
     {
-      "mal_id": 41848,
-      "name": "Isekai Harem Monogatari",
-      "season": "summer",
-      "year": 2020,
-      "members": 26246,
-      "score": 7.45,
-      "episodes": 4,
-      "genres": [
-        "Fantasy",
-        "Hentai"
-      ],
-      "themes": [
-        "Harem",
-        "Isekai"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Isekai Harem Monogatari (batch)",
-      "added": false
-    },
-    {
       "mal_id": 42387,
       "name": "Hataraku Saibou!! Saikyou no Teki, Futatabi. Karada no Naka wa \"Chou\" Oosawagi!",
       "season": "summer",
@@ -83494,24 +78903,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Hataraku Saibou!! Saikyou no Teki, Futatabi. Karada no Naka wa \"Chou\" Oosawagi! (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 42517,
-      "name": "Ookami-san wa Taberaretai",
-      "season": "summer",
-      "year": 2020,
-      "members": 24402,
-      "score": 5.88,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Ookami-san wa Taberaretai (batch)",
       "added": false
     },
     {
@@ -83624,40 +79015,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Murenase! Seton Gakuen Special (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 42048,
-      "name": "Succubus Stayed Life The Animation",
-      "season": "summer",
-      "year": 2020,
-      "members": 11749,
-      "score": 7.12,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Succubus Stayed Life The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 42031,
-      "name": "Muramata-san no Himitsu",
-      "season": "summer",
-      "year": 2020,
-      "members": 10705,
-      "score": 6.71,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Muramata-san no Himitsu (batch)",
       "added": false
     },
     {
@@ -84886,22 +80243,6 @@
       "added": false
     },
     {
-      "mal_id": 42714,
-      "name": "Otona nya Koi no Shikata ga Wakaranee!",
-      "season": "fall",
-      "year": 2020,
-      "members": 15614,
-      "score": 5.8,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Otona nya Koi no Shikata ga Wakaranee! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 41574,
       "name": "Guraburu!",
       "season": "fall",
@@ -85074,22 +80415,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Xie Wang Zhui Qi: Yishi Qingcheng (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 42756,
-      "name": "Oneshota The Animation",
-      "season": "fall",
-      "year": 2020,
-      "members": 10354,
-      "score": 6.88,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Oneshota The Animation (batch)",
       "added": false
     },
     {
@@ -86095,24 +81420,6 @@
       "added": false
     },
     {
-      "mal_id": 44044,
-      "name": "Jimihen!!: Jimiko wo Kaechau Jun Isei Kouyuu!!",
-      "season": "winter",
-      "year": 2021,
-      "members": 41645,
-      "score": 6.38,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Workplace"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Jimihen!!: Jimiko wo Kaechau Jun Isei Kouyuu!! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 42825,
       "name": "Project Scard: Praeter no Kizu",
       "season": "winter",
@@ -86341,24 +81648,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Alice in Deadly School (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 43465,
-      "name": "Ijirare: Fukushuu Saimin",
-      "season": "winter",
-      "year": 2021,
-      "members": 19767,
-      "score": 7.43,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Ijirare: Fukushuu Saimin (batch)",
       "added": false
     },
     {
@@ -86613,54 +81902,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "WIXOSS Diva(A)Live (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 43466,
-      "name": "Himawari wa Yoru ni Saku",
-      "season": "winter",
-      "year": 2021,
-      "members": 11311,
-      "score": 6.89,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Himawari wa Yoru ni Saku (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 44192,
-      "name": "Kimi ga Suki. The Animation",
-      "season": "winter",
-      "year": 2021,
-      "members": 11262,
-      "score": 6.79,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Kimi ga Suki. The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 43467,
-      "name": "Ajisai no Chiru Koro ni",
-      "season": "winter",
-      "year": 2021,
-      "members": 10782,
-      "score": 6.53,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Ajisai no Chiru Koro ni (batch)",
       "added": false
     },
     {
@@ -87737,25 +82978,6 @@
       "added": false
     },
     {
-      "mal_id": 47591,
-      "name": "Kuro Gal ni Natta kara Shinyuu to shitemita.",
-      "season": "spring",
-      "year": 2021,
-      "members": 46818,
-      "score": 6.2,
-      "episodes": 8,
-      "genres": [
-        "Boys Love",
-        "Hentai"
-      ],
-      "themes": [
-        "Magical Sex Shift"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Kuro Gal ni Natta kara Shinyuu to shitemita. (batch)",
-      "added": false
-    },
-    {
       "mal_id": 42774,
       "name": "Sayonara Watashi no Cramer",
       "season": "spring",
@@ -87829,22 +83051,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Fairy Ranmaru: Anata no Kokoro Otasuke Shimasu (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 48468,
-      "name": "Uchi no Otouto Maji de Dekain Dakedo Mi ni Konai?",
-      "season": "spring",
-      "year": 2021,
-      "members": 24982,
-      "score": 7.67,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Uchi no Otouto Maji de Dekain Dakedo Mi ni Konai? (batch)",
       "added": false
     },
     {
@@ -88154,24 +83360,6 @@
       "added": false
     },
     {
-      "mal_id": 48626,
-      "name": "J* Fuuzoku Gakuensai",
-      "season": "spring",
-      "year": 2021,
-      "members": 11958,
-      "score": 7.22,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "J* Fuuzoku Gakuensai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 47904,
       "name": "Hololive Alternative",
       "season": "spring",
@@ -88237,38 +83425,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Chibi Revenger (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 48651,
-      "name": "Sakusei Byoutou The Animation",
-      "season": "spring",
-      "year": 2021,
-      "members": 10996,
-      "score": 7.02,
-      "episodes": 0,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Sakusei Byoutou The Animation (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 48697,
-      "name": "Eroge de Subete wa Kaiketsu Dekiru! The Animation",
-      "season": "spring",
-      "year": 2021,
-      "members": 10269,
-      "score": 7.4,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Eroge de Subete wa Kaiketsu Dekiru! The Animation (batch)",
       "added": false
     },
     {
@@ -89267,24 +84423,6 @@
       "added": false
     },
     {
-      "mal_id": 48755,
-      "name": "Imaizumin Chi wa Douyara Gal no Tamariba ni Natteru Rashii",
-      "season": "summer",
-      "year": 2021,
-      "members": 26170,
-      "score": 7.94,
-      "episodes": 4,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Imaizumin Chi wa Douyara Gal no Tamariba ni Natteru Rashii (batch)",
-      "added": false
-    },
-    {
       "mal_id": 48470,
       "name": "D_Cide Traumerei the Animation",
       "season": "summer",
@@ -89409,23 +84547,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Shingeki no Kyojin: The Final Season Specials (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 46701,
-      "name": "Yubisaki kara Honki no Netsujou 2: Koibito wa Shouboushi",
-      "season": "summer",
-      "year": 2021,
-      "members": 17506,
-      "score": 6.31,
-      "episodes": 8,
-      "genres": [
-        "Comedy",
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Yubisaki kara Honki no Netsujou 2: Koibito wa Shouboushi (batch)",
       "added": false
     },
     {
@@ -90787,22 +85908,6 @@
       "added": false
     },
     {
-      "mal_id": 49637,
-      "name": "Showtime! Uta no Oneesan datte Shitai",
-      "season": "fall",
-      "year": 2021,
-      "members": 14873,
-      "score": 6.78,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Showtime! Uta no Oneesan datte Shitai (batch)",
-      "added": false
-    },
-    {
       "mal_id": 50696,
       "name": "One Piece: Barto no Himitsu no Heya!",
       "season": "fall",
@@ -91853,22 +86958,6 @@
       "added": false
     },
     {
-      "mal_id": 50634,
-      "name": "Love Me: Kaede to Suzu The Animation",
-      "season": "winter",
-      "year": 2022,
-      "members": 19661,
-      "score": 7.86,
-      "episodes": 3,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Love Me: Kaede to Suzu The Animation (batch)",
-      "added": false
-    },
-    {
       "mal_id": 49665,
       "name": "Blue Thermal",
       "season": "winter",
@@ -91995,38 +87084,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Yami Shibai 10 (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 50192,
-      "name": "Akane wa Tsumare Somerareru",
-      "season": "winter",
-      "year": 2022,
-      "members": 10394,
-      "score": 6.7,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Akane wa Tsumare Somerareru (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 50488,
-      "name": "Garden: Takamine-ke no Nirinka - The Animation",
-      "season": "winter",
-      "year": 2022,
-      "members": 10216,
-      "score": 7.58,
-      "episodes": 1,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Garden: Takamine-ke no Nirinka - The Animation (batch)",
       "added": false
     },
     {
@@ -95890,24 +90947,6 @@
       "added": false
     },
     {
-      "mal_id": 52717,
-      "name": "Harem Camp!",
-      "season": "fall",
-      "year": 2022,
-      "members": 11382,
-      "score": 6.64,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Harem Camp! (batch)",
-      "added": false
-    },
-    {
       "mal_id": 53414,
       "name": "Lupin Zero",
       "season": "fall",
@@ -95943,22 +90982,6 @@
       ],
       "hasAdultGenre": false,
       "searchTerm": "Tiger & Bunny 2 Part 2 (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 52617,
-      "name": "Succubus Yondara Gibo ga Kita!?",
-      "season": "fall",
-      "year": 2022,
-      "members": 11034,
-      "score": 7.6,
-      "episodes": 2,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [],
-      "hasAdultGenre": true,
-      "searchTerm": "Succubus Yondara Gibo ga Kita!? (batch)",
       "added": false
     },
     {
@@ -101195,25 +96218,6 @@
       "themes": [],
       "hasAdultGenre": false,
       "searchTerm": "Digimon Adventure 02: The Beginning (batch)",
-      "added": false
-    },
-    {
-      "mal_id": 57470,
-      "name": "Modaete yo, Adam-kun",
-      "season": "fall",
-      "year": 2023,
-      "members": 11867,
-      "score": 6.97,
-      "episodes": 8,
-      "genres": [
-        "Hentai"
-      ],
-      "themes": [
-        "Harem",
-        "School"
-      ],
-      "hasAdultGenre": true,
-      "searchTerm": "Modaete yo, Adam-kun (batch)",
       "added": false
     },
     {

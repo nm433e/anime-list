@@ -1,4 +1,15 @@
+// Clean v2 rules are the following:
+// Rule 0: Remove Hentai
+// Rule 1: More than 50k members special rules
+// Rule 2: Remove less than 25k members
+// Rule 3a: Ecchi/Erotica with score < 5.5
+// Rule 3b: Not Ecchi/Erotica with score < 6.0
+// Rule 4: Remove if year is before 2005 (DEFAULT, THERE'S NO ANIME BEFORE 2005 IN THE DATABASE)
+
 const fs = require('node:fs/promises');
+
+// Configuration
+const outputFilePath = 'cleaned_adult-genres.json';
 
 async function cleanAnimeDatabase(inputFilePath) {
     try {
@@ -8,37 +19,17 @@ async function cleanAnimeDatabase(inputFilePath) {
         const cleanedList = animeList.filter(anime => {
             
             const isEcchiOrErotica = anime.genres.includes("Ecchi") || anime.genres.includes("Erotica");
-            // Rule 0: Remove Hentai
+            // Rule 1: Remove Hentai
             if (anime.genres.includes("Hentai")) {
                 return false;
             }
-            if(anime.year < 2015){
-                return false;
-            }
-            if(anime.episodes === 1){
-                return false;
-            }
-            // Rule 1: More than 50k members special rules
-            if(anime.members > 50000 && anime.score > 5.5){
+
+            // Rule 3: Include all Ecchi and Erotica (no need to remove)
+            if (isEcchiOrErotica) {
                 return true;
             }
-            if(isEcchiOrErotica && anime.members > 50000 && anime.score > 5){
-                return true;
-            }
-
-            // Rule 2: Remove less than 25k viewers
-            if (anime.members < 25000) {
-                return false;
-            }
-            // Rule 3a: Ecchi/Erotica with score < 5.5
-            if (isEcchiOrErotica && anime.score < 5.5) {
-                return false;
-            }
-
-            // Rule 3b: Not Ecchi/Erotica with score < 6.0
-            if (!isEcchiOrErotica && anime.score < 6.0) {
-                return false;
-            }
+            // Rule 4: Remove anime based on member and score ranges
+            // still reformulating this rule
 
             // If none of the removal conditions are met, keep the anime
             return true;
@@ -52,7 +43,7 @@ async function cleanAnimeDatabase(inputFilePath) {
             animeList: cleanedList
         };
 
-        const outputFilePath = 'cleaned_input.json';
+
         await fs.writeFile(outputFilePath, JSON.stringify(outputData, null, 2), 'utf8');
 
         console.log(`Successfully cleaned the database. The cleaned data has been written to ${outputFilePath}`);
