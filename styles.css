@@ -336,6 +336,39 @@ hr {
     font-style: italic;
 }
 
+/* Info Window Action Buttons */
+.info-window-actions {
+    display: flex;
+    justify-content: space-around; /* Distribute buttons evenly */
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee; /* Separator line */
+}
+
+.info-action-btn {
+    padding: 6px 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #6217c4; /* Primary purple */
+    border-radius: 4px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.info-action-btn:hover {
+    background-color: #511985; /* Darker purple */
+}
+
+.info-action-btn.mal-btn {
+    background-color: #2e51a2; /* MAL blue */
+}
+
+.info-action-btn.mal-btn:hover {
+    background-color: #254180; /* Darker MAL blue */
+}
+
 /* Modal */
 .modal {
     display: none;
@@ -934,4 +967,17 @@ button.year-season-btn:hover{
     color: #777;
     margin-top: 8px;
     font-style: italic;
+}
+
+.nf-btn{
+    background-color: #e50914;
+}
+.cr-btn{
+    background-color: #ff8800;
+}
+.copy-btn{
+    background-color: #6d6d6d;
+}
+.hi-btn{
+    background-color: #4d1b9c;
 }

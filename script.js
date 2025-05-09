@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     createGlobalTooltip(); // Create it on DOM ready
 
+    let currentOpenAnimeLink = null; // Track which link opened the tooltip
+
     // --- Element References ---
     const inputModeBtn = document.getElementById('inputModeBtn');
     const searchModeBtn = document.getElementById('searchModeBtn');
@@ -186,63 +188,101 @@ document.addEventListener('DOMContentLoaded', () => {
             
             nameCell.appendChild(nameLink);
 
-            // Tooltip positioning and visibility logic using GLOBAL tooltip
-            nameLink.addEventListener('mouseenter', (event) => {
-                // 1. Populate globalTooltip content
-                globalTooltip.innerHTML = `
-                    <h4 class="tooltip-title">${anime.name}</h4>
-                    <div class="tooltip-middle-section">
-                        <img src="${anime.cover || 'placeholder.png'}" alt="${anime.name} cover" class="tooltip-cover-image">
-                        <p class="tooltip-synopsis">${anime.synopsis}</p>
-                    </div>
-                    <div class="tooltip-stats-section">
-                        ${anime.genres && anime.genres.length > 0 ? `<div class="tooltip-genres"><strong>Genres:</strong> ${anime.genres.map(g => `<span class="tooltip-genre-pill">${g}</span>`).join(' ')}</div>` : ''}
-                        ${anime.themes && anime.themes.length > 0 ? `<div class="tooltip-themes"><strong>Themes:</strong> ${anime.themes.map(t => `<span class="tooltip-theme-pill">${t}</span>`).join(' ')}</div>` : ''}
-                        <div class="tooltip-members-score">
-                            <span class="tooltip-stat"><i class="fas fa-users"></i> ${anime.members.toLocaleString()}</span>
-                            <span class="tooltip-stat"><i class="fas fa-star"></i> ${anime.score ? anime.score.toFixed(2) : 'N/A'}</span>
+            // Info Window (formerly Tooltip) logic: Click to open/toggle, click outside to close
+            nameLink.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                if (globalTooltip.classList.contains('active') && currentOpenAnimeLink === nameLink) {
+                    // Clicked the same link that opened the currently active tooltip: close it
+                    globalTooltip.classList.remove('active');
+                    currentOpenAnimeLink = null;
+                } else {
+                    // Clicked a new link or tooltip was closed: open/reopen it for this anime
+                    // 1. Populate globalTooltip content
+                    globalTooltip.innerHTML = `
+                        <h4 class="tooltip-title">${anime.name}</h4>
+                        <div class="tooltip-middle-section">
+                            <img src="${anime.cover || 'placeholder.png'}" alt="${anime.name} cover" class="tooltip-cover-image">
+                            <p class="tooltip-synopsis">${anime.synopsis}</p>
                         </div>
-                    </div>
-                `;
+                        <div class="tooltip-stats-section">
+                            ${anime.genres && anime.genres.length > 0 ? `<div class="tooltip-genres"><strong>Genres:</strong> ${anime.genres.map(g => `<span class="tooltip-genre-pill">${g}</span>`).join(' ')}</div>` : ''}
+                            ${anime.themes && anime.themes.length > 0 ? `<div class="tooltip-themes"><strong>Themes:</strong> ${anime.themes.map(t => `<span class="tooltip-theme-pill">${t}</span>`).join(' ')}</div>` : ''}
+                            <div class="tooltip-members-score">
+                                <span class="tooltip-stat"><i class="fas fa-users"></i> ${anime.members.toLocaleString()}</span>
+                                <span class="tooltip-stat"><i class="fas fa-star"></i> ${anime.score ? anime.score.toFixed(2) : 'N/A'}</span>
+                            </div>
+                        </div>
+                        <div class="info-window-actions">
+                            <a href="https://myanimelist.net/anime/${anime.mal_id}" target="_blank" rel="noopener noreferrer" class="info-action-btn mal-btn">MAL</a>
+                            <a href="https://hianimez.to/search?keyword=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn hi-btn">HiAnimez</a>
+                            <a href="https://www.crunchyroll.com/search?q=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn cr-btn">Crunchyroll</a>
+                            <a href="https://www.netflix.com/search?q=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn nf-btn">Netflix</a>
+                            <button type="button" class="info-action-btn copy-btn" data-anime-title="${anime.name}">Copy Title</button>
+                        </div>
+                    `;
 
-                // 2. Calculate Position
-                const linkRect = nameLink.getBoundingClientRect();
-                const tooltipRect = globalTooltip.getBoundingClientRect(); // Get its dimensions AFTER content is set
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-                const scrollY = window.scrollY;
-                const scrollX = window.scrollX;
-
-                let top = linkRect.top + scrollY - tooltipRect.height - 10; // 10px above the link
-                let left = linkRect.left + scrollX + (linkRect.width / 2) - (tooltipRect.width / 2); // Centered
-
-                // Adjust for viewport boundaries
-                if (top < scrollY + 10) { // Too high, flip below if space
-                    top = linkRect.bottom + scrollY + 10;
-                    if (top + tooltipRect.height > scrollY + viewportHeight - 10) {
-                        top = scrollY + viewportHeight - tooltipRect.height - 10; // Stick to bottom if no space below either
+                    // Add click listener for the new Copy Title button
+                    const copyBtn = globalTooltip.querySelector('.copy-title-btn');
+                    if (copyBtn) {
+                        copyBtn.addEventListener('click', () => {
+                            const titleToCopy = copyBtn.dataset.animeTitle;
+                            navigator.clipboard.writeText(titleToCopy).then(() => {
+                                // Success feedback: change button text temporarily
+                                const originalText = copyBtn.textContent;
+                                copyBtn.textContent = 'Copied!';
+                                copyBtn.disabled = true;
+                                setTimeout(() => {
+                                    copyBtn.textContent = originalText;
+                                    copyBtn.disabled = false;
+                                }, 1500);
+                            }).catch(err => {
+                                console.error('Failed to copy title: ', err);
+                                // Optional: User feedback for error
+                                alert('Failed to copy title.');
+                            });
+                        });
                     }
-                }
-                if (left < scrollX + 10) { 
-                    left = scrollX + 10; 
-                }
-                if (left + tooltipRect.width > scrollX + viewportWidth - 10) { 
-                    left = scrollX + viewportWidth - tooltipRect.width - 10; 
-                }
-                if (top + tooltipRect.height > scrollY + viewportHeight - 10 && top > scrollY + (viewportHeight/2) ) { //if its still overflowing downwards and its on the lower half of the screen stick it to the bottom
-                     top = scrollY + viewportHeight - tooltipRect.height - 10;
-                }
 
+                    // 2. Position and Show
+                    // Ensure it's visible for getBoundingClientRect to work correctly if it was hidden
+                    globalTooltip.classList.add('active'); 
+                    // We might need a brief moment for content to render and affect size
+                    // requestAnimationFrame can help ensure dimensions are read after render
+                    requestAnimationFrame(() => {
+                        const linkRect = nameLink.getBoundingClientRect();
+                        const tooltipRect = globalTooltip.getBoundingClientRect(); // Get its dimensions AFTER content is set & it's active
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+                        const scrollY = window.scrollY;
+                        const scrollX = window.scrollX;
 
-                globalTooltip.style.top = `${top}px`;
-                globalTooltip.style.left = `${left}px`;
-                globalTooltip.style.transform = ''; // No translateX(-50%) needed with this direct positioning
-                globalTooltip.classList.add('global-tooltip');
-                globalTooltip.classList.add('active');
-            });
+                        let top = linkRect.top + scrollY - tooltipRect.height - 10; // 10px above the link
+                        let left = linkRect.left + scrollX + (linkRect.width / 2) - (tooltipRect.width / 2); // Centered
 
-            nameLink.addEventListener('mouseleave', () => {
-                globalTooltip.classList.remove('active');
+                        // Adjust for viewport boundaries
+                        if (top < scrollY + 10) { 
+                            top = linkRect.bottom + scrollY + 10;
+                            if (top + tooltipRect.height > scrollY + viewportHeight - 10) {
+                                top = scrollY + viewportHeight - tooltipRect.height - 10;
+                            }
+                        }
+                         if (top + tooltipRect.height > scrollY + viewportHeight - 10 ) { 
+                             top = scrollY + viewportHeight - tooltipRect.height - 10;
+                        }
+                        if (left < scrollX + 10) { 
+                            left = scrollX + 10; 
+                        }
+                        if (left + tooltipRect.width > scrollX + viewportWidth - 10) { 
+                            left = scrollX + viewportWidth - tooltipRect.width - 10; 
+                        }
+                        
+                        globalTooltip.style.top = `${Math.max(scrollY + 10, top)}px`; // Ensure it doesn't go above viewport top due to adjustments
+                        globalTooltip.style.left = `${left}px`;
+                        globalTooltip.style.transform = '';
+                    });
+                    currentOpenAnimeLink = nameLink;
+                }
             });
 
             // Season & Year cell
@@ -1362,6 +1402,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initialization ---
     loadListFromLocalStorage();
     hideInputModes();
+
+    // Global click listener to close the info window when clicking outside
+    document.addEventListener('click', (event) => {
+        if (globalTooltip && globalTooltip.classList.contains('active')) {
+            const isClickInsideTooltip = globalTooltip.contains(event.target);
+            const isClickOnNameLink = event.target.classList.contains('anime-name-link') || event.target.closest('.anime-name-link');
+
+            if (!isClickInsideTooltip && !isClickOnNameLink) {
+                globalTooltip.classList.remove('active');
+                currentOpenAnimeLink = null;
+            }
+        }
+    });
 });
 
 
