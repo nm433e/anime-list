@@ -236,45 +236,15 @@ hr {
     display: inline-block; /* Or block, depending on how you want the link to behave */
 }
 
-.tooltip .tooltip-content { /* This is the actual tooltip div */
-    /* Initial Hidden State & Absolute Positioning */
-    visibility: visible !important; /* DEBUG: FORCE VISIBLE */
-    opacity: 1 !important;          /* DEBUG: FORCE VISIBLE */
-    position: absolute !important;   /* DEBUG: FORCE ABSOLUTE */
-    z-index: 1000 !important;       /* DEBUG: FORCE HIGH Z-INDEX */
-    background-color: yellow !important; /* DEBUG: MAKE IT OBVIOUS */
-    border: 2px solid red !important;   /* DEBUG: MAKE IT OBVIOUS */
-    color: black !important;            /* DEBUG: Ensure text is visible */
-    
-    /* Default positioning - centered above the parent */
-    bottom: 105%; 
-    left: 50%;
-    transform: translateX(-50%);
-    
-    /* Appearance */
-    width: 450px;
-    max-width: 90vw;
-    /* background-color: #fff; -- overridden by debug */
-    /* color: #333; -- overridden by debug */
-    /* border: 1px solid #ddd; -- overridden by debug */
+.global-tooltip{
+    position: fixed;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    font-size: 0.9rem;
-    text-align: left;
-    
-    /* Transition for smooth show/hide via .active class */
-    /* transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; -- DEBUG: Disable transitions */
+    width: 900px;
+    height: 400px;
 }
-
-.tooltip-content.active { /* Added by JavaScript on mouseenter, removed on mouseleave */
-    /* visibility: visible; -- Handled by DEBUG above */
-    /* opacity: 1; -- Handled by DEBUG above */
-    /* This class now primarily serves as a hook for JS if needed, debug styles override */
-}
-
-/* Remove the old .tooltip:hover .tooltip-content if it still exists elsewhere */
-/* Ensure no other global styles are setting .tooltip-content to display: block or similar without position: absolute */
 
 .tooltip-title {
     font-size: 1.2em;
@@ -293,15 +263,17 @@ hr {
     display: flex;
     gap: 15px;
     margin-bottom: 10px;
+    height: 225px;	
 }
 
 .tooltip-cover-image {
-    width: 100px; /* Adjust as needed */
+    width: 150px; /* Adjust as needed */
     height: auto; /* Maintain aspect ratio */
-    max-height: 150px; /* Limit height */
+    height: 225px; /* Limit height */
     object-fit: cover;
     border-radius: 4px;
     border: 1px solid #eee;
+    height: 100%;
 }
 
 .tooltip-synopsis {
@@ -309,7 +281,7 @@ hr {
     min-width: 0; /* Added for flex item overflow prevention */
     font-size: 0.85em;
     line-height: 1.5;
-    max-height: 150px; /* Match image max height */
+    height: 225px; /* Match image max height */
     overflow-y: auto;
     margin: 0;
     padding-right: 5px; /* For scrollbar */
@@ -859,7 +831,7 @@ button.year-season-btn:hover{
     visibility: hidden;
     opacity: 0;
     z-index: 10000; /* Very high z-index */
-    width: 450px;
+    width: 600px;
     max-width: 90vw;
     background-color: #fff;
     color: #333;
@@ -904,21 +876,12 @@ button.year-season-btn:hover{
     margin-bottom: 10px;
 }
 
-.tooltip-cover-image {
-    width: 100px; /* Adjust as needed */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 150px; /* Limit height */
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid #eee;
-}
-
 .tooltip-synopsis {
     flex: 1;
     min-width: 0; /* Added for flex item overflow prevention */
     font-size: 0.85em;
     line-height: 1.5;
-    max-height: 150px; /* Match image max height */
+    height: 225px; /* Match image max height */
     overflow-y: auto;
     margin: 0;
     padding-right: 5px; /* For scrollbar */

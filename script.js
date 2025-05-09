@@ -237,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 globalTooltip.style.top = `${top}px`;
                 globalTooltip.style.left = `${left}px`;
                 globalTooltip.style.transform = ''; // No translateX(-50%) needed with this direct positioning
+                globalTooltip.classList.add('global-tooltip');
                 globalTooltip.classList.add('active');
             });
 
@@ -1193,7 +1194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (!resp.ok) {
                         batchStatus.textContent = `Error fetching ${season} ${year} page ${page}: ${resp.status}. Skipping to next season/year or ending.`;
-                        await new Promise(r => setTimeout(r, 1500));
+                        await new Promise(r => setTimeout(r, 2500));
                         seasonFetchingActive = false;
                         continue;
                     }
@@ -1245,7 +1246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             seasonFetchingActive = false;
                         } else {
                             page++;
-                            await new Promise(r => setTimeout(r, 1500));
+                            await new Promise(r => setTimeout(r, 2500));
                         }
                     } else {
                         seasonFetchingActive = false;
