@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let themeFilterMode = 'inclusive'; // Added: 'inclusive', 'all_selected', or 'none_selected'
     const JIKAN_API_BASE_URL = 'https://api.jikan.moe/v4';
     const INPUT_MODE_DELAY = 1500; // 1.5 seconds delay between requests in input mode
-    let currentSortColumn = 'name'; // Default sort column
-    let currentSortDirection = 'asc'; // Default sort direction
+    let currentSortColumn = 'members'; // Default sort column
+    let currentSortDirection = 'desc'; // Default sort direction
     let currentEditIndex = -1; // Track which anime is being edited
 
     // --- Local Storage ---
@@ -200,6 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Clicked a new link or tooltip was closed: open/reopen it for this anime
                     // 1. Populate globalTooltip content
                     globalTooltip.innerHTML = `
+                        <button type="button" class="tooltip-toggle-added-btn ${anime.added ? 'added' : ''}" data-mal-id="${anime.mal_id}" title="${anime.added ? 'Mark as Not Added' : 'Mark as Added'}">
+                            ${anime.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>'}
+                        </button>
                         <h4 class="tooltip-title">${anime.name}</h4>
                         <div class="tooltip-middle-section">
                             <img src="${anime.cover || 'placeholder.png'}" alt="${anime.name} cover" class="tooltip-cover-image">
@@ -223,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
 
                     // Add click listener for the new Copy Title button
-                    const copyBtn = globalTooltip.querySelector('.copy-title-btn');
+                    const copyBtn = globalTooltip.querySelector('.copy-btn');
                     if (copyBtn) {
                         copyBtn.addEventListener('click', () => {
                             const titleToCopy = copyBtn.dataset.animeTitle;
@@ -241,6 +244,38 @@ document.addEventListener('DOMContentLoaded', () => {
                                 // Optional: User feedback for error
                                 alert('Failed to copy title.');
                             });
+                        });
+                    }
+
+                    // Add click listener for the new Toggle Added button
+                    const tooltipToggleAddedBtn = globalTooltip.querySelector('.tooltip-toggle-added-btn');
+                    if (tooltipToggleAddedBtn) {
+                        tooltipToggleAddedBtn.addEventListener('click', (e) => {
+                            e.stopPropagation(); // Important: prevent closing tooltip by document click listener
+                            const malId = parseInt(tooltipToggleAddedBtn.dataset.malId);
+                            const animeToToggle = animeList.find(a => a.mal_id === malId);
+
+                            if (animeToToggle) {
+                                animeToToggle.added = !animeToToggle.added;
+                                saveListToLocalStorage();
+
+                                // Update tooltip button appearance
+                                tooltipToggleAddedBtn.innerHTML = animeToToggle.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
+                                tooltipToggleAddedBtn.title = animeToToggle.added ? 'Mark as Not Added' : 'Mark as Added';
+                                if (animeToToggle.added) {
+                                    tooltipToggleAddedBtn.classList.add('added');
+                                } else {
+                                    tooltipToggleAddedBtn.classList.remove('added');
+                                }
+
+                                // Refresh main list/table to update corresponding table button
+                                // and apply status filters if active
+                                if (filteredList !== null) {
+                                    applyFilters();
+                                } else {
+                                    renderAnimeList();
+                                }
+                            }
                         });
                     }
 
@@ -570,6 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return {
             mal_id: apiData.mal_id,
             name: apiData.title || apiData.title_english || apiData.title_japanese || 'Unknown Title',
+            english_name: apiData.title_english || '',
             season: apiData.season,
             year: parseInt(apiData.year, 10) || 0,
             members: members,
@@ -1208,7 +1244,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const endSeason = batchEndSeason.value;
         const endYear = parseInt(batchEndYear.value);
         const minMembersEnabled = batchMinMembersCheckbox.checked;
-        const minMembersValue = 1000;
+        const minMembersValue = 10000;
 
         if (!startSeason || isNaN(startYear) || !endSeason || isNaN(endYear)) {
             batchStatus.textContent = 'Please select valid start and end seasons/years.';

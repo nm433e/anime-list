@@ -758,7 +758,7 @@ label.filter-modes{
 }
 
 .actions-column {
-    width: 6%;      /* Set a reasonable width */
+    width: 5%;      /* Set a reasonable width */
     /* min-width: 80px; And a minimum */
 }
 th.number-column{
