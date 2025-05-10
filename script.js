@@ -46,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const genreFilterList = document.getElementById('genreFilterList');
     const themeFilterList = document.getElementById('themeFilterList');
     const statusFilter = document.getElementById('statusFilter');
-    const applyFiltersBtn = document.getElementById('applyFiltersBtn');
-    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
     const batchModeBtn = document.getElementById('batchModeBtn');
     const batchModeSection = document.getElementById('batchModeSection');
     const batchStartSeason = document.getElementById('batchStartSeason');
@@ -95,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSortColumn = 'members'; // Default sort column
     let currentSortDirection = 'desc'; // Default sort direction
     let currentEditIndex = -1; // Track which anime is being edited
+    let currentSearchTerm = ''; // Track the current search term
 
     // --- Local Storage ---
     const LOCAL_STORAGE_KEY = 'jikanAnimeList';
@@ -503,7 +502,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const newAnimeData = extractAnimeData(apiData);
         if (currentEditIndex >= 0 && currentEditIndex < animeList.length) {
-            // Preserve the search term from the original entry
             animeList[currentEditIndex] = newAnimeData;
             saveListToLocalStorage();
             renderAnimeList();
@@ -587,8 +585,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Extract genre names and identify adult genres
         const genres = (apiData.genres || []).map(genre => genre.name);
-        // const adultGenres = ['Erotica', 'Ecchi', 'Hentai'];
-        // const hasAdultGenre = genres.some(genre => adultGenres.includes(genre));
 
         // Extract theme names
         const themes = (apiData.themes || []).map(theme => theme.name);
@@ -620,7 +616,6 @@ document.addEventListener('DOMContentLoaded', () => {
             themes: themes,
             cover: coverImageUrl,
             synopsis: synopsisText,
-            // hasAdultGenre: hasAdultGenre,
             added: false
         };
     };
@@ -653,7 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Function to add anime to the list (with duplicate check)
-    const addAnimeToList = (animeData, searchTerm = null) => {
+    const addAnimeToList = (animeData) => {
         if (!animeData || !animeData.mal_id) {
             console.warn("Invalid anime data provided.");
             return false;
@@ -663,9 +658,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const existingAnime = animeList.find(anime => anime.mal_id === animeData.mal_id);
 
         if (!existingAnime) {
-            if (searchTerm) {
-                animeData.searchTerm = searchTerm;
-            }
             animeList.push(animeData);
             saveListToLocalStorage();
             renderAnimeList();
@@ -983,9 +975,6 @@ document.addEventListener('DOMContentLoaded', () => {
             themeFilterList.appendChild(themeItem);
         });
     };
-
-    // Add a variable to store the current search term
-    let currentSearchTerm = '';
 
     // Add event listener for the search input with debounce
     const searchInput = document.getElementById('listSearchInput');
