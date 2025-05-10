@@ -61,15 +61,13 @@
                 </select>
                 <input type="number" id="batchEndYear" min="1900" max="2100" placeholder="Year">
             </div>
-
-            <div class="batch-group" style="align-self: flex-end;">
-                <label style="font-weight: normal;">
-                    <input type="checkbox" id="batchMinMembersCheckbox"> Only add anime with at least 1000 members
-                </label>
+            <div class="batch-group">
+                <label for="finalPage">Final Page (optional):</label>
+                <input type="number" id="finalPage" min="1">
             </div>
-            <button id="batchFetchBtn">Fetch & Add Batch</button>
+            <button id="batchFetchBtn" class="action-btn">Start Batch Fetch</button>
         </div>
-        <div id="batchStatus" class="status-area"></div>
+        <div id="batchStatus" class="status-message"></div>
     </div>
     <div class="anime-list-section">
         <div class="list-actions">

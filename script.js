@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const batchStatus = document.getElementById('batchStatus');
     const finalPage = document.getElementById('finalPage');
     const initialPage = document.getElementById('initialPage');
-    const batchMinMembersCheckbox = document.getElementById('batchMinMembersCheckbox');
 
     const previousYearBtn = document.getElementById('previousYearBtn');
     const nextYearBtn = document.getElementById('nextYearBtn');
@@ -1236,8 +1235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const startYear = parseInt(batchStartYear.value);
         const endSeason = batchEndSeason.value;
         const endYear = parseInt(batchEndYear.value);
-        const minMembersEnabled = batchMinMembersCheckbox.checked;
-        const minMembersValue = 10000;
+        const minMembersValue = 10000; // This is the fixed minimum members value
 
         if (!startSeason || isNaN(startYear) || !endSeason || isNaN(endYear)) {
             batchStatus.textContent = 'Please select valid start and end seasons/years.';
@@ -1279,20 +1277,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ? parseInt(animeEntry.members.replace(/,/g, ''), 10) 
                                 : (animeEntry.members || 0);
 
-                            if (minMembersEnabled) {
-                                if (animeMembers >= minMembersValue) {
-                                    allOnPageBelowThreshold = false;
-                                    if (!animeList.some(a => a.mal_id === animeEntry.mal_id)) {
-                                        const animeData = extractAnimeData(animeEntry);
-                                        if (!animeData.season) animeData.season = season.toLowerCase();
-                                        if (!animeData.year) animeData.year = year;
-                                        animeData.searchTerm = `${animeData.name || 'Anime'} (batch)`;
-                                        animeList.push(animeData);
-                                        addedCount++;
-                                    }
-                                }
-                            } else {
-                                allOnPageBelowThreshold = false;
+                            // The 10k member filter is always active in batch mode
+                            if (animeMembers >= minMembersValue) {
+                                allOnPageBelowThreshold = false; // Found at least one qualifying anime on this page
                                 if (!animeList.some(a => a.mal_id === animeEntry.mal_id)) {
                                     const animeData = extractAnimeData(animeEntry);
                                     if (!animeData.season) animeData.season = season.toLowerCase();
@@ -1302,17 +1289,20 @@ document.addEventListener('DOMContentLoaded', () => {
                                     addedCount++;
                                 }
                             }
+                            // If animeMembers < minMembersValue, it's skipped. 
+                            // allOnPageBelowThreshold remains true IF AND ONLY IF all entries so far (on this page) are < minMembersValue.
                         }
                         saveListToLocalStorage();
-                        renderAnimeList();
+                        renderAnimeList(); // Or applyFilters() if search/filters should persist during batch
 
                         let hasNextPageAccordingToAPI = data.pagination && data.pagination.has_next_page;
 
-                        if (minMembersEnabled && allOnPageBelowThreshold) {
+                        // Stop fetching for this season IF all anime on the current page were below the threshold
+                        if (allOnPageBelowThreshold) { 
                             batchStatus.textContent = `Stopping ${season} ${year} after page ${page}: all on page below ${minMembersValue} members.`;
                             seasonFetchingActive = false;
                         } else if (!hasNextPageAccordingToAPI) {
-                            seasonFetchingActive = false;
+                            seasonFetchingActive = false; // API says no more pages
                         } else {
                             page++;
                             await new Promise(r => setTimeout(r, 2500));
