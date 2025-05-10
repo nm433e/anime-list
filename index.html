@@ -4,15 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jikan Anime List App</title>
+    <title>Jikan Anime List App (Firebase)</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="favicon.png" type="image/png">
-</head>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script> </head>
 
 <body>
 
-    <h1>My Anime List</h1>
+    <div class="auth-status-container">
+        <span id="authStatus">Not logged in</span>
+        <button id="loginBtn" style="display: none;">Login Anonymously</button>
+        <button id="logoutBtn" style="display: none;">Logout</button>
+    </div>
+
+    <h1>My Anime List (Firebase)</h1>
 
     <div class="mode-switcher">
         <button id="inputModeBtn">List Mode</button>
@@ -76,13 +85,12 @@
             <input type="file" id="importListInput" accept=".json" style="display: none;">
             <button onclick="document.getElementById('importListInput').click()" class="action-btn">Import List</button>
             <div class="filter-buttons-inline">
-                <button id="applyFiltersBtn">Apply Filters</button>
-                <button id="resetFiltersBtn">Reset Filters</button>
+                <button id="applyFiltersBtn" style="display: none;">Apply Filters</button> <button id="resetFiltersBtn">Reset Filters</button>
                 <button id="previousYearBtn"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="year-season-btn">Year</span>
+                <button class="year-season-btn">Year</button>
                 <button id="nextYearBtn"><i class="fa-solid fa-arrow-right"></i></button>
                 <button id="previousSeasonBtn"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="year-season-btn">Season</span>
+                <button class="year-season-btn">Season</button>
                 <button id="nextSeasonBtn"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
@@ -91,7 +99,6 @@
         </div>
         <div id="resultsCountMessage" class="results-count"></div>
 
-        <!-- Preset Filter Buttons -->
         <div class="preset-filter-groups">
             <div class="preset-group" id="memberPresetButtons">
                 <span class="preset-group-label">Members:</span>
@@ -115,9 +122,7 @@
             </div>
         </div>
 
-        <!-- Filter Section -->
         <div class="filter-section">
-            <!-- <h3>Filters</h3> -->
             <div class="filter-row">
                 <div class="filter-group">
                     <label for="minScore">Min Score</label>
@@ -202,11 +207,6 @@
             </div>
         </div>
 
-        <!-- Theme Filter Section -->
-        <div class="filter-section" id="themeFilterSection">
-
-        </div>
-
         <table id="animeTable">
             <thead>
                 <tr>
@@ -222,12 +222,11 @@
                 </tr>
             </thead>
             <tbody>
-            </tbody>
+                </tbody>
         </table>
-        <p id="emptyListMessage">Your list is empty.</p>
+        <p id="emptyListMessage">Your list is empty. Please log in to load or add anime.</p>
     </div>
 
-    <!-- Edit Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>

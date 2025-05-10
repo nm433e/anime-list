@@ -1,17 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Global Tooltip Element ---
-    let globalTooltip = null; // Will be created once
-    function createGlobalTooltip() {
-        if (!globalTooltip) {
-            globalTooltip = document.createElement('div');
-            globalTooltip.id = 'globalAnimeTooltip';
-            // Base styles will be in CSS, initially hidden
-            document.body.appendChild(globalTooltip);
-        }
-    }
-    createGlobalTooltip(); // Create it on DOM ready
+    // --- Firebase Configuration & Initialization ---
+    // IMPORTANT: Replace with your Firebase project's configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBSMYaL2lAxQi2NeOvG-P0EN8BtlDptWKg",
+        authDomain: "anime-list-cac07.firebaseapp.com",
+        projectId: "anime-list-cac07",
+        storageBucket: "anime-list-cac07.firebasestorage.app",
+        messagingSenderId: "78050819094",
+        appId: "1:78050819094:web:d71b70b563269296284937"
+    };
 
-    let currentOpenAnimeLink = null; // Track which link opened the tooltip
+    let db;
+    let auth; // Firebase Auth instance
+    let currentUser = null; // Store current authenticated user
+
+    try {
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        db = firebase.firestore();
+        auth = firebase.auth(); // Initialize Firebase Auth
+        console.log("Firebase initialized successfully (Firestore & Auth).");
+    } catch (error) {
+        console.error("Firebase initialization failed:", error);
+        alert("Could not connect to Firebase. Please check your configuration and ensure Firebase SDKs are correctly loaded.");
+        document.getElementById('emptyListMessage').textContent = 'Error connecting to Firebase.';
+        if(document.getElementById('authStatus')) document.getElementById('authStatus').textContent = 'Firebase connection error.';
+        return; 
+    }
+
+    const ANIME_COLLECTION = 'animeCollection'; 
 
     // --- Element References ---
     const inputModeBtn = document.getElementById('inputModeBtn');
@@ -28,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const animeTableHead = document.querySelector('#animeTable thead');
     const emptyListMessage = document.getElementById('emptyListMessage');
     const editModal = document.getElementById('editModal');
-    const closeModal = document.querySelector('.close');
+    const closeModalBtn = document.querySelector('.close'); 
     const newAnimeId = document.getElementById('newAnimeId');
     const confirmEdit = document.getElementById('confirmEdit');
     const editStatus = document.getElementById('editStatus');
@@ -54,26 +73,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const batchEndYear = document.getElementById('batchEndYear');
     const batchFetchBtn = document.getElementById('batchFetchBtn');
     const batchStatus = document.getElementById('batchStatus');
-    const finalPage = document.getElementById('finalPage');
-    const initialPage = document.getElementById('initialPage');
-
+    const finalPage = document.getElementById('finalPage'); 
     const previousYearBtn = document.getElementById('previousYearBtn');
     const nextYearBtn = document.getElementById('nextYearBtn');
     const previousSeasonBtn = document.getElementById('previousSeasonBtn');
     const nextSeasonBtn = document.getElementById('nextSeasonBtn');
     const resultsCountMessage = document.getElementById('resultsCountMessage');
+    const listSearchInput = document.getElementById('listSearchInput');
+    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+    
+    // Auth UI elements
+    const authStatusSpan = document.getElementById('authStatus');
+    const loginBtn = document.getElementById('loginBtn'); 
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // --- Global Tooltip Element ---
+    let globalTooltip = null;
+    function createGlobalTooltip() {
+        if (!globalTooltip) {
+            globalTooltip = document.createElement('div');
+            globalTooltip.id = 'globalAnimeTooltip';
+            document.body.appendChild(globalTooltip);
+        }
+    }
+    createGlobalTooltip();
+    let currentOpenAnimeLink = null;
 
     // --- Static Data ---
     const ALL_STATIC_GENRES = [
         "Action", "Adventure", "Avant Garde", "Award Winning", "Boys Love", "Comedy", "Drama",
         "Ecchi", "Erotica", "Fantasy", "Girls Love", "Gourmet", "Hentai", "Horror", "Mystery",
         "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Suspense"
-    ].sort(); // Ensure alphabetical order
+    ].sort();
 
     const ALL_STATIC_THEMES = [
         "Adult Cast", "Anthropomorphic", "CGDCT", "Childcare", "Combat Sports", "Crossdressing",
         "Delinquents", "Detective", "Educational", "Gag Humor", "Gore", "Harem", "High Stakes Game",
-        "Historical", "Idols (Female)", "Idols (Male)", "Isekai", "Iyashikei", "Love Polygon", "Love Status Quo",
+        "Historical", "Idols (Female)", "Idols (Male)", "Isekai", "Iyashikei", "Love Polygon",
         "Magical Sex Shift", "Mahou Shoujo", "Martial Arts", "Mecha", "Medical", "Military", "Music",
         "Mythology", "Organized Crime", "Otaku Culture", "Parody", "Performing Arts", "Pets",
         "Psychological", "Racing", "Reincarnation", "Reverse Harem", "Samurai", "School", "Showbiz",
@@ -82,266 +118,319 @@ document.addEventListener('DOMContentLoaded', () => {
     ].sort();
 
     // --- State Variables ---
-    let animeList = []; // Array to hold anime objects
+    let animeList = []; 
     let filteredList = null;
     let selectedGenres = new Set();
-    let genreFilterMode = 'inclusive'; // 'inclusive', 'all_selected', or 'none_selected'
-    let selectedThemes = new Set(); // Added
-    let themeFilterMode = 'inclusive'; // Added: 'inclusive', 'all_selected', or 'none_selected'
+    let genreFilterMode = 'inclusive';
+    let selectedThemes = new Set();
+    let themeFilterMode = 'inclusive';
     const JIKAN_API_BASE_URL = 'https://api.jikan.moe/v4';
-    const INPUT_MODE_DELAY = 1500; // 1.5 seconds delay between requests in input mode
-    let currentSortColumn = 'members'; // Default sort column
-    let currentSortDirection = 'desc'; // Default sort direction
-    let currentEditIndex = -1; // Track which anime is being edited
-    let currentSearchTerm = ''; // Track the current search term
+    const INPUT_MODE_DELAY = 1500;
+    let currentSortColumn = 'members';
+    let currentSortDirection = 'desc';
+    let currentEditMalId = null; 
+    let currentSearchTerm = '';
 
-    // --- Local Storage ---
-    const LOCAL_STORAGE_KEY = 'jikanAnimeList';
-
-    // Function to load list from local storage
-    const loadListFromLocalStorage = () => {
-        const storedList = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (storedList) {
-            try {
-                animeList = JSON.parse(storedList);
-                // Ensure members and score are numbers for sorting
-                animeList.forEach(anime => {
-                    if (typeof anime.members === 'string') {
-                        // Remove commas and convert to number
-                        anime.members = parseInt(anime.members.replace(/,/g, ''), 10) || 0;
-                    } else if (typeof anime.members !== 'number') {
-                        anime.members = 0;
-                    }
-                    if (typeof anime.score !== 'number') {
-                        anime.score = parseFloat(anime.score) || 0;
-                    }
-                    if (typeof anime.year !== 'number') {
-                        anime.year = parseInt(anime.year, 10) || 0;
-                    }
-                    if (!anime.themes) {
-                        anime.themes = [];
-                    }
-                    if (anime.cover === undefined) {
-                        anime.cover = '';
-                    }
-                    if (anime.synopsis === undefined) {
-                        anime.synopsis = 'Synopsis not available.';
-                    }
-                });
-                populateGenreFilter();
-                populateThemeFilter();
-                filteredList = [...animeList];
-            } catch (e) {
-                console.error("Failed to parse anime list from localStorage:", e);
-                animeList = [];
-                filteredList = null;
-            }
-        } else {
-            animeList = [];
-            filteredList = null;
+    // --- Firebase Auth Functions ---
+    const signInWithGoogle = async () => {
+        if (!auth) {
+            authStatusSpan.textContent = "Auth service not available.";
+            return;
         }
-        renderAnimeList();
+        authStatusSpan.textContent = "Logging in with Google...";
+        const provider = new firebase.auth.GoogleAuthProvider(); 
+        try {
+            await auth.signInWithPopup(provider); 
+            console.log("Signed in with Google successfully.");
+        } catch (error) {
+            console.error("Error signing in with Google:", error);
+            authStatusSpan.textContent = `Google login failed: ${error.message}`;
+            if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/cancelled-popup-request') {
+                authStatusSpan.textContent = "Login cancelled. Please try again.";
+            }
+            updateAuthUI(null); 
+        }
     };
 
-    // Function to save list to local storage
-    const saveListToLocalStorage = () => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(animeList));
+    const signOutUser = async () => {
+        if (!auth) return;
+        try {
+            await auth.signOut();
+            console.log("User signed out.");
+        } catch (error) {
+            console.error("Error signing out:", error);
+            authStatusSpan.textContent = `Logout failed: ${error.message}`;
+        }
     };
+
+    // --- Auth State Change Listener ---
+    auth.onAuthStateChanged(async (user) => {
+        currentUser = user; 
+        if (user) {
+            console.log("Auth state changed: User logged in", user.uid, user.displayName || user.email);
+            authStatusSpan.textContent = `Logged in as ${user.displayName || user.email || 'User'} (UID: ${user.uid.substring(0,6)}...)`;
+            updateAuthUI(user);
+            enableAppFeatures(true);
+            await loadListFromFirebase(); 
+        } else {
+            console.log("Auth state changed: User logged out");
+            authStatusSpan.textContent = "Not logged in. Please log in to use the app.";
+            animeList = []; 
+            applyFilters(); 
+            updateAuthUI(null);
+            enableAppFeatures(false);
+            emptyListMessage.textContent = 'Please log in to load or add anime.';
+            emptyListMessage.classList.remove('hidden');
+        }
+    });
+
+    function updateAuthUI(user) {
+        if (user) {
+            loginBtn.textContent = 'Login with Google'; 
+            loginBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline-block';
+        } else {
+            loginBtn.textContent = 'Login with Google'; 
+            loginBtn.style.display = 'inline-block';
+            logoutBtn.style.display = 'none';
+        }
+    }
+
+    function enableAppFeatures(enable) {
+        const featureButtons = [
+            processInputBtn, batchFetchBtn, clearListBtn, exportListBtn, 
+            confirmEdit, ...document.querySelectorAll('.action-btn'), 
+        ];
+        const featureInputs = [
+            animeInputList, animeSearchInput, importListInput, newAnimeId,
+            minScore, maxScore, minMembers, maxMembers, minEpisodesFilter, maxEpisodesFilter,
+            yearFilter, seasonFilter, statusFilter, listSearchInput,
+            batchStartSeason, batchStartYear, batchEndSeason, batchEndYear, finalPage
+        ];
+        
+        featureButtons.forEach(btn => btn.disabled = !enable);
+        featureInputs.forEach(input => input.disabled = !enable);
+
+        if (!enable) {
+            inputModeSection.classList.add('hidden');
+            searchModeSection.classList.add('hidden');
+            batchModeSection.classList.add('hidden');
+            inputModeBtn.classList.remove('active');
+            searchModeBtn.classList.remove('active');
+            batchModeBtn.classList.remove('active');
+            if (!hideModeBtn.classList.contains('active')) { 
+                 hideModeBtn.classList.add('active');
+            }
+        }
+    }
+
+
+    // --- Firebase Data Operations ---
+    const loadListFromFirebase = async () => {
+        if (!db || !currentUser) { 
+            console.warn("Firestore not available or user not logged in. Cannot load list.");
+            animeList = [];
+            applyFilters(); 
+            emptyListMessage.textContent = currentUser ? 'Error: Firestore not available.' : 'Please log in to load your list.';
+            emptyListMessage.classList.remove('hidden');
+            return;
+        }
+        emptyListMessage.textContent = 'Loading anime from Firebase...';
+        emptyListMessage.classList.remove('hidden');
+
+        try {
+            const snapshot = await db.collection(ANIME_COLLECTION).get(); 
+
+            const loadedAnime = [];
+            snapshot.forEach(doc => {
+                const anime = doc.data();
+                // Perform data cleaning/normalization
+                const cleanedAnime = {
+                    mal_id: parseInt(anime.mal_id, 10) || 0, // Ensure mal_id is a number
+                    name: anime.name || 'Unknown Title',
+                    english_name: anime.english_name || '',
+                    season: anime.season || null,
+                    year: parseInt(anime.year, 10) || null,
+                    members: parseInt(String(anime.members).replace(/,/g, ''), 10) || 0,
+                    score: parseFloat(anime.score) || 0,
+                    episodes: parseInt(anime.episodes, 10) || 0,
+                    genres: Array.isArray(anime.genres) ? anime.genres.filter(g => typeof g === 'string') : [],
+                    themes: Array.isArray(anime.themes) ? anime.themes.filter(t => typeof t === 'string') : [],
+                    cover: anime.cover || '',
+                    synopsis: anime.synopsis || 'Synopsis not available.',
+                    added: typeof anime.added === 'boolean' ? anime.added : false,
+                };
+                loadedAnime.push(cleanedAnime);
+            });
+            animeList = loadedAnime;
+            applyFilters(); 
+            console.log("Anime list loaded from Firebase:", animeList.length, "items");
+            if (animeList.length === 0) {
+                 emptyListMessage.textContent = 'Your list is empty. Add some anime!';
+                 emptyListMessage.classList.remove('hidden');
+            } else {
+                emptyListMessage.classList.add('hidden');
+            }
+        } catch (error) {
+            console.error("Error loading anime list from Firebase:", error);
+            animeList = [];
+            emptyListMessage.textContent = 'Failed to load list from Firebase. Check security rules and ensure you are logged in.';
+            emptyListMessage.classList.remove('hidden');
+            renderAnimeList(); 
+        }
+    };
+
+    const addAnimeToFirebase = async (animeData) => {
+        if (!db || !currentUser) return false; 
+        if (!animeData || typeof animeData.mal_id !== 'number' || isNaN(animeData.mal_id)) {
+            console.error("addAnimeToFirebase: Invalid animeData or mal_id.", animeData);
+            return false;
+        }
+        try {
+            // Ensure no undefined fields are being sent
+            const dataToSet = { ...animeData };
+            for (const key in dataToSet) {
+                if (dataToSet[key] === undefined) {
+                    // Decide on a default: null for optional, '' for strings, 0 for numbers, [] for arrays
+                    if (['season', 'year'].includes(key)) dataToSet[key] = null;
+                    else if (['members', 'score', 'episodes'].includes(key)) dataToSet[key] = 0;
+                    else if (Array.isArray(dataToSet[key])) dataToSet[key] = []; // Should not happen if extractAnimeData is robust
+                    else dataToSet[key] = ''; // General default for strings
+                    console.warn(`Field '${key}' was undefined before saving MAL ID ${dataToSet.mal_id}. Defaulted.`);
+                }
+            }
+            await db.collection(ANIME_COLLECTION).doc(String(dataToSet.mal_id)).set(dataToSet);
+            console.log(`Anime "${dataToSet.name}" (ID: ${dataToSet.mal_id}) added/updated in Firebase.`);
+            return true;
+        } catch (error) {
+            console.error(`Error adding anime (MAL ID: ${animeData.mal_id}) to Firebase:`, error, animeData);
+            return false;
+        }
+    };
+
+    const updateAnimeInFirebase = async (malId, updatedData) => {
+        if (!db || !currentUser) return false; 
+        try {
+            // Ensure no undefined fields in updatedData
+            const dataToUpdate = { ...updatedData };
+            for (const key in dataToUpdate) {
+                if (dataToUpdate[key] === undefined) {
+                    // For updates, it's often better to delete the field if it becomes undefined,
+                    // or set it to a specific null/default value.
+                    // firebase.firestore.FieldValue.delete() can be used to remove a field.
+                    // For simplicity here, we'll assign a default, but review if field deletion is better.
+                    if (['season', 'year'].includes(key)) dataToUpdate[key] = null;
+                    else if (['members', 'score', 'episodes'].includes(key)) dataToUpdate[key] = 0;
+                    else dataToUpdate[key] = ''; 
+                    console.warn(`Field '${key}' in update was undefined for MAL ID ${malId}. Defaulted.`);
+                }
+            }
+            await db.collection(ANIME_COLLECTION).doc(String(malId)).update(dataToUpdate);
+            console.log(`Anime ID: ${malId} updated in Firebase.`);
+            return true;
+        } catch (error) {
+            console.error("Error updating anime in Firebase:", error);
+            return false;
+        }
+    };
+
+    const deleteAnimeFromFirebase = async (malId) => {
+        if (!db || !currentUser) return false; 
+        try {
+            await db.collection(ANIME_COLLECTION).doc(String(malId)).delete();
+            console.log(`Anime ID: ${malId} deleted from Firebase.`);
+            return true;
+        } catch (error) {
+            console.error("Error deleting anime from Firebase:", error);
+            return false;
+        }
+    };
+
+    const clearListInFirebase = async () => {
+        if (!db || !currentUser) return; 
+        batchStatus.textContent = 'Clearing list from Firebase...';
+        try {
+            const snapshot = await db.collection(ANIME_COLLECTION).get();
+            const batchOp = db.batch(); 
+            snapshot.docs.forEach(doc => {
+                batchOp.delete(doc.ref);
+            });
+            await batchOp.commit();
+            animeList = []; 
+            applyFilters(); 
+            batchStatus.textContent = 'List cleared from Firebase.';
+            console.log("Anime list cleared from Firebase.");
+        } catch (error) {
+            console.error("Error clearing list from Firebase:", error);
+            batchStatus.textContent = 'Error clearing list.';
+        }
+    };
+
 
     // --- UI Rendering ---
-
-    // Function to render the anime list in the table
     const renderAnimeList = () => {
         animeTableBody.innerHTML = '';
         emptyListMessage.classList.add('hidden');
 
-        // Use filteredList if filters are active, otherwise use animeList
         const listToRender = filteredList !== null ? filteredList : animeList;
-        
-        console.log('Rendering list:');
-        
-        if (listToRender.length === 0) {
+
+        if (!currentUser) { 
+            emptyListMessage.textContent = 'Please log in to see your anime list.';
             emptyListMessage.classList.remove('hidden');
+            resultsCountMessage.textContent = 'Logged out.';
+            return;
+        }
+        
+        if (listToRender.length === 0 && animeList.length > 0 && filteredList !== null) {
+             emptyListMessage.textContent = 'No anime match your current filters.';
+             emptyListMessage.classList.remove('hidden');
+        } else if (listToRender.length === 0) {
+            if (emptyListMessage.textContent === 'Loading anime from Firebase...') {
+                // Keep loading message
+            } else if (animeList.length === 0 && currentUser) {
+                 emptyListMessage.textContent = 'Your list is empty. Add some anime!';
+            } else {
+                 emptyListMessage.textContent = 'No results to display for current filters.';
+            }
+            emptyListMessage.classList.remove('hidden');
+            resultsCountMessage.textContent = 'No results to display.';
             return;
         }
 
         const sortedList = sortAnimeList(listToRender, currentSortColumn, currentSortDirection);
-
         sortedList.forEach((anime, index) => {
             const row = animeTableBody.insertRow();
-            
-            // # column
-            const numberCell = row.insertCell(0);
-            numberCell.textContent = index + 1;
-            numberCell.className = 'number-column';
-            
-            // Name cell with link and tooltip
+            row.dataset.malId = anime.mal_id; 
+
+            row.insertCell(0).textContent = index + 1; 
+
             const nameCell = row.insertCell(1);
-            
             const nameLink = document.createElement('a');
             nameLink.href = `https://myanimelist.net/anime/${anime.mal_id}`;
             nameLink.target = '_blank';
             nameLink.className = 'anime-name-link';
             nameLink.textContent = anime.name;
-            
             nameCell.appendChild(nameLink);
 
-            // Info Window (formerly Tooltip) logic: Click to open/toggle, click outside to close
             nameLink.addEventListener('click', (event) => {
                 event.preventDefault();
-
                 if (globalTooltip.classList.contains('active') && currentOpenAnimeLink === nameLink) {
-                    // Clicked the same link that opened the currently active tooltip: close it
                     globalTooltip.classList.remove('active');
                     currentOpenAnimeLink = null;
                 } else {
-                    // Clicked a new link or tooltip was closed: open/reopen it for this anime
-                    // 1. Populate globalTooltip content
-                    globalTooltip.innerHTML = `
-                        <button type="button" class="tooltip-toggle-added-btn ${anime.added ? 'added' : ''}" data-mal-id="${anime.mal_id}" title="${anime.added ? 'Mark as Not Added' : 'Mark as Added'}">
-                            ${anime.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>'}
-                        </button>
-                        <h4 class="tooltip-title">${anime.name}</h4>
-                        <div class="tooltip-middle-section">
-                            <img src="${anime.cover || 'placeholder.png'}" alt="${anime.name} cover" class="tooltip-cover-image">
-                            <p class="tooltip-synopsis">${anime.synopsis}</p>
-                        </div>
-                        <div class="tooltip-stats-section">
-                            ${anime.genres && anime.genres.length > 0 ? `<div class="tooltip-genres"><strong>Genres:</strong> ${anime.genres.map(g => `<span class="tooltip-genre-pill">${g}</span>`).join(' ')}</div>` : ''}
-                            ${anime.themes && anime.themes.length > 0 ? `<div class="tooltip-themes"><strong>Themes:</strong> ${anime.themes.map(t => `<span class="tooltip-theme-pill">${t}</span>`).join(' ')}</div>` : ''}
-                            <div class="tooltip-members-score">
-                                <span class="tooltip-stat"><i class="fas fa-users"></i> ${anime.members.toLocaleString()}</span>
-                                <span class="tooltip-stat"><i class="fas fa-star"></i> ${anime.score ? anime.score.toFixed(2) : 'N/A'}</span>
-                            </div>
-                        </div>
-                        <div class="info-window-actions">
-                            <a href="https://myanimelist.net/anime/${anime.mal_id}" target="_blank" rel="noopener noreferrer" class="info-action-btn mal-btn">MAL</a>
-                            <a href="https://hianimez.to/search?keyword=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn hi-btn">HiAnimez</a>
-                            <a href="https://www.crunchyroll.com/search?q=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn cr-btn">Crunchyroll</a>
-                            <a href="https://www.netflix.com/search?q=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn nf-btn">Netflix</a>
-                            <button type="button" class="info-action-btn copy-btn" data-anime-title="${anime.name}">Copy Title</button>
-                        </div>
-                    `;
-
-                    // Add click listener for the new Copy Title button
-                    const copyBtn = globalTooltip.querySelector('.copy-btn');
-                    if (copyBtn) {
-                        copyBtn.addEventListener('click', () => {
-                            const titleToCopy = copyBtn.dataset.animeTitle;
-                            
-                            if (navigator.clipboard && navigator.clipboard.writeText) {
-                                navigator.clipboard.writeText(titleToCopy).then(() => {
-                                    // Success feedback
-                                    const originalText = copyBtn.textContent;
-                                    copyBtn.textContent = 'Copied!';
-                                    copyBtn.disabled = true;
-                                    setTimeout(() => {
-                                        copyBtn.textContent = originalText;
-                                        copyBtn.disabled = false;
-                                    }, 1500);
-                                }).catch(err => {
-                                    console.error('Failed to copy title using navigator.clipboard: ', err);
-                                    // Attempt fallback
-                                    fallbackCopyTextToClipboard(titleToCopy, copyBtn);
-                                });
-                            } else {
-                                console.warn('navigator.clipboard.writeText not available. Using fallback.');
-                                // Fallback for older browsers or when navigator.clipboard is not available
-                                fallbackCopyTextToClipboard(titleToCopy, copyBtn);
-                            }
-                        });
-                    }
-
-                    // Add click listener for the new Toggle Added button
-                    const tooltipToggleAddedBtn = globalTooltip.querySelector('.tooltip-toggle-added-btn');
-                    if (tooltipToggleAddedBtn) {
-                        tooltipToggleAddedBtn.addEventListener('click', (e) => {
-                            e.stopPropagation(); // Important: prevent closing tooltip by document click listener
-                            const malId = parseInt(tooltipToggleAddedBtn.dataset.malId);
-                            const animeToToggle = animeList.find(a => a.mal_id === malId);
-
-                            if (animeToToggle) {
-                                animeToToggle.added = !animeToToggle.added;
-                                saveListToLocalStorage();
-
-                                // Update tooltip button appearance
-                                tooltipToggleAddedBtn.innerHTML = animeToToggle.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
-                                tooltipToggleAddedBtn.title = animeToToggle.added ? 'Mark as Not Added' : 'Mark as Added';
-                                if (animeToToggle.added) {
-                                    tooltipToggleAddedBtn.classList.add('added');
-                                } else {
-                                    tooltipToggleAddedBtn.classList.remove('added');
-                                }
-
-                                // Refresh main list/table to update corresponding table button
-                                // and apply status filters if active
-                                if (filteredList !== null) {
-                                    applyFilters();
-                                } else {
-                                    renderAnimeList();
-                                }
-                            }
-                        });
-                    }
-
-                    // 2. Position and Show
-                    // Ensure it's visible for getBoundingClientRect to work correctly if it was hidden
-                    globalTooltip.classList.add('active'); 
-                    // We might need a brief moment for content to render and affect size
-                    // requestAnimationFrame can help ensure dimensions are read after render
-                    requestAnimationFrame(() => {
-                        const linkRect = nameLink.getBoundingClientRect();
-                        const tooltipRect = globalTooltip.getBoundingClientRect(); // Get its dimensions AFTER content is set & it's active
-                        const viewportWidth = window.innerWidth;
-                        const viewportHeight = window.innerHeight;
-                        const scrollY = window.scrollY;
-                        const scrollX = window.scrollX;
-
-                        let top = linkRect.top + scrollY - tooltipRect.height - 10; // 10px above the link
-                        let left = linkRect.left + scrollX + (linkRect.width / 2) - (tooltipRect.width / 2); // Centered
-
-                        // Adjust for viewport boundaries
-                        if (top < scrollY + 10) { 
-                            top = linkRect.bottom + scrollY + 10;
-                            if (top + tooltipRect.height > scrollY + viewportHeight - 10) {
-                                top = scrollY + viewportHeight - tooltipRect.height - 10;
-                            }
-                        }
-                         if (top + tooltipRect.height > scrollY + viewportHeight - 10 ) { 
-                             top = scrollY + viewportHeight - tooltipRect.height - 10;
-                        }
-                        if (left < scrollX + 10) { 
-                            left = scrollX + 10; 
-                        }
-                        if (left + tooltipRect.width > scrollX + viewportWidth - 10) { 
-                            left = scrollX + viewportWidth - tooltipRect.width - 10; 
-                        }
-                        
-                        globalTooltip.style.top = `${Math.max(scrollY + 10, top)}px`; // Ensure it doesn't go above viewport top due to adjustments
-                        globalTooltip.style.left = `${left}px`;
-                        globalTooltip.style.transform = '';
-                    });
+                    populateAndShowTooltip(anime, nameLink);
                     currentOpenAnimeLink = nameLink;
                 }
             });
 
-            // Season & Year cell
             row.insertCell(2).textContent = `${anime.season || 'N/A'} ${anime.year || 'N/A'}`;
-            
-            // Members cell
-            row.insertCell(3).textContent = anime.members.toLocaleString();
-            
-            // Score cell
+            row.insertCell(3).textContent = anime.members ? anime.members.toLocaleString() : 'N/A';
             row.insertCell(4).textContent = anime.score ? anime.score.toFixed(2) : 'N/A';
-
-            // Episodes cell
             row.insertCell(5).textContent = anime.episodes || '?';
 
-            // Genres cell
             const genresCell = row.insertCell(6);
-            const genreList = document.createElement('div');
-            genreList.className = 'genre-list';
-            
+            const genreListDiv = document.createElement('div'); 
+            genreListDiv.className = 'genre-list';
             if (anime.genres && anime.genres.length > 0) {
                 anime.genres.forEach(genre => {
                     const genreSpan = document.createElement('span');
@@ -350,86 +439,141 @@ document.addEventListener('DOMContentLoaded', () => {
                         genreSpan.classList.add('adult');
                     }
                     genreSpan.textContent = genre;
-                    genreList.appendChild(genreSpan);
+                    genreListDiv.appendChild(genreSpan);
                 });
             } else {
-                genreList.textContent = 'N/A';
+                genreListDiv.textContent = 'N/A';
             }
-            genresCell.appendChild(genreList);
-            
-            // Themes cell
+            genresCell.appendChild(genreListDiv);
+
             const themesCell = row.insertCell(7);
-            const themeList = document.createElement('div');
-            themeList.className = 'theme-list';
-            
+            const themeListDiv = document.createElement('div'); 
+            themeListDiv.className = 'theme-list';
             if (anime.themes && anime.themes.length > 0) {
                 anime.themes.forEach(theme => {
                     const themeSpan = document.createElement('span');
                     themeSpan.className = 'theme';
                     themeSpan.textContent = theme;
-                    themeList.appendChild(themeSpan);
+                    themeListDiv.appendChild(themeSpan);
                 });
             } else {
-                themeList.textContent = 'N/A';
+                themeListDiv.textContent = 'N/A';
             }
-            themesCell.appendChild(themeList);
-            
-            // Actions cell
+            themesCell.appendChild(themeListDiv);
+
             const actionsCell = row.insertCell(8);
-            
-            // Toggle Added button
             const toggleBtn = document.createElement('button');
             toggleBtn.className = `action-btn toggle-btn ${anime.added ? 'added' : ''}`;
             toggleBtn.innerHTML = anime.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
             toggleBtn.title = anime.added ? 'Mark as Not Added' : 'Mark as Added';
-            toggleBtn.onclick = () => toggleAnimeAdded(index);
-            
-            // Edit button
+            toggleBtn.onclick = () => toggleAnimeAddedStatus(anime.mal_id); 
+
             const editBtn = document.createElement('button');
             editBtn.className = 'action-btn edit-btn';
             editBtn.innerHTML = '<i class="fas fa-pen"></i>';
             editBtn.title = 'Edit';
-            editBtn.onclick = () => openEditModal(index);
-            
-            // Delete button
+            editBtn.onclick = () => openEditModal(anime.mal_id); 
+
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'action-btn delete-btn';
             deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
             deleteBtn.title = 'Delete';
-            deleteBtn.onclick = () => deleteAnime(index);
-            
+            deleteBtn.onclick = () => deleteAnime(anime.mal_id); 
+
             actionsCell.appendChild(toggleBtn);
             actionsCell.appendChild(editBtn);
             actionsCell.appendChild(deleteBtn);
         });
 
-        // Update results count message
         const count = listToRender.length;
-        if (count === 0) {
-            resultsCountMessage.textContent = 'No results to display.';
-        } else if (filteredList !== null) {
+        if (filteredList !== null) { 
             resultsCountMessage.textContent = `Displaying ${count} filtered results (out of ${animeList.length} total).`;
         } else {
             resultsCountMessage.textContent = `Displaying ${count} results.`;
         }
+         if (listToRender.length > 0) {
+            emptyListMessage.classList.add('hidden');
+        }
     };
 
-    // Function to sort the anime list
-    const SEASON_ORDER = { Winter: 0, Spring: 1, Summer: 2, Fall: 3 };
+    function populateAndShowTooltip(anime, nameLink) {
+        if (!currentUser) return; 
+        globalTooltip.innerHTML = `
+ 
+            <h4 class="tooltip-title">${anime.name}</h4>
+            <div class="tooltip-middle-section">
+                <img src="${anime.cover || 'placeholder.png'}" alt="${anime.name} cover" class="tooltip-cover-image" onerror="this.src='https://placehold.co/150x225/cccccc/333333?text=No+Image';">
+                <p class="tooltip-synopsis">${anime.synopsis || 'Synopsis not available.'}</p>
+            </div>
+            <div class="tooltip-stats-section">
+                ${anime.genres && anime.genres.length > 0 ? `<div class="tooltip-genres"><strong>Genres:</strong> ${anime.genres.map(g => `<span class="tooltip-genre-pill">${g}</span>`).join(' ')}</div>` : ''}
+                ${anime.themes && anime.themes.length > 0 ? `<div class="tooltip-themes"><strong>Themes:</strong> ${anime.themes.map(t => `<span class="tooltip-theme-pill">${t}</span>`).join(' ')}</div>` : ''}
+                <div class="tooltip-members-score">
+                    <span class="tooltip-stat"><i class="fas fa-users"></i> ${anime.members ? anime.members.toLocaleString() : 'N/A'}</span>
+                    <span class="tooltip-stat"><i class="fas fa-star"></i> ${anime.score ? anime.score.toFixed(2) : 'N/A'}</span>
+                </div>
+            </div>
+            <div class="info-window-actions">
+                <a href="https://myanimelist.net/anime/${anime.mal_id}" target="_blank" rel="noopener noreferrer" class="info-action-btn mal-btn">MAL</a>
+                <a href="https://hianimez.to/search?keyword=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn hi-btn">HiAnimez</a>
+                <a href="https://www.crunchyroll.com/search?q=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn cr-btn">Crunchyroll</a>
+                <a href="https://www.netflix.com/search?q=${encodeURIComponent(anime.name)}" target="_blank" rel="noopener noreferrer" class="info-action-btn nf-btn">Netflix</a>
+                <button type="button" class="info-action-btn copy-btn" data-anime-title="${anime.name}">Copy Title</button>
+                           <button type="button" class="tooltip-toggle-added-btn ${anime.added ? 'added' : ''}" data-mal-id="${anime.mal_id}" title="${anime.added ? 'Mark as Not Added' : 'Mark as Added'}">
+                ${anime.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>'}
+            </button>
+            </div>
+        `;
 
+        const copyBtn = globalTooltip.querySelector('.copy-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => copyTitleToClipboard(copyBtn.dataset.animeTitle, copyBtn));
+        }
+
+        const tooltipToggleAddedBtn = globalTooltip.querySelector('.tooltip-toggle-added-btn');
+        if (tooltipToggleAddedBtn) {
+            tooltipToggleAddedBtn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const malId = parseInt(tooltipToggleAddedBtn.dataset.malId);
+                await toggleAnimeAddedStatus(malId, true); 
+            });
+        }
+
+        globalTooltip.classList.add('active');
+        requestAnimationFrame(() => {
+            const linkRect = nameLink.getBoundingClientRect();
+            const tooltipRect = globalTooltip.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const scrollY = window.scrollY;
+            const scrollX = window.scrollX;
+
+            let top = linkRect.top + scrollY - tooltipRect.height - 10;
+            let left = linkRect.left + scrollX + (linkRect.width / 2) - (tooltipRect.width / 2);
+
+            if (top < scrollY + 10) top = linkRect.bottom + scrollY + 10;
+            if (top + tooltipRect.height > scrollY + viewportHeight - 10) top = scrollY + viewportHeight - tooltipRect.height - 10;
+            if (left < scrollX + 10) left = scrollX + 10;
+            if (left + tooltipRect.width > scrollX + viewportWidth - 10) left = scrollX + viewportWidth - tooltipRect.width - 10;
+            
+            globalTooltip.style.top = `${Math.max(scrollY + 10, top)}px`;
+            globalTooltip.style.left = `${left}px`;
+        });
+    }
+
+    const SEASON_ORDER = { Winter: 0, Spring: 1, Summer: 2, Fall: 3 };
     function capitalizeSeason(season) {
-        if (!season) return '';
+        if (!season) return ''; // Return empty string, not null or undefined
         return season.charAt(0).toUpperCase() + season.slice(1).toLowerCase();
     }
 
     const sortAnimeList = (list, column, direction) => {
         return [...list].sort((a, b) => {
             let comparison = 0;
-            const aValue = a[column];
-            const bValue = b[column];
+            let aValue = a[column];
+            let bValue = b[column];
 
             if (column === 'seasonYear') {
-                // Sort by year, then by season order
                 const aYear = a.year || 0;
                 const bYear = b.year || 0;
                 if (aYear !== bYear) {
@@ -440,45 +584,49 @@ document.addEventListener('DOMContentLoaded', () => {
                     comparison = (SEASON_ORDER[aSeason] ?? -1) - (SEASON_ORDER[bSeason] ?? -1);
                 }
             } else if (column === 'genres') {
-                // Sort by first genre name
-                const aGenres = a.genres || [];
-                const bGenres = b.genres || [];
-                const aFirstGenre = aGenres[0] || '';
-                const bFirstGenre = bGenres[0] || '';
+                const aFirstGenre = (a.genres && a.genres[0]) || '';
+                const bFirstGenre = (b.genres && b.genres[0]) || '';
                 comparison = aFirstGenre.localeCompare(bFirstGenre);
             } else if (column === 'themes') {
-                const aThemes = a.themes || [];
-                const bThemes = b.themes || [];
-                const aFirstTheme = aThemes[0] || '';
-                const bFirstTheme = bThemes[0] || '';
+                const aFirstTheme = (a.themes && a.themes[0]) || '';
+                const bFirstTheme = (b.themes && b.themes[0]) || '';
                 comparison = aFirstTheme.localeCompare(bFirstTheme);
-            } else if (typeof aValue === 'string') {
+            } else if (typeof aValue === 'string' && typeof bValue === 'string') {
                 comparison = aValue.localeCompare(bValue);
-            } else {
+            } else if (typeof aValue === 'number' && typeof bValue === 'number') {
                 comparison = aValue - bValue;
+            } else { 
+                const strA = String(aValue).toLowerCase();
+                const strB = String(bValue).toLowerCase();
+                comparison = strA.localeCompare(strB);
             }
-
             return direction === 'asc' ? comparison : -comparison;
         });
     };
 
     // --- Modal Functions ---
-    const openEditModal = (index) => {
-        currentEditIndex = index;
-        newAnimeId.value = '';
-        editStatus.textContent = '';
+    const openEditModal = (malId) => {
+        if (!currentUser) return; 
+        const animeToEdit = animeList.find(a => a.mal_id === malId);
+        if (!animeToEdit) {
+            console.error("Anime to edit not found in local list:", malId);
+            return;
+        }
+        currentEditMalId = malId; 
+        newAnimeId.value = ''; 
+        editStatus.textContent = `Editing: ${animeToEdit.name}. Enter new MAL ID if you want to replace it.`;
         editModal.style.display = 'block';
     };
 
     const closeEditModal = () => {
         editModal.style.display = 'none';
-        currentEditIndex = -1;
+        currentEditMalId = null;
         newAnimeId.value = '';
         editStatus.textContent = '';
     };
 
     // --- Event Handlers for Modal ---
-    closeModal.onclick = closeEditModal;
+    if (closeModalBtn) closeModalBtn.onclick = closeEditModal;
     window.onclick = (event) => {
         if (event.target === editModal) {
             closeEditModal();
@@ -486,70 +634,85 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     confirmEdit.onclick = async () => {
-        const newId = parseInt(newAnimeId.value);
-        if (isNaN(newId)) {
-            editStatus.textContent = 'Please enter a valid MAL ID';
+        if (!currentUser || !currentEditMalId) { 
+            editStatus.textContent = 'Error: Not logged in or no anime selected for editing.';
+            return;
+        }
+        const newIdToFetch = parseInt(newAnimeId.value);
+        if (isNaN(newIdToFetch) || newIdToFetch <= 0) {
+            editStatus.textContent = 'Please enter a valid new MAL ID to fetch and replace.';
             return;
         }
 
         editStatus.textContent = 'Fetching new anime data...';
-        const apiData = await fetchAnimeById(newId);
+        const apiData = await fetchAnimeById(newIdToFetch);
         
         if (!apiData) {
-            editStatus.textContent = 'Failed to fetch anime data';
+            editStatus.textContent = 'Failed to fetch new anime data. Check MAL ID.';
             return;
         }
 
         const newAnimeData = extractAnimeData(apiData);
-        if (currentEditIndex >= 0 && currentEditIndex < animeList.length) {
-            animeList[currentEditIndex] = newAnimeData;
-            saveListToLocalStorage();
-            renderAnimeList();
-            closeEditModal();
+        if (!newAnimeData) { // extractAnimeData now returns null for bad data
+             editStatus.textContent = 'Could not process new anime data (invalid or missing critical info).';
+            return;
+        }
+        
+        const deleteSuccess = await deleteAnimeFromFirebase(currentEditMalId);
+        if (!deleteSuccess) {
+            editStatus.textContent = 'Failed to remove old anime entry from Firebase. Aborting update.';
+            return;
+        }
+
+        const addSuccess = await addAnimeToFirebase(newAnimeData);
+        if (addSuccess) {
+            const oldIndex = animeList.findIndex(a => a.mal_id === currentEditMalId);
+            if (oldIndex !== -1) animeList.splice(oldIndex, 1); 
+            
+            const existingNewIndex = animeList.findIndex(a => a.mal_id === newAnimeData.mal_id);
+            if (existingNewIndex !== -1) {
+                animeList[existingNewIndex] = newAnimeData; 
+            } else {
+                animeList.push(newAnimeData); 
+            }
+
+            applyFilters(); 
+            editStatus.textContent = `Successfully replaced MAL ID ${currentEditMalId} with ${newAnimeData.name} (ID: ${newAnimeData.mal_id}).`;
+            setTimeout(closeEditModal, 2000);
+        } else {
+            editStatus.textContent = 'Failed to add new anime data to Firebase. Old entry was removed.';
+            await loadListFromFirebase(); 
         }
     };
 
     // --- Delete Function ---
-    const deleteAnime = (index) => {
-        if (confirm('Are you sure you want to delete this anime from your list?')) {
-            const listCurrentlyDisplayed = filteredList !== null ? filteredList : animeList;
-            const sortedDisplayedList = sortAnimeList(listCurrentlyDisplayed, currentSortColumn, currentSortDirection);
-            const animeToDelete = sortedDisplayedList[index];
+    const deleteAnime = async (malId) => {
+        if (!currentUser) return; 
+        const animeToDelete = animeList.find(a => a.mal_id === malId);
+        if (!animeToDelete) {
+            console.error("Anime to delete not found in local list:", malId);
+            return;
+        }
 
-            if (!animeToDelete) {
-                console.error("Error: Could not find the anime to delete from displayed list at index:", index);
-                return;
-            }
-
-            const actualIndexInMainAnimeList = animeList.findIndex(anime => anime.mal_id === animeToDelete.mal_id);
-
-            if (actualIndexInMainAnimeList !== -1) {
-                animeList.splice(actualIndexInMainAnimeList, 1);
-                saveListToLocalStorage();
-
-                if (filteredList !== null) {
-                    applyFilters();
-                } else {
-                    renderAnimeList();
-                }
+        if (confirm(`Are you sure you want to delete "${animeToDelete.name}" from your list?`)) {
+            const success = await deleteAnimeFromFirebase(malId);
+            if (success) {
+                animeList = animeList.filter(anime => anime.mal_id !== malId);
+                applyFilters(); 
+                console.log(`Anime "${animeToDelete.name}" deleted.`);
             } else {
-                console.error("Error: Anime found in displayed list for deletion but not in main animeList. MAL_ID:", animeToDelete.mal_id);
+                alert("Failed to delete anime from Firebase. Please try again.");
             }
         }
     };
 
-    // --- API Interaction ---
-
-    // Function to fetch anime by ID
+    // --- API Interaction (Jikan) ---
     const fetchAnimeById = async (id) => {
         try {
             const response = await fetch(`${JIKAN_API_BASE_URL}/anime/${id}`);
             if (!response.ok) {
-                if (response.status === 404) {
-                    console.warn(`Anime with ID ${id} not found.`);
-                    return null;
-                }
-                throw new Error(`HTTP error! status: ${response.status}`);
+                console.warn(`Anime with ID ${id} not found or API error: ${response.status}`);
+                return null;
             }
             const data = await response.json();
             return data.data;
@@ -559,152 +722,220 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Function to search for anime by name
     const searchAnimeByName = async (name) => {
         try {
             const encodedName = encodeURIComponent(name);
             const response = await fetch(`${JIKAN_API_BASE_URL}/anime?q=${encodedName}&limit=10`);
             if (!response.ok) {
-                if (response.status === 404) {
-                    console.warn(`No results found for "${name}".`);
-                    return [];
-                }
-                throw new Error(`HTTP error! status: ${response.status}`);
+                console.warn(`No results for "${name}" or API error: ${response.status}`);
+                return [];
             }
             const data = await response.json();
-            return data.data;
+            return data.data || [];
         } catch (error) {
             console.error(`Error searching for anime "${name}":`, error);
             return [];
         }
     };
 
-    // Function to extract relevant anime data
     const extractAnimeData = (apiData) => {
-        if (!apiData) return null;
-
-        // Extract genre names and identify adult genres
-        const genres = (apiData.genres || []).map(genre => genre.name);
-
-        // Extract theme names
-        const themes = (apiData.themes || []).map(theme => theme.name);
-
-        // Extract cover image (webp, regular size)
-        let coverImageUrl = '';
-        if (apiData.images && apiData.images.webp && apiData.images.webp.image_url) {
-            coverImageUrl = apiData.images.webp.image_url;
+        if (!apiData || typeof apiData.mal_id === 'undefined' || apiData.mal_id === null) {
+            console.warn("extractAnimeData: apiData or apiData.mal_id is missing/null. Cannot extract.", apiData);
+            return null;
         }
 
-        // Extract synopsis
-        const synopsisText = apiData.synopsis || 'Synopsis not available.';
+        const mal_id_parsed = parseInt(apiData.mal_id, 10);
+        if (isNaN(mal_id_parsed)) {
+            console.warn("extractAnimeData: mal_id is not a number. Cannot extract.", apiData.mal_id);
+            return null;
+        }
 
-        // Convert members to number, removing commas if present
-        const members = typeof apiData.members === 'string' 
-            ? parseInt(apiData.members.replace(/,/g, ''), 10) || 0
-            : apiData.members || 0;
+        // Filter genres and themes to ensure they are arrays of valid strings
+        const genres = (apiData.genres || [])
+            .map(genre => genre.name)
+            .filter(name => typeof name === 'string' && name.trim() !== '');
 
-        return {
-            mal_id: apiData.mal_id,
+        const themes = (apiData.themes || [])
+            .map(theme => theme.name)
+            .filter(name => typeof name === 'string' && name.trim() !== '');
+
+        const coverImageUrl = (apiData.images?.webp?.image_url) || (apiData.images?.jpg?.image_url) || '';
+
+        const parsedYear = parseInt(apiData.year, 10);
+        const yearValue = !isNaN(parsedYear) ? parsedYear : null;
+
+        const parsedMembers = parseInt(String(apiData.members).replace(/,/g, ''), 10);
+        const membersValue = !isNaN(parsedMembers) ? parsedMembers : 0;
+
+        const parsedScore = parseFloat(apiData.score);
+        const scoreValue = !isNaN(parsedScore) ? parsedScore : 0;
+
+        const parsedEpisodes = parseInt(apiData.episodes, 10);
+        const episodesValue = !isNaN(parsedEpisodes) ? parsedEpisodes : 0;
+
+        const extracted = {
+            mal_id: mal_id_parsed,
             name: apiData.title || apiData.title_english || apiData.title_japanese || 'Unknown Title',
             english_name: apiData.title_english || '',
-            season: apiData.season,
-            year: parseInt(apiData.year, 10) || 0,
-            members: members,
-            score: parseFloat(apiData.score) || 0,
-            episodes: apiData.episodes || 0,
-            genres: genres,
-            themes: themes,
-            cover: coverImageUrl,
-            synopsis: synopsisText,
-            added: false
+            season: apiData.season ? capitalizeSeason(apiData.season) : null, // capitalizeSeason returns '' if !apiData.season
+            year: yearValue,
+            members: membersValue,
+            score: scoreValue,
+            episodes: episodesValue,
+            genres: genres, 
+            themes: themes, 
+            cover: coverImageUrl, 
+            synopsis: apiData.synopsis || 'Synopsis not available.',
+            added: false 
         };
+        
+        // Safeguard: Ensure no top-level fields are undefined. This should ideally not be needed
+        // if all fields are constructed with defaults above.
+        // for (const key in extracted) {
+        //     if (extracted[key] === undefined) {
+        //         console.warn(`extractAnimeData: Safeguard - Field '${key}' was undefined for MAL ID ${mal_id_parsed}. Applying default.`);
+        //         if (key === 'year' || key === 'season') extracted[key] = null;
+        //         else if (key === 'members' || key === 'score' || key === 'episodes') extracted[key] = 0;
+        //         else if (key === 'genres' || key === 'themes') extracted[key] = [];
+        //         else if (typeof extracted[key] === 'string') extracted[key] = ''; // For potential string fields
+        //         // else, leave as is or assign a more generic null if type is unknown
+        //     }
+        // }
+        return extracted;
     };
 
     // Function to toggle anime added status
-    const toggleAnimeAdded = (index) => {
-        const listCurrentlyDisplayed = filteredList !== null ? filteredList : animeList;
-        const sortedDisplayedList = sortAnimeList(listCurrentlyDisplayed, currentSortColumn, currentSortDirection);
-        const animeToToggle = sortedDisplayedList[index];
-
-        if (!animeToToggle) {
-            console.error("Error: Could not find the anime to toggle from displayed list at index:", index);
+    const toggleAnimeAddedStatus = async (malId, updateTooltipButton = false) => {
+        if (!currentUser) return; 
+        const animeIndex = animeList.findIndex(a => a.mal_id === malId);
+        if (animeIndex === -1) {
+            console.error("Anime to toggle not found in local list:", malId);
             return;
         }
 
-        const actualIndexInMainAnimeList = animeList.findIndex(a => a.mal_id === animeToToggle.mal_id);
-
-        if (actualIndexInMainAnimeList !== -1) {
-            animeList[actualIndexInMainAnimeList].added = !animeList[actualIndexInMainAnimeList].added;
-            saveListToLocalStorage();
-
-            if (filteredList !== null) {
-                applyFilters();
-            } else {
-                renderAnimeList();
+        const animeToToggle = animeList[animeIndex];
+        const newAddedStatus = !animeToToggle.added;
+        animeToToggle.added = newAddedStatus; 
+        
+        const row = animeTableBody.querySelector(`tr[data-mal-id="${malId}"]`);
+        if (row) {
+            const toggleBtnInRow = row.querySelector('.toggle-btn');
+            if (toggleBtnInRow) {
+                toggleBtnInRow.innerHTML = newAddedStatus ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
+                toggleBtnInRow.title = newAddedStatus ? 'Mark as Not Added' : 'Mark as Added';
+                if (newAddedStatus) toggleBtnInRow.classList.add('added');
+                else toggleBtnInRow.classList.remove('added');
             }
+        }
+        
+        if (updateTooltipButton && globalTooltip.classList.contains('active')) {
+            const tooltipToggleBtn = globalTooltip.querySelector(`.tooltip-toggle-added-btn[data-mal-id="${malId}"]`);
+            if (tooltipToggleBtn) {
+                tooltipToggleBtn.innerHTML = newAddedStatus ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
+                tooltipToggleBtn.title = newAddedStatus ? 'Mark as Not Added' : 'Mark as Added';
+                if (newAddedStatus) tooltipToggleBtn.classList.add('added');
+                else tooltipToggleBtn.classList.remove('added');
+            }
+        }
+        
+        const success = await updateAnimeInFirebase(malId, { added: newAddedStatus });
+        if (!success) {
+            animeToToggle.added = !newAddedStatus; 
+            alert("Failed to update status in Firebase. Please try again.");
+            applyFilters(); 
         } else {
-            console.error("Error: Anime found in displayed list for toggle but not in main animeList. MAL_ID:", animeToToggle.mal_id);
+             if (statusFilter.value) { 
+                applyFilters();
+            }
         }
     };
 
-    // Function to add anime to the list (with duplicate check)
-    const addAnimeToList = (animeData) => {
-        if (!animeData || !animeData.mal_id) {
-            console.warn("Invalid anime data provided.");
-            return false;
+    // Function to add anime to the list (local and Firebase)
+    const addAnimeToList = async (animeDataFromExtract) => {
+        if (!currentUser) return { success: false, exists: false, message: "Not logged in." }; 
+        
+        if (!animeDataFromExtract) { // Check if extractAnimeData returned null
+            console.warn("addAnimeToList: Received null animeDataFromExtract. Cannot add.");
+            return { success: false, exists: false, message: "Invalid anime data (extraction failed)." };
+        }
+        // animeDataFromExtract is already the cleaned object
+        const animeData = animeDataFromExtract;
+
+
+        if (!animeData.mal_id || typeof animeData.mal_id !== 'number' || isNaN(animeData.mal_id)) {
+            console.warn("addAnimeToList: Invalid or missing mal_id in processed animeData.", animeData);
+            return { success: false, exists: false, message: "Invalid anime ID after processing." };
         }
 
-        // Check if anime already exists by mal_id
         const existingAnime = animeList.find(anime => anime.mal_id === animeData.mal_id);
+        if (existingAnime) {
+            return { success: false, exists: true, name: existingAnime.name, message: "Already exists." };
+        }
 
-        if (!existingAnime) {
+        const success = await addAnimeToFirebase(animeData); // animeData is now the cleaned object
+        if (success) {
             animeList.push(animeData);
-            saveListToLocalStorage();
-            renderAnimeList();
-            return true;
+            applyFilters(); 
+            return { success: true, exists: false, name: animeData.name, message: "Added." };
         } else {
-            return {
-                exists: true,
-                name: existingAnime.name
-            };
+            return { success: false, exists: false, message: "Failed to save to Firebase." };
         }
     };
 
     // --- Clear List Function ---
-    const clearList = () => {
-        if (confirm('Are you sure you want to clear the entire list? This action cannot be undone.')) {
-            animeList = [];
-            saveListToLocalStorage();
-            renderAnimeList();
+    const clearList = async () => {
+        if (!currentUser) { 
+            alert("Please log in to clear the list.");
+            return;
+        }
+        if (confirm('Are you sure you want to clear the entire list from Firebase? This action cannot be undone.')) {
+            await clearListInFirebase();
         }
     };
 
     // --- Event Handlers ---
+    loginBtn.addEventListener('click', signInWithGoogle); 
+    logoutBtn.addEventListener('click', signOutUser);
 
-    // Mode switcher event listeners
-    inputModeBtn.addEventListener('click', () => {
-        inputModeSection.classList.remove('hidden');
-        searchModeSection.classList.add('hidden');
-        inputModeBtn.classList.add('active');
-        searchModeBtn.classList.remove('active');
-        batchModeSection.classList.add('hidden');
-        batchModeBtn.classList.remove('active');
-        searchResultsDropdown.innerHTML = '';
-    });
+    inputModeBtn.addEventListener('click', () => switchMode('input'));
+    searchModeBtn.addEventListener('click', () => switchMode('search'));
+    batchModeBtn.addEventListener('click', () => switchMode('batch'));
+    hideModeBtn.addEventListener('click', () => switchMode('hidden'));
 
-    searchModeBtn.addEventListener('click', () => {
-        searchModeSection.classList.remove('hidden');
+    function switchMode(mode) {
+        if (!currentUser && mode !== 'hidden') { 
+            inputStatus.textContent = "Please log in to use this feature.";
+            return;
+        }
+
         inputModeSection.classList.add('hidden');
-        searchModeBtn.classList.add('active');
-        inputModeBtn.classList.remove('active');
+        searchModeSection.classList.add('hidden');
         batchModeSection.classList.add('hidden');
-        batchModeBtn.classList.remove('active');
-        inputStatus.textContent = '';
-    });
-    hideModeBtn.addEventListener('click', hideInputModes);
 
-    // Input Mode: Process list button
+        inputModeBtn.classList.remove('active');
+        searchModeBtn.classList.remove('active');
+        batchModeBtn.classList.remove('active');
+        hideModeBtn.classList.remove('active'); 
+
+        searchResultsDropdown.innerHTML = '';
+        inputStatus.textContent = ''; 
+
+        if (mode === 'input') {
+            inputModeSection.classList.remove('hidden');
+            inputModeBtn.classList.add('active');
+        } else if (mode === 'search') {
+            searchModeSection.classList.remove('hidden');
+            searchModeBtn.classList.add('active');
+        } else if (mode === 'batch') {
+            batchModeSection.classList.remove('hidden');
+            batchModeBtn.classList.add('active');
+        } else if (mode === 'hidden') {
+            hideModeBtn.classList.add('active');
+        }
+    }
+
     processInputBtn.addEventListener('click', async () => {
+        if (!currentUser) return; 
         const lines = animeInputList.value.split('\n').map(line => line.trim()).filter(line => line.length > 0);
         if (lines.length === 0) {
             inputStatus.textContent = 'No input lines found.';
@@ -713,74 +944,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
         inputStatus.textContent = `Processing ${lines.length} lines...`;
         processInputBtn.disabled = true;
+        let succeededCount = 0; 
 
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
             inputStatus.textContent = `Processing line ${i + 1} of ${lines.length}: "${line}"`;
-
-            let animeData = null;
+            let jikanApiData = null; // Renamed to avoid confusion with extracted data
             const malId = parseInt(line, 10);
 
             if (!isNaN(malId)) {
-                const apiData = await fetchAnimeById(malId);
-                if (apiData) {
-                    animeData = extractAnimeData(apiData);
-                } else {
-                    inputStatus.textContent += ` - ID not found.`;
-                }
+                jikanApiData = await fetchAnimeById(malId);
+                if (!jikanApiData) inputStatus.textContent += ` - ID ${malId} not found or fetch failed.`;
             } else {
                 const searchResults = await searchAnimeByName(line);
                 if (searchResults && searchResults.length > 0) {
-                    const apiData = await fetchAnimeById(searchResults[0].mal_id);
-                    if(apiData) {
-                        animeData = extractAnimeData(apiData);
+                    jikanApiData = await fetchAnimeById(searchResults[0].mal_id); 
+                    if(!jikanApiData) inputStatus.textContent += ` - Found match "${searchResults[0].title}", but couldn't fetch full data.`;
+                } else {
+                    inputStatus.textContent += ` - No search results for "${line}".`;
+                }
+            }
+
+            if (jikanApiData) {
+                const animeDataForDb = extractAnimeData(jikanApiData); // Extract and clean
+                if (animeDataForDb) { // Check if extraction was successful
+                    const result = await addAnimeToList(animeDataForDb); 
+                    if (result.success) {
+                        inputStatus.textContent += ` - Added "${animeDataForDb.name}".`;
+                        succeededCount++;
+                    } else if (result.exists) {
+                        inputStatus.textContent += ` - Skipped "${result.name}" (already exists).`;
                     } else {
-                        inputStatus.textContent += ` - Found match "${searchResults[0].title}", but could not fetch full data.`;
+                         inputStatus.textContent += ` - Failed to add "${animeDataForDb.name}". Reason: ${result.message}`;
                     }
                 } else {
-                    inputStatus.textContent += ` - No search results found.`;
+                    inputStatus.textContent += ` - Failed to process data for "${line}".`;
                 }
             }
-
-            if (animeData) {
-                const result = addAnimeToList(animeData);
-                if (result === true) {
-                    inputStatus.textContent += ` - Added "${animeData.name}".`;
-                } else if (result.exists) {
-                    inputStatus.textContent += ` - Skipped "${animeData.name}" (already exists).`;
-                }
-            }
-
-            if (i < lines.length - 1) {
-                await new Promise(resolve => setTimeout(resolve, INPUT_MODE_DELAY));
-            }
+            if (i < lines.length - 1) await new Promise(resolve => setTimeout(resolve, INPUT_MODE_DELAY));
         }
-
-        inputStatus.textContent = `Processing complete. Added ${animeList.length - (lines.length - lines.filter(line => {
-            const malId = parseInt(line, 10);
-            if (!isNaN(malId)) {
-                return animeList.some(anime => anime.mal_id === malId);
-            }
-            return false;
-        }).length)} new anime (approx).`;
+        inputStatus.textContent = `Processing complete. Successfully processed ${succeededCount} new anime.`;
         processInputBtn.disabled = false;
+        animeInputList.value = ''; 
     });
 
-    // Search Mode: Input change for dropdown
     let searchTimeout = null;
-    animeSearchInput.addEventListener('input', async () => {
+    animeSearchInput.addEventListener('input', () => {
+        if (!currentUser) return; 
         clearTimeout(searchTimeout);
-
         const query = animeSearchInput.value.trim();
         if (query.length < 3) {
             searchResultsDropdown.innerHTML = '';
             return;
         }
-
         searchTimeout = setTimeout(async () => {
             const results = await searchAnimeByName(query);
             searchResultsDropdown.innerHTML = '';
-
             if (results && results.length > 0) {
                 results.forEach(anime => {
                     const resultDiv = document.createElement('div');
@@ -789,81 +1008,93 @@ document.addEventListener('DOMContentLoaded', () => {
                     searchResultsDropdown.appendChild(resultDiv);
                 });
             } else {
-                const noResultsDiv = document.createElement('div');
-                noResultsDiv.textContent = 'No results found.';
-                searchResultsDropdown.appendChild(noResultsDiv);
+                searchResultsDropdown.innerHTML = '<div>No results found.</div>';
             }
         }, 300);
     });
 
-    // Search Mode: Dropdown item click
     searchResultsDropdown.addEventListener('click', async (event) => {
+        if (!currentUser) return; 
         const target = event.target;
         if (target.tagName === 'DIV' && target.dataset.malId) {
             const malId = parseInt(target.dataset.malId, 10);
-            const apiData = await fetchAnimeById(malId);
-            if (apiData) {
-                const animeData = extractAnimeData(apiData);
-                const result = addAnimeToList(animeData);
-                if (result === true) {
-                    // Successfully added
-                    animeSearchInput.value = '';
-                    searchResultsDropdown.innerHTML = '';
-                } else if (result.exists) {
-                    // Already exists
-                    alert(`"${animeData.name}" is already in your list.`);
+            const searchStatus = inputStatus; 
+            searchStatus.textContent = `Fetching details for ID ${malId}...`; 
+            const jikanApiData = await fetchAnimeById(malId);
+            if (jikanApiData) {
+                const animeDataForDb = extractAnimeData(jikanApiData);
+                if (animeDataForDb) {
+                    const result = await addAnimeToList(animeDataForDb); 
+                    if (result.success) {
+                        searchStatus.textContent = `Added "${animeDataForDb.name}" to your list.`;
+                        animeSearchInput.value = '';
+                        searchResultsDropdown.innerHTML = '';
+                    } else if (result.exists) {
+                        searchStatus.textContent = `"${result.name}" is already in your list.`;
+                    } else {
+                        searchStatus.textContent = `Failed to add "${animeDataForDb.name}". ${result.message}`;
+                    }
+                } else {
+                     searchStatus.textContent = `Could not process data for ID: ${malId}`;
                 }
             } else {
-                console.error(`Could not fetch full data for selected anime ID: ${malId}`);
+                searchStatus.textContent = `Could not fetch full data for ID: ${malId}`;
             }
         }
     });
 
-    // Close dropdown if clicked outside
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => { 
         if (!animeSearchInput.contains(event.target) && !searchResultsDropdown.contains(event.target)) {
             searchResultsDropdown.innerHTML = '';
         }
-    });
-
-    // Table header click for sorting
-    animeTableHead.addEventListener('click', (event) => {
-        const target = event.target;
-        if (target.tagName === 'TH') {
-            const sortBy = target.dataset.sortBy;
-            if (sortBy) {
-                if (currentSortColumn === sortBy) {
-                    currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-                } else {
-                    currentSortColumn = sortBy;
-                    currentSortDirection = 'asc';
-                }
-                renderAnimeList();
+        if (globalTooltip && globalTooltip.classList.contains('active')) {
+            const isClickInsideTooltip = globalTooltip.contains(event.target);
+            const isClickOnNameLink = event.target.classList.contains('anime-name-link') || event.target.closest('.anime-name-link');
+            if (!isClickInsideTooltip && !isClickOnNameLink) {
+                globalTooltip.classList.remove('active');
+                currentOpenAnimeLink = null;
             }
         }
     });
 
-    // Clear List button click
-    clearListBtn.addEventListener('click', clearList);
+    animeTableHead.addEventListener('click', (event) => {
+        if (!currentUser) return; 
+        const target = event.target.closest('th'); 
+        if (target && target.dataset.sortBy) {
+            const sortBy = target.dataset.sortBy;
+            if (currentSortColumn === sortBy) {
+                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortColumn = sortBy;
+                currentSortDirection = 'asc'; 
+            }
+            renderAnimeList(); 
+        }
+    });
+
+    clearListBtn.addEventListener('click', clearList); 
 
     // --- Export/Import Functions ---
     const exportList = () => {
+        if (!currentUser) { 
+            alert("Please log in to export the list.");
+            return;
+        }
         if (animeList.length === 0) {
             alert('Your list is empty. Nothing to export.');
             return;
         }
-
         const exportData = {
-            version: '1.0',
+            version: '1.4-firebase-google-auth-uid', 
             exportDate: new Date().toISOString(),
-            animeList: animeList
+            animeList: animeList,
+            userUid: currentUser ? currentUser.uid : null
         };
-
         const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `anime-list-${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `anime-list-firebase-${new Date().toISOString().split('T')[0]}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -871,61 +1102,108 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const importList = (file) => {
+        if (!db || !currentUser) {
+            alert("Please log in before importing a list.");
+            return;
+        }
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = async (event) => {
             try {
-                const importData = JSON.parse(e.target.result);
-                
-                // Validate the imported data
-                if (!importData.animeList || !Array.isArray(importData.animeList)) {
-                    throw new Error('Invalid file format: animeList array not found');
+                const importedData = JSON.parse(event.target.result);
+                if (!Array.isArray(importedData.animeList)) {
+                    throw new Error("Invalid import file format: 'animeList' array is missing or not an array.");
                 }
 
-                // Validate each anime entry
-                const validAnimeList = importData.animeList.filter(anime => {
-                    return anime && 
-                           typeof anime.mal_id === 'number' && 
-                           typeof anime.name === 'string';
-                });
-
-                if (validAnimeList.length === 0) {
-                    throw new Error('No valid anime entries found in the file');
+                // Check userUid only if it exists in the imported file
+                if (importedData.hasOwnProperty('userUid') && importedData.userUid !== currentUser.uid) {
+                    if (!confirm("This list belongs to a different user (UID mismatch). Import anyway? Your current list might be overwritten where MAL IDs match, or items will be merged.")) {
+                        return;
+                    }
                 }
 
-                // Ask for confirmation
-                if (confirm(`Found ${validAnimeList.length} valid anime entries. Import them?`)) {
-                    // Merge with existing list, avoiding duplicates
-                    const newAnimeList = [...animeList];
-                    let addedCount = 0;
+                let successCount = 0;
+                let failCount = 0;
+                const animeToImport = importedData.animeList;
+                const totalToImport = animeToImport.length;
 
-                    validAnimeList.forEach(anime => {
-                        if (!newAnimeList.some(existing => existing.mal_id === anime.mal_id)) {
-                            newAnimeList.push(anime);
-                            addedCount++;
+                if (totalToImport === 0) {
+                    emptyListMessage.textContent = "Import finished. No anime found in the file to import.";
+                    console.log("Import finished. No anime to import.");
+                    importListInput.value = ''; // Reset file input
+                    return;
+                }
+
+                emptyListMessage.textContent = `Importing anime... 0 of ${totalToImport} processed.`;
+                emptyListMessage.classList.remove('hidden');
+
+                const MAX_BATCH_SIZE = 499; // Firestore batch limit is 500 operations
+                let batch = db.batch();
+                let operationsInCurrentBatch = 0;
+
+                for (let i = 0; i < totalToImport; i++) {
+                    const anime = animeToImport[i];
+                    
+                    if (anime && typeof anime.mal_id !== 'undefined') {
+                        try {
+                            // Ensure mal_id is a string for document ID
+                            const docRef = db.collection(ANIME_COLLECTION).doc(String(anime.mal_id));
+                            batch.set(docRef, anime);
+                            operationsInCurrentBatch++;
+                            successCount++;
+
+                            if (operationsInCurrentBatch >= MAX_BATCH_SIZE) {
+                                await batch.commit();
+                                console.log(`Committed a batch of ${operationsInCurrentBatch} anime records.`);
+                                batch = db.batch(); // Start a new batch
+                                operationsInCurrentBatch = 0;
+                            }
+                        } catch (e) {
+                            console.warn("Skipping invalid anime entry during import processing (error during batch add):", anime, e);
+                            failCount++;
                         }
-                    });
+                    } else {
+                        console.warn("Skipping invalid anime entry during import (missing mal_id or invalid structure):", anime);
+                        failCount++;
+                    }
 
-                    animeList = newAnimeList;
-                    saveListToLocalStorage();
-                    renderAnimeList();
-                    alert(`Import complete. Added ${addedCount} new entries.`);
+                    if ((i + 1) % 10 === 0 || (i + 1) === totalToImport) {
+                         emptyListMessage.textContent = `Importing anime... ${i + 1} of ${totalToImport} processed. ${successCount} prepared, ${failCount} skipped.`;
+                    }
                 }
+
+                if (operationsInCurrentBatch > 0) {
+                    await batch.commit(); // Commit the final batch
+                    console.log(`Committed the final batch of ${operationsInCurrentBatch} anime records.`);
+                }
+
+                emptyListMessage.textContent = `Import finished. ${successCount} anime records processed for import. ${failCount} failed/skipped.`;
+                console.log(`Import finished. ${successCount} anime records processed for import, ${failCount} failed/skipped.`);
+                await loadListFromFirebase(); // Reload the list from Firebase
             } catch (error) {
-                alert(`Error importing file: ${error.message}`);
+                console.error("Error importing list:", error);
+                alert("Error importing list: " + error.message);
+                emptyListMessage.textContent = "Error importing list. Please check the console.";
+            } finally {
+                importListInput.value = ''; // Reset file input
             }
         };
         reader.onerror = () => {
-            alert('Error reading file');
+            alert("Error reading file.");
+            importListInput.value = ''; // Reset file input
+            emptyListMessage.textContent = "Error reading import file.";
         };
         reader.readAsText(file);
     };
 
-    // --- Event Handlers ---
     exportListBtn.addEventListener('click', exportList);
     importListInput.addEventListener('change', (e) => {
+        if (!currentUser) { 
+            alert("Please log in to import files.");
+            e.target.value = ''; 
+            return;
+        }
         if (e.target.files.length > 0) {
             importList(e.target.files[0]);
-            // Reset the input so the same file can be imported again
             e.target.value = '';
         }
     });
@@ -933,21 +1211,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Filter Functions ---
     const populateGenreFilter = () => {
         genreFilterList.innerHTML = '';
-        // Use the static list of genres
-        const sortedGenres = ALL_STATIC_GENRES; // Already sorted during definition
-
-        sortedGenres.forEach(genre => {
+        ALL_STATIC_GENRES.forEach(genre => {
             const genreItem = document.createElement('div');
             genreItem.className = `genre-filter-item ${selectedGenres.has(genre) ? 'selected' : ''} ${['Erotica', 'Ecchi', 'Hentai'].includes(genre) ? 'adult' : ''}`;
             genreItem.textContent = genre;
             genreItem.onclick = () => {
-                if (selectedGenres.has(genre)) {
-                    selectedGenres.delete(genre);
-                    genreItem.classList.remove('selected');
-                } else {
-                    selectedGenres.add(genre);
-                    genreItem.classList.add('selected');
-                }
+                if (!currentUser) return; 
+                if (selectedGenres.has(genre)) selectedGenres.delete(genre);
+                else selectedGenres.add(genre);
+                genreItem.classList.toggle('selected');
                 applyFilters();
             };
             genreFilterList.appendChild(genreItem);
@@ -956,529 +1228,394 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const populateThemeFilter = () => {
         themeFilterList.innerHTML = '';
-        const sortedThemes = ALL_STATIC_THEMES; // Already sorted
-
-        sortedThemes.forEach(theme => {
+        ALL_STATIC_THEMES.forEach(theme => {
             const themeItem = document.createElement('div');
             themeItem.className = `theme-filter-item ${selectedThemes.has(theme) ? 'selected' : ''}`;
             themeItem.textContent = theme;
             themeItem.onclick = () => {
-                if (selectedThemes.has(theme)) {
-                    selectedThemes.delete(theme);
-                    themeItem.classList.remove('selected');
-                } else {
-                    selectedThemes.add(theme);
-                    themeItem.classList.add('selected');
-                }
+                if (!currentUser) return; 
+                if (selectedThemes.has(theme)) selectedThemes.delete(theme);
+                else selectedThemes.add(theme);
+                themeItem.classList.toggle('selected');
                 applyFilters();
             };
             themeFilterList.appendChild(themeItem);
         });
     };
-
-    // Add event listener for the search input with debounce
-    const searchInput = document.getElementById('listSearchInput');
+    
     let listSearchTimeout;
-
-    searchInput.addEventListener('input', (e) => {
+    listSearchInput.addEventListener('input', (e) => {
+        if (!currentUser) return; 
         clearTimeout(listSearchTimeout);
         listSearchTimeout = setTimeout(() => {
             currentSearchTerm = e.target.value.toLowerCase().trim();
             applyFilters();
-        }, 500);
+        }, 300); 
     });
 
-    // Modify applyFilters to include search term
     const applyFilters = () => {
-        console.log('Applying filters...');
-        console.log('Current anime list:', animeList);
-        
-        // Start with the full list
-        let filteredResults = [...animeList];
+        if (!currentUser && animeList.length > 0) { 
+            filteredList = [];
+            renderAnimeList();
+            return;
+        }
+        if (!currentUser && animeList.length === 0) { 
+            renderAnimeList(); 
+            return;
+        }
 
-        // Apply search term filter if it exists
+        let filteredResults = [...animeList]; 
+
         if (currentSearchTerm) {
-            filteredResults = filteredResults.filter(anime => {
-                const nameMatch = anime.name.toLowerCase().includes(currentSearchTerm);
-                const englishNameMatch = anime.english_name && anime.english_name.toLowerCase().includes(currentSearchTerm);
-                return nameMatch || englishNameMatch;
-            });
+            filteredResults = filteredResults.filter(anime =>
+                (anime.name && anime.name.toLowerCase().includes(currentSearchTerm)) ||
+                (anime.english_name && anime.english_name.toLowerCase().includes(currentSearchTerm))
+            );
         }
         
-        // Check if any other filters are active
-        const hasActiveFilters = minScore.value || maxScore.value || minMembers.value || maxMembers.value || 
-            minEpisodesFilter.value || maxEpisodesFilter.value ||
-            yearFilter.value || seasonFilter.value || statusFilter.value || 
-            selectedGenres.size > 0 || selectedThemes.size > 0;
-        
-        if (hasActiveFilters) {
-            filteredResults = filteredResults.filter(anime => {
-                console.log('\nChecking anime:', anime.name);
-                
-                // Score filter
-                const minScoreValue = parseFloat(minScore.value);
-                const maxScoreValue = parseFloat(maxScore.value);
-                if (!isNaN(minScoreValue) && anime.score < minScoreValue) {
-                    console.log('Filtered by min score:', anime.score, '<', minScoreValue);
-                    return false;
-                }
-                if (!isNaN(maxScoreValue) && anime.score > maxScoreValue) {
-                    console.log('Filtered by max score:', anime.score, '>', maxScoreValue);
-                    return false;
-                }
+        const minScoreVal = parseFloat(minScore.value);
+        const maxScoreVal = parseFloat(maxScore.value);
+        const minMembersVal = parseInt(minMembers.value);
+        const maxMembersVal = parseInt(maxMembers.value);
+        const minEpisodesVal = parseInt(minEpisodesFilter.value);
+        const maxEpisodesVal = parseInt(maxEpisodesFilter.value);
+        const yearVal = parseInt(yearFilter.value);
+        const seasonVal = seasonFilter.value ? seasonFilter.value.toLowerCase() : "";
+        const statusVal = statusFilter.value;
 
-                // Members filter
-                const minMembersValue = parseInt(minMembers.value);
-                const maxMembersValue = parseInt(maxMembers.value);
-                if (!isNaN(minMembersValue) && anime.members < minMembersValue) {
-                    console.log('Filtered by min members:', anime.members, '<', minMembersValue);
-                    return false;
-                }
-                if (!isNaN(maxMembersValue) && anime.members > maxMembersValue) {
-                    console.log('Filtered by max members:', anime.members, '>', maxMembersValue);
-                    return false;
-                }
+        filteredResults = filteredResults.filter(anime => {
+            if (!isNaN(minScoreVal) && anime.score < minScoreVal) return false;
+            if (!isNaN(maxScoreVal) && anime.score > maxScoreVal) return false;
+            if (!isNaN(minMembersVal) && anime.members < minMembersVal) return false;
+            if (!isNaN(maxMembersVal) && anime.members > maxMembersVal) return false;
+            if (!isNaN(minEpisodesVal) && anime.episodes < minEpisodesVal) return false;
+            if (!isNaN(maxEpisodesVal) && anime.episodes > maxEpisodesVal) return false;
+            if (!isNaN(yearVal) && anime.year !== yearVal) return false;
+            if (seasonVal && (anime.season || '').toLowerCase() !== seasonVal) return false;
+            
+            if (statusVal === 'added' && !anime.added) return false;
+            if (statusVal === 'not-added' && anime.added) return false;
 
-                // Episodes filter
-                const minEpisodesValue = parseInt(minEpisodesFilter.value);
-                const maxEpisodesValue = parseInt(maxEpisodesFilter.value);
-                if (!isNaN(minEpisodesValue) && anime.episodes < minEpisodesValue) {
-                    console.log('Filtered by min episodes:', anime.episodes, '<', minEpisodesValue);
-                    return false;
-                }
-                if (!isNaN(maxEpisodesValue) && anime.episodes > maxEpisodesValue) {
-                    console.log('Filtered by max episodes:', anime.episodes, '>', maxEpisodesValue);
-                    return false;
-                }
-
-                // Year filter
-                const yearValue = parseInt(yearFilter.value);
-                if (!isNaN(yearValue) && anime.year !== yearValue) {
-                    console.log('Filtered by year:', anime.year, '!==', yearValue);
-                    return false;
-                }
-
-                // Season filter
-                if (seasonFilter.value) {
-                    const animeSeason = (anime.season || '').toLowerCase();
-                    const filterSeason = seasonFilter.value.toLowerCase();
-                    if (animeSeason !== filterSeason) {
-                        console.log('Filtered by season:', animeSeason, '!==', filterSeason);
-                        return false;
-                    }
-                }
-
-                // Genre filter
-                if (selectedGenres.size > 0) {
-                    if (genreFilterMode === 'inclusive') {
-                        if (!anime.genres || !anime.genres.some(genre => selectedGenres.has(genre))) {
-                            console.log('Filtered by inclusive genres - anime does not have any selected genre');
-                            return false;
-                        }
-                    } else if (genreFilterMode === 'all_selected') {
-                        if (!anime.genres || !Array.from(selectedGenres).every(selGenre => anime.genres.includes(selGenre))) {
-                            console.log('Filtered by exclusive/all_selected genres - anime does not have all selected genres');
-                            return false;
-                        }
-                    } else if (genreFilterMode === 'none_selected') {
-                        if (anime.genres && anime.genres.some(genre => selectedGenres.has(genre))) {
-                            console.log('Filtered by none_selected (exclude) genres - anime has one or more of the selected genres');
-                            return false;
-                        }
-                    }
-                }
-
-                // Theme filter
-                if (selectedThemes.size > 0) {
-                    if (themeFilterMode === 'inclusive') {
-                        if (!anime.themes || !anime.themes.some(theme => selectedThemes.has(theme))) {
-                            console.log('Filtered by inclusive themes - anime does not have any selected theme');
-                            return false;
-                        }
-                    } else if (themeFilterMode === 'all_selected') {
-                        if (!anime.themes || !Array.from(selectedThemes).every(selTheme => anime.themes.includes(selTheme))) {
-                            console.log('Filtered by all_selected themes - anime does not have all selected themes');
-                            return false;
-                        }
-                    } else if (themeFilterMode === 'none_selected') {
-                        if (anime.themes && anime.themes.some(theme => selectedThemes.has(theme))) {
-                            console.log('Filtered by none_selected (exclude) themes - anime has one or more of the selected themes');
-                            return false;
-                        }
-                    }
-                }
-
-                // Status filter
-                if (statusFilter.value) {
-                    if (statusFilter.value === 'added' && !anime.added) {
-                        console.log('Filtered by status: not added');
-                        return false;
-                    }
-                    if (statusFilter.value === 'not-added' && anime.added) {
-                        console.log('Filtered by status: added');
-                        return false;
-                    }
-                }
-
-                console.log('Anime passed all filters');
-                return true;
-            });
-        }
+            if (selectedGenres.size > 0) {
+                const animeGenres = new Set(anime.genres || []);
+                if (genreFilterMode === 'inclusive' && !Array.from(selectedGenres).some(sg => animeGenres.has(sg))) return false;
+                if (genreFilterMode === 'all_selected' && !Array.from(selectedGenres).every(sg => animeGenres.has(sg))) return false;
+                if (genreFilterMode === 'none_selected' && Array.from(selectedGenres).some(sg => animeGenres.has(sg))) return false;
+            }
+            if (selectedThemes.size > 0) {
+                const animeThemes = new Set(anime.themes || []);
+                if (themeFilterMode === 'inclusive' && !Array.from(selectedThemes).some(st => animeThemes.has(st))) return false;
+                if (themeFilterMode === 'all_selected' && !Array.from(selectedThemes).every(st => animeThemes.has(st))) return false;
+                if (themeFilterMode === 'none_selected' && Array.from(selectedThemes).some(st => animeThemes.has(st))) return false;
+            }
+            return true;
+        });
 
         filteredList = filteredResults;
         renderAnimeList();
     };
 
-    // Add event listeners for all filter inputs to trigger applyFilters
-    const filterInputs = [
-        minScore, maxScore, minMembers, maxMembers,
-        minEpisodesFilter, maxEpisodesFilter,
-        yearFilter, seasonFilter, statusFilter
-    ];
-
+    const filterInputs = [minScore, maxScore, minMembers, maxMembers, minEpisodesFilter, maxEpisodesFilter, yearFilter, seasonFilter, statusFilter];
     filterInputs.forEach(input => {
-        input.addEventListener('input', applyFilters);
+        input.addEventListener('input', () => {
+            if (!currentUser) return; applyFilters();
+        });
     });
-
-    // Add event listeners for genre and theme filter modes
     document.querySelectorAll('input[name="genreFilterMode"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            genreFilterMode = e.target.value;
-            applyFilters();
+        radio.addEventListener('change', (e) => { 
+            if (!currentUser) return; genreFilterMode = e.target.value; applyFilters(); 
         });
     });
-
     document.querySelectorAll('input[name="themeFilterMode"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            themeFilterMode = e.target.value;
-            applyFilters();
+        radio.addEventListener('change', (e) => { 
+            if (!currentUser) return; themeFilterMode = e.target.value; applyFilters(); 
         });
     });
 
-    // Remove the Apply Filters button from the HTML
-    applyFiltersBtn.style.display = 'none';
-
-    // Modify resetFilters to also clear the search
     const resetFilters = () => {
-        minScore.value = '';
-        maxScore.value = '';
-        minMembers.value = '';
-        maxMembers.value = '';
-        minEpisodesFilter.value = '';
-        maxEpisodesFilter.value = '';
-        yearFilter.value = '';
-        seasonFilter.value = '';
-        statusFilter.value = '';
+        if (!currentUser) return; 
+        filterInputs.forEach(input => input.value = ''); 
+        seasonFilter.value = ''; 
+        statusFilter.value = ''; 
         selectedGenres.clear();
         genreFilterMode = 'inclusive';
         document.querySelector('input[name="genreFilterMode"][value="inclusive"]').checked = true;
-        populateGenreFilter();
+        populateGenreFilter(); 
 
         selectedThemes.clear();
         themeFilterMode = 'inclusive';
         document.querySelector('input[name="themeFilterMode"][value="inclusive"]').checked = true;
-        populateThemeFilter();
+        populateThemeFilter(); 
 
-        // Clear search
-        searchInput.value = '';
+        listSearchInput.value = '';
         currentSearchTerm = '';
 
-        filteredList = null;
-        renderAnimeList();
+        filteredList = null; 
+        applyFilters(); 
     };
-
-    // Add event listener for reset filters button
     resetFiltersBtn.addEventListener('click', resetFilters);
 
-    // --- Batch Mode Elements ---
-    batchModeBtn.addEventListener('click', () => {
-        batchModeSection.classList.remove('hidden');
-        inputModeSection.classList.add('hidden');
-        searchModeSection.classList.add('hidden');
-        batchModeBtn.classList.add('active');
-        inputModeBtn.classList.remove('active');
-        searchModeBtn.classList.remove('active');
-        inputStatus.textContent = '';
-        searchResultsDropdown.innerHTML = '';
-    });
-
     // --- Batch Mode Logic ---
-    const SEASONS = ['Winter', 'Spring', 'Summer', 'Fall'];
+    const SEASONS_ORDER = ['Winter', 'Spring', 'Summer', 'Fall']; 
     function getSeasonInterval(startSeason, startYear, endSeason, endYear) {
         const result = [];
-        let year = startYear;
-        let seasonIdx = SEASONS.indexOf(startSeason);
-        const endIdx = SEASONS.indexOf(endSeason);
-        while (year < endYear || (year === endYear && seasonIdx <= endIdx)) {
-            result.push({ season: SEASONS[seasonIdx], year });
-            if (seasonIdx === 3) {
-                seasonIdx = 0;
-                year++;
-            } else {
-                seasonIdx++;
+        let currentYear = startYear;
+        let currentSeasonIndex = SEASONS_ORDER.indexOf(capitalizeSeason(startSeason));
+        const endTargetYear = endYear;
+        const endTargetSeasonIndex = SEASONS_ORDER.indexOf(capitalizeSeason(endSeason));
+
+        while (currentYear < endTargetYear || (currentYear === endTargetYear && currentSeasonIndex <= endTargetSeasonIndex)) {
+            result.push({ season: SEASONS_ORDER[currentSeasonIndex], year: currentYear });
+            currentSeasonIndex++;
+            if (currentSeasonIndex >= SEASONS_ORDER.length) {
+                currentSeasonIndex = 0;
+                currentYear++;
             }
         }
         return result;
     }
 
     async function fetchBatchAnime() {
-        const startSeason = batchStartSeason.value;
-        const startYear = parseInt(batchStartYear.value);
-        const endSeason = batchEndSeason.value;
-        const endYear = parseInt(batchEndYear.value);
-        const minMembersValue = 10000; // This is the fixed minimum members value
+        if (!currentUser) { 
+            batchStatus.textContent = "Please log in to use batch fetch.";
+            return;
+        }
+        const startS = batchStartSeason.value;
+        const startY = parseInt(batchStartYear.value);
+        const endS = batchEndSeason.value;
+        const endY = parseInt(batchEndYear.value);
+        const userFinalPage = parseInt(finalPage.value) || Infinity;
+        const minMembersValue = 10000; // Hardcoded minimum members filter for batch mode
 
-        if (!startSeason || isNaN(startYear) || !endSeason || isNaN(endYear)) {
-            batchStatus.textContent = 'Please select valid start and end seasons/years.';
+        if (!startS || isNaN(startY) || !endS || isNaN(endY) || startY > endY || (startY === endY && SEASONS_ORDER.indexOf(capitalizeSeason(startS)) > SEASONS_ORDER.indexOf(capitalizeSeason(endS)))) {
+            batchStatus.textContent = 'Please select a valid start and end season/year range.';
             return;
         }
 
         batchStatus.textContent = 'Preparing batch fetch...';
         batchFetchBtn.disabled = true;
-        let addedCount = 0;
-        let checkedCount = 0;
-        const interval = getSeasonInterval(startSeason, startYear, endSeason, endYear);
+        let totalAddedCount = 0;
+        let totalCheckedCount = 0;
+        let totalSkippedLowMembers = 0;
+        const interval = getSeasonInterval(startS, startY, endS, endY);
+
+        const MAX_FIRESTORE_BATCH_SIZE = 499; // Firestore batch limit
+        let firestoreBatch = db.batch();
+        let operationsInCurrentFirestoreBatch = 0;
 
         for (let i = 0; i < interval.length; i++) {
             const { season, year } = interval[i];
             let page = 1;
             let seasonFetchingActive = true;
+            // seasonAddedCount can be useful if we decide to commit per season, but not strictly needed for now
+            // let seasonAddedCount = 0; 
 
-            while (seasonFetchingActive) {
-                batchStatus.textContent = `Fetching ${season} ${year}, page ${page}... (added: ${addedCount}, checked: ${checkedCount})`;
+            while (seasonFetchingActive && page <= userFinalPage) {
+                batchStatus.textContent = `Fetching ${season} ${year}, P${page} (Added: ${totalAddedCount}, Chk: ${totalCheckedCount}, Skip: ${totalSkippedLowMembers})`;
                 try {
                     const apiUrl = `${JIKAN_API_BASE_URL}/seasons/${year}/${season.toLowerCase()}?page=${page}`;
                     const resp = await fetch(apiUrl);
 
                     if (!resp.ok) {
-                        batchStatus.textContent = `Error fetching ${season} ${year} page ${page}: ${resp.status}. Skipping to next season/year or ending.`;
-                        await new Promise(r => setTimeout(r, 2500));
-                        seasonFetchingActive = false;
+                        batchStatus.textContent = `Error ${season} ${year} P${page}: ${resp.status}. Skipping season.`;
+                        await new Promise(r => setTimeout(r, INPUT_MODE_DELAY)); 
+                        seasonFetchingActive = false; 
                         continue;
                     }
-
                     const data = await resp.json();
 
                     if (data.data && Array.isArray(data.data) && data.data.length > 0) {
                         let allOnPageBelowThreshold = true;
 
                         for (const animeEntry of data.data) {
-                            checkedCount++;
+                            totalCheckedCount++;
                             const animeMembers = typeof animeEntry.members === 'string' 
                                 ? parseInt(animeEntry.members.replace(/,/g, ''), 10) 
                                 : (animeEntry.members || 0);
 
-                            // The 10k member filter is always active in batch mode
                             if (animeMembers >= minMembersValue) {
-                                allOnPageBelowThreshold = false; // Found at least one qualifying anime on this page
-                                if (!animeList.some(a => a.mal_id === animeEntry.mal_id)) {
-                                    const animeData = extractAnimeData(animeEntry);
-                                    if (!animeData.season) animeData.season = season.toLowerCase();
-                                    if (!animeData.year) animeData.year = year;
-                                    animeList.push(animeData);
-                                    addedCount++;
+                                allOnPageBelowThreshold = false; 
+                                const extracted = extractAnimeData(animeEntry);
+                                
+                                // Check if anime already exists in the main animeList (loaded from Firebase)
+                                if (extracted && !animeList.some(a => a.mal_id === extracted.mal_id)) {
+                                    if (!extracted.season) extracted.season = capitalizeSeason(season);
+                                    if (!extracted.year) extracted.year = year;
+
+                                    const docRef = db.collection(ANIME_COLLECTION).doc(String(extracted.mal_id));
+                                    firestoreBatch.set(docRef, extracted);
+                                    operationsInCurrentFirestoreBatch++;
+                                    
+                                    // Temporarily add to a separate list for this batch session or rely on reload
+                                    // For simplicity, we'll assume loadListFromFirebase() after batch is enough
+                                    // or we can push to animeList and accept it's only fully synced after batch.
+                                    // For the check `!animeList.some`, the current animeList (from initial load) is used.
+                                    // To avoid re-adding in same batch session, we could use a temporary set for this session.
+
+                                    totalAddedCount++;
+                                    // seasonAddedCount++;
+
+                                    if (operationsInCurrentFirestoreBatch >= MAX_FIRESTORE_BATCH_SIZE) {
+                                        await firestoreBatch.commit();
+                                        console.log(`Committed a Firestore batch of ${operationsInCurrentFirestoreBatch} records (batch fetch).`);
+                                        firestoreBatch = db.batch(); 
+                                        operationsInCurrentFirestoreBatch = 0;
+                                    }
                                 }
+                            } else {
+                                totalSkippedLowMembers++;
                             }
-                            // If animeMembers < minMembersValue, it's skipped. 
-                            // allOnPageBelowThreshold remains true IF AND ONLY IF all entries so far (on this page) are < minMembersValue.
                         }
-                        saveListToLocalStorage();
-                        renderAnimeList(); // Or applyFilters() if search/filters should persist during batch
-
-                        let hasNextPageAccordingToAPI = data.pagination && data.pagination.has_next_page;
-
-                        // Stop fetching for this season IF all anime on the current page were below the threshold
-                        if (allOnPageBelowThreshold) { 
-                            batchStatus.textContent = `Stopping ${season} ${year} after page ${page}: all on page below ${minMembersValue} members.`;
+                        
+                        if (allOnPageBelowThreshold && page > 1) { 
+                            batchStatus.textContent = `Stopping ${season} ${year} after P${page}: all on page < ${minMembersValue} members.`;
                             seasonFetchingActive = false;
-                        } else if (!hasNextPageAccordingToAPI) {
-                            seasonFetchingActive = false; // API says no more pages
+                        } else if (!data.pagination || !data.pagination.has_next_page) {
+                            seasonFetchingActive = false; 
                         } else {
                             page++;
-                            await new Promise(r => setTimeout(r, 2500));
+                            await new Promise(r => setTimeout(r, INPUT_MODE_DELAY)); 
                         }
                     } else {
-                        seasonFetchingActive = false;
+                        seasonFetchingActive = false; 
                     }
                 } catch (e) {
-                    batchStatus.textContent = `Error processing ${season} ${year} page ${page}: ${e.message}. Skipping to next season/year.`;
-                    seasonFetchingActive = false;
+                    batchStatus.textContent = `Error ${season} ${year} P${page}: ${e.message}. Skipping season.`;
+                    seasonFetchingActive = false; 
+                    await new Promise(r => setTimeout(r, INPUT_MODE_DELAY));
                 }
             }
         }
 
-        batchStatus.textContent = `Batch complete! Added ${addedCount} new anime (checked ${checkedCount}).`;
+        if (operationsInCurrentFirestoreBatch > 0) {
+            await firestoreBatch.commit(); 
+            console.log(`Committed final Firestore batch of ${operationsInCurrentFirestoreBatch} records (batch fetch).`);
+        }
+        
+        await loadListFromFirebase(); // Reload the list to include all newly added items
+        batchStatus.textContent = `Batch complete! Added: ${totalAddedCount} (Checked: ${totalCheckedCount}, Skipped Low Members: ${totalSkippedLowMembers}). List reloaded.`;
         batchFetchBtn.disabled = false;
     }
-
     batchFetchBtn.addEventListener('click', fetchBatchAnime);
-    
-    function hideInputModes(){
-        inputModeSection.classList.add('hidden');
-        searchModeSection.classList.add('hidden');
-        inputModeBtn.classList.remove('active');
-        searchModeBtn.classList.remove('active');
-        batchModeSection.classList.add('hidden');
-        batchModeBtn.classList.remove('active');
-        searchResultsDropdown.innerHTML = '';
-    }
 
-    // NAVIGATION
-    const navigateToNextYear = () => {
-        if(yearFilter.value){
-            seasonFilter.value = "";
-            yearFilter.value = parseInt(yearFilter.value) + 1
-        }else{
-            return;
+    // --- Navigation for Filters ---
+    const navigateYear = (increment) => {
+        if (!currentUser) return;
+        if (yearFilter.value) {
+            seasonFilter.value = ""; 
+            yearFilter.value = parseInt(yearFilter.value) + increment;
+            applyFilters();
+        } else {
+            const currentYearVal = new Date().getFullYear(); 
+            yearFilter.value = currentYearVal + increment;
+            applyFilters();
         }
+    };
+    const navigateSeason = (increment) => {
+        if (!currentUser) return;
+        let currentYearVal = yearFilter.value ? parseInt(yearFilter.value) : new Date().getFullYear(); 
+        let currentSeason = seasonFilter.value;
+        let seasonIndex = currentSeason ? SEASONS_ORDER.indexOf(capitalizeSeason(currentSeason)) : -1;
+
+        seasonIndex += increment;
+
+        if (seasonIndex >= SEASONS_ORDER.length) {
+            seasonIndex = 0;
+            currentYearVal++; 
+        } else if (seasonIndex < 0) {
+            seasonIndex = SEASONS_ORDER.length - 1;
+            currentYearVal--; 
+        }
+        yearFilter.value = currentYearVal; 
+        seasonFilter.value = SEASONS_ORDER[seasonIndex];
         applyFilters();
-    }
-    
-    const navigateToPreviousYear= () => {
-        if(yearFilter.value){
-            seasonFilter.value = "";
-            yearFilter.value = parseInt(yearFilter.value) - 1;
-        }else{
-            return;
-        }
-        applyFilters();
-    }
-    
-    const navigateToNextSeason = () => {
-        console.log('nextSeason');
-        if(!yearFilter.value){
-            yearFilter.value = 2025;
-        }
-        if(seasonFilter.value === ""){
-            seasonFilter.value = "Winter";
-        }else if(seasonFilter.value === "Winter"){
-            seasonFilter.value = "Spring";
-        }else if(seasonFilter.value === "Spring"){
-            seasonFilter.value = "Summer";
-        }else if(seasonFilter.value === "Summer"){
-            seasonFilter.value = "Fall";
-        }else{
-            seasonFilter.value = "Winter";
-            yearFilter.value = parseInt(yearFilter.value) + 1;
-        }
-        applyFilters();
-    }
-    const navigateToPreviousSeason = () => {
-        if(!yearFilter.value){
-            yearFilter.value = 2025;
-        }
-        if(seasonFilter.value === ""){
-            seasonFilter.value = "Winter";
-        }else if(seasonFilter.value === "Winter"){
-            yearFilter.value = parseInt(yearFilter.value) - 1;
-            seasonFilter.value = "Fall";
-        }else if(seasonFilter.value === "Fall"){
-            seasonFilter.value = "Summer";
-        }else if(seasonFilter.value === "Summer"){
-            seasonFilter.value = "Spring";
-        }else{
-            seasonFilter.value = "Winter";
-        }
-        applyFilters();
-    }
-    previousYearBtn.addEventListener('click', navigateToPreviousYear);
-    nextYearBtn.addEventListener('click', navigateToNextYear);
-    previousSeasonBtn.addEventListener('click', navigateToPreviousSeason);
-    nextSeasonBtn.addEventListener('click', navigateToNextSeason);
+    };
+
+    previousYearBtn.addEventListener('click', () => navigateYear(-1));
+    nextYearBtn.addEventListener('click', () => navigateYear(1));
+    previousSeasonBtn.addEventListener('click', () => navigateSeason(-1));
+    nextSeasonBtn.addEventListener('click', () => navigateSeason(1));
 
     // Preset Filter Button Logic
     document.querySelectorAll('.preset-btn').forEach(button => {
         button.addEventListener('click', () => {
+            if (!currentUser) return;
             const minMembersVal = button.dataset.minMembers;
             const maxMembersVal = button.dataset.maxMembers;
             const minScoreVal = button.dataset.minScore;
             const maxScoreVal = button.dataset.maxScore;
 
-            if (minMembersVal !== undefined && maxMembersVal !== undefined) {
-                minMembers.value = minMembersVal;
-                maxMembers.value = maxMembersVal;
-            }
-
-            if (minScoreVal !== undefined && maxScoreVal !== undefined) {
-                minScore.value = minScoreVal;
-                maxScore.value = maxScoreVal;
-            }
+            if (minMembersVal !== undefined) minMembers.value = minMembersVal;
+            if (maxMembersVal !== undefined) maxMembers.value = maxMembersVal;
+            if (minScoreVal !== undefined) minScore.value = minScoreVal;
+            if (maxScoreVal !== undefined) maxScore.value = maxScoreVal;
             
             applyFilters();
         });
     });
-
-    // --- Initialization ---
-    loadListFromLocalStorage();
-    hideInputModes();
-
-    // Global click listener to close the info window when clicking outside
-    document.addEventListener('click', (event) => {
-        if (globalTooltip && globalTooltip.classList.contains('active')) {
-            const isClickInsideTooltip = globalTooltip.contains(event.target);
-            const isClickOnNameLink = event.target.classList.contains('anime-name-link') || event.target.closest('.anime-name-link');
-
-            if (!isClickInsideTooltip && !isClickOnNameLink) {
-                globalTooltip.classList.remove('active');
-                currentOpenAnimeLink = null;
-            }
-        }
-    });
-
-    // Initialize the list
-    loadListFromLocalStorage();
-    renderAnimeList();
-
-    // Add event listener for the clear list button
-    clearListBtn.addEventListener('click', clearList);
-
-    // Add event listener for the export list button
-    exportListBtn.addEventListener('click', exportList);
-
-    // Add event listener for the import list input
-    importListInput.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            importList(e.target.files[0]);
-            // Reset the input so the same file can be imported again
-            e.target.value = '';
-        }
-    });
-
+    
     // --- Fallback Copy Function ---
-    function fallbackCopyTextToClipboard(text, buttonElement) {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-
-        // Styling to make textarea non-intrusive
-        textArea.style.top = "0";
-        textArea.style.left = "0";
-        textArea.style.position = "fixed";
-        textArea.style.opacity = "0"; // Make it invisible
-
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-
-        try {
-            const successful = document.execCommand('copy');
-            if (successful) {
+    function copyTitleToClipboard(text, buttonElement) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
                 const originalText = buttonElement.textContent;
-                buttonElement.textContent = 'Copied!'; // Keep feedback consistent
+                buttonElement.textContent = 'Copied!';
                 buttonElement.disabled = true;
                 setTimeout(() => {
                     buttonElement.textContent = originalText;
                     buttonElement.disabled = false;
                 }, 1500);
+            }).catch(err => {
+                console.error('Async: Could not copy text: ', err);
+                fallbackCopyTextToClipboard(text, buttonElement); 
+            });
+        } else {
+            fallbackCopyTextToClipboard(text, buttonElement); 
+        }
+    }
+
+    function fallbackCopyTextToClipboard(text, buttonElement) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed"; 
+        textArea.style.top = "0"; textArea.style.left = "0"; textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus(); textArea.select();
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                const originalText = buttonElement.textContent;
+                buttonElement.textContent = 'Copied!'; buttonElement.disabled = true;
+                setTimeout(() => { buttonElement.textContent = originalText; buttonElement.disabled = false; }, 1500);
             } else {
-                console.error('Fallback copy: document.execCommand failed');
-                alert('Failed to copy title using fallback. Please try manually.');
+                alert('Fallback: Failed to copy title.');
             }
         } catch (err) {
-            console.error('Fallback copy error:', err);
-            alert('Failed to copy title using fallback. Please try manually.');
+            alert('Fallback: Error copying title.');
         }
         document.body.removeChild(textArea);
     }
-});
 
+    // --- Initialization ---
+    async function initializeApp() {
+        if (!db || !auth) { 
+            console.warn("DB or Auth not available, app initialization incomplete.");
+            authStatusSpan.textContent = 'Firebase connection error.';
+            emptyListMessage.textContent = 'Firebase connection error. Data cannot be loaded.';
+            emptyListMessage.classList.remove('hidden');
+            enableAppFeatures(false); 
+            return;
+        }
+        
+        switchMode('hidden'); 
+        populateGenreFilter(); 
+        populateThemeFilter();
+        enableAppFeatures(false); 
+        authStatusSpan.textContent = "Checking login status...";
+        emptyListMessage.textContent = 'Checking login status...';
+        emptyListMessage.classList.remove('hidden');
+    }
+
+    initializeApp();
+});
 
