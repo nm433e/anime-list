@@ -955,6 +955,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     selectedGenres.add(genre);
                     genreItem.classList.add('selected');
                 }
+                applyFilters();
             };
             genreFilterList.appendChild(genreItem);
         });
@@ -976,23 +977,52 @@ document.addEventListener('DOMContentLoaded', () => {
                     selectedThemes.add(theme);
                     themeItem.classList.add('selected');
                 }
+                applyFilters();
             };
             themeFilterList.appendChild(themeItem);
         });
     };
 
+    // Add a variable to store the current search term
+    let currentSearchTerm = '';
+
+    // Add event listener for the search input with debounce
+    const searchInput = document.getElementById('listSearchInput');
+    let listSearchTimeout;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(listSearchTimeout);
+        listSearchTimeout = setTimeout(() => {
+            currentSearchTerm = e.target.value.toLowerCase().trim();
+            applyFilters();
+        }, 500);
+    });
+
+    // Modify applyFilters to include search term
     const applyFilters = () => {
         console.log('Applying filters...');
         console.log('Current anime list:', animeList);
         
-        // Check if any filters are active
+        // Start with the full list
+        let filteredResults = [...animeList];
+
+        // Apply search term filter if it exists
+        if (currentSearchTerm) {
+            filteredResults = filteredResults.filter(anime => {
+                const nameMatch = anime.name.toLowerCase().includes(currentSearchTerm);
+                const englishNameMatch = anime.english_name && anime.english_name.toLowerCase().includes(currentSearchTerm);
+                return nameMatch || englishNameMatch;
+            });
+        }
+        
+        // Check if any other filters are active
         const hasActiveFilters = minScore.value || maxScore.value || minMembers.value || maxMembers.value || 
             minEpisodesFilter.value || maxEpisodesFilter.value ||
             yearFilter.value || seasonFilter.value || statusFilter.value || 
             selectedGenres.size > 0 || selectedThemes.size > 0;
         
         if (hasActiveFilters) {
-            filteredList = animeList.filter(anime => {
+            filteredResults = filteredResults.filter(anime => {
                 console.log('\nChecking anime:', anime.name);
                 
                 // Score filter
@@ -1010,11 +1040,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Members filter
                 const minMembersValue = parseInt(minMembers.value);
                 const maxMembersValue = parseInt(maxMembers.value);
-                console.log('Members check:', {
-                    animeMembers: anime.members,
-                    minMembersValue,
-                    maxMembersValue
-                });
                 if (!isNaN(minMembersValue) && anime.members < minMembersValue) {
                     console.log('Filtered by min members:', anime.members, '<', minMembersValue);
                     return false;
@@ -1024,38 +1049,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     return false;
                 }
 
-                // Min Episodes filter
+                // Episodes filter
                 const minEpisodesValue = parseInt(minEpisodesFilter.value);
-                if(anime.episodes === "?	"){
+                const maxEpisodesValue = parseInt(maxEpisodesFilter.value);
+                if (!isNaN(minEpisodesValue) && anime.episodes < minEpisodesValue) {
+                    console.log('Filtered by min episodes:', anime.episodes, '<', minEpisodesValue);
                     return false;
                 }
-                if (!isNaN(minEpisodesValue) && minEpisodesValue > 0) {
-                    // Ensure anime.episodes is a number; treat 0 or non-numeric as not meeting criteria if minEpisodesValue > 0
-                    const animeEpisodes = typeof anime.episodes === 'number' ? anime.episodes : 0;
-                    if (animeEpisodes < minEpisodesValue) {
-                        console.log('Filtered by min episodes:', animeEpisodes, '<', minEpisodesValue);
-                        return false;
-                    }
-                }
-
-                // Max Episodes filter
-                const maxEpisodesValue = parseInt(maxEpisodesFilter.value);
-                if (!isNaN(maxEpisodesValue) && maxEpisodesValue > 0) { // Only filter if a positive value is set
-                    const animeEpisodes = typeof anime.episodes === 'number' ? anime.episodes : 0;
-                    // If animeEpisodes is 0 (e.g. movie or unknown), it should pass unless maxEpisodesValue is also 0 (which we ignore due to >0 check)
-                    // If animeEpisodes is a positive number, it must be <= maxEpisodesValue
-                    if (animeEpisodes > 0 && animeEpisodes > maxEpisodesValue) {
-                        console.log('Filtered by max episodes:', animeEpisodes, '>', maxEpisodesValue);
-                        return false;
-                    }
+                if (!isNaN(maxEpisodesValue) && anime.episodes > maxEpisodesValue) {
+                    console.log('Filtered by max episodes:', anime.episodes, '>', maxEpisodesValue);
+                    return false;
                 }
 
                 // Year filter
                 const yearValue = parseInt(yearFilter.value);
-                console.log('Year check:', {
-                    animeYear: anime.year,
-                    yearValue
-                });
                 if (!isNaN(yearValue) && anime.year !== yearValue) {
                     console.log('Filtered by year:', anime.year, '!==', yearValue);
                     return false;
@@ -1065,10 +1072,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (seasonFilter.value) {
                     const animeSeason = (anime.season || '').toLowerCase();
                     const filterSeason = seasonFilter.value.toLowerCase();
-                    console.log('Season check:', {
-                        animeSeason,
-                        filterSeason
-                    });
                     if (animeSeason !== filterSeason) {
                         console.log('Filtered by season:', animeSeason, '!==', filterSeason);
                         return false;
@@ -1077,22 +1080,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Genre filter
                 if (selectedGenres.size > 0) {
-                    console.log('Genre check:', {
-                        animeGenres: anime.genres,
-                        selectedGenres: Array.from(selectedGenres),
-                        mode: genreFilterMode
-                    });
                     if (genreFilterMode === 'inclusive') {
                         if (!anime.genres || !anime.genres.some(genre => selectedGenres.has(genre))) {
                             console.log('Filtered by inclusive genres - anime does not have any selected genre');
                             return false;
                         }
-                    } else if (genreFilterMode === 'all_selected') { // Anime must have ALL selected genres
+                    } else if (genreFilterMode === 'all_selected') {
                         if (!anime.genres || !Array.from(selectedGenres).every(selGenre => anime.genres.includes(selGenre))) {
                             console.log('Filtered by exclusive/all_selected genres - anime does not have all selected genres');
                             return false;
                         }
-                    } else if (genreFilterMode === 'none_selected') { // Anime must have NONE of the selected genres
+                    } else if (genreFilterMode === 'none_selected') {
                         if (anime.genres && anime.genres.some(genre => selectedGenres.has(genre))) {
                             console.log('Filtered by none_selected (exclude) genres - anime has one or more of the selected genres');
                             return false;
@@ -1100,13 +1098,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                // Theme filter (similar to genre filter)
+                // Theme filter
                 if (selectedThemes.size > 0) {
-                    console.log('Theme check:', {
-                        animeThemes: anime.themes,
-                        selectedThemes: Array.from(selectedThemes),
-                        mode: themeFilterMode
-                    });
                     if (themeFilterMode === 'inclusive') {
                         if (!anime.themes || !anime.themes.some(theme => selectedThemes.has(theme))) {
                             console.log('Filtered by inclusive themes - anime does not have any selected theme');
@@ -1127,10 +1120,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Status filter
                 if (statusFilter.value) {
-                    console.log('Status check:', {
-                        animeAdded: anime.added,
-                        filterStatus: statusFilter.value
-                    });
                     if (statusFilter.value === 'added' && !anime.added) {
                         console.log('Filtered by status: not added');
                         return false;
@@ -1144,15 +1133,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Anime passed all filters');
                 return true;
             });
-        } else {
-            // If no filters are active, reset to full list
-            filteredList = null;
         }
 
-        console.log('Filtered list:', filteredList);
+        filteredList = filteredResults;
         renderAnimeList();
     };
 
+    // Add event listeners for all filter inputs to trigger applyFilters
+    const filterInputs = [
+        minScore, maxScore, minMembers, maxMembers,
+        minEpisodesFilter, maxEpisodesFilter,
+        yearFilter, seasonFilter, statusFilter
+    ];
+
+    filterInputs.forEach(input => {
+        input.addEventListener('input', applyFilters);
+    });
+
+    // Add event listeners for genre and theme filter modes
+    document.querySelectorAll('input[name="genreFilterMode"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            genreFilterMode = e.target.value;
+            applyFilters();
+        });
+    });
+
+    document.querySelectorAll('input[name="themeFilterMode"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            themeFilterMode = e.target.value;
+            applyFilters();
+        });
+    });
+
+    // Remove the Apply Filters button from the HTML
+    applyFiltersBtn.style.display = 'none';
+
+    // Modify resetFilters to also clear the search
     const resetFilters = () => {
         minScore.value = '';
         maxScore.value = '';
@@ -1164,48 +1180,25 @@ document.addEventListener('DOMContentLoaded', () => {
         seasonFilter.value = '';
         statusFilter.value = '';
         selectedGenres.clear();
-        genreFilterMode = 'inclusive'; // Default mode
+        genreFilterMode = 'inclusive';
         document.querySelector('input[name="genreFilterMode"][value="inclusive"]').checked = true;
-        if (document.querySelector('input[name="genreFilterMode"][value="all_selected"]')) {
-            document.querySelector('input[name="genreFilterMode"][value="all_selected"]').checked = false;
-        }
-        if (document.querySelector('input[name="genreFilterMode"][value="none_selected"]')) {
-            document.querySelector('input[name="genreFilterMode"][value="none_selected"]').checked = false;
-        }
         populateGenreFilter();
 
         selectedThemes.clear();
         themeFilterMode = 'inclusive';
-        if(document.querySelector('input[name="themeFilterMode"][value="inclusive"]')){
-            document.querySelector('input[name="themeFilterMode"][value="inclusive"]').checked = true;
-        }
-        if (document.querySelector('input[name="themeFilterMode"][value="all_selected"]')) {
-            document.querySelector('input[name="themeFilterMode"][value="all_selected"]').checked = false;
-        }
-        if (document.querySelector('input[name="themeFilterMode"][value="none_selected"]')) {
-            document.querySelector('input[name="themeFilterMode"][value="none_selected"]').checked = false;
-        }
+        document.querySelector('input[name="themeFilterMode"][value="inclusive"]').checked = true;
         populateThemeFilter();
+
+        // Clear search
+        searchInput.value = '';
+        currentSearchTerm = '';
 
         filteredList = null;
         renderAnimeList();
     };
 
-    // --- Event Handlers ---
-    applyFiltersBtn.addEventListener('click', applyFilters);
+    // Add event listener for reset filters button
     resetFiltersBtn.addEventListener('click', resetFilters);
-
-    document.querySelectorAll('input[name="genreFilterMode"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            genreFilterMode = e.target.value;
-        });
-    });
-
-    document.querySelectorAll('input[name="themeFilterMode"]').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            themeFilterMode = e.target.value;
-        });
-    });
 
     // --- Batch Mode Elements ---
     batchModeBtn.addEventListener('click', () => {
@@ -1449,6 +1442,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 globalTooltip.classList.remove('active');
                 currentOpenAnimeLink = null;
             }
+        }
+    });
+
+    // Initialize the list
+    loadListFromLocalStorage();
+    renderAnimeList();
+
+    // Add event listener for the clear list button
+    clearListBtn.addEventListener('click', clearList);
+
+    // Add event listener for the export list button
+    exportListBtn.addEventListener('click', exportList);
+
+    // Add event listener for the import list input
+    importListInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            importList(e.target.files[0]);
+            // Reset the input so the same file can be imported again
+            e.target.value = '';
         }
     });
 });

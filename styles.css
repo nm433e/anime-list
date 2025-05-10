@@ -563,8 +563,9 @@ label.filter-modes{
 
 .genre-row {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 0px;
     margin-top: 10px;
 }
@@ -980,4 +981,36 @@ button.year-season-btn:hover{
 }
 .hi-btn{
     background-color: #4d1b9c;
+}
+
+.list-search {
+    margin: 10px 0;
+    padding: 0 20px;
+}
+
+.list-search-input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.2s ease;
+}
+
+.list-search-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.list-search-input::placeholder {
+    color: #999;
+}
+
+.results-count {
+    padding: 0 20px;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 14px;
 }

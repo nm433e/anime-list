@@ -73,11 +73,10 @@
     </div>
     <div class="anime-list-section">
         <div class="list-actions">
-            <button id="clearListBtn" class="clear-btn">Clear List</button>
-            <button id="exportListBtn" class="export-btn">Export List</button>
-            <label for="importListInput" class="import-btn">Import List
-                <input class="import-btn" type="file" id="importListInput" accept=".json" style="display: none;">
-            </label>
+            <button id="clearListBtn" class="action-btn">Clear List</button>
+            <button id="exportListBtn" class="action-btn">Export List</button>
+            <input type="file" id="importListInput" accept=".json" style="display: none;">
+            <button onclick="document.getElementById('importListInput').click()" class="action-btn">Import List</button>
             <div class="filter-buttons-inline">
                 <button id="applyFiltersBtn">Apply Filters</button>
                 <button id="resetFiltersBtn">Reset Filters</button>
@@ -89,6 +88,10 @@
                 <button id="nextSeasonBtn"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
+        <div class="list-search">
+            <input type="text" id="listSearchInput" placeholder="Search your list..." class="list-search-input">
+        </div>
+        <div id="resultsCountMessage" class="results-count"></div>
 
         <!-- Preset Filter Buttons -->
         <div class="preset-filter-groups">
@@ -205,8 +208,6 @@
         <div class="filter-section" id="themeFilterSection">
 
         </div>
-
-        <div id="resultsCountMessage" class="results-count-message"></div>
 
         <table id="animeTable">
             <thead>
