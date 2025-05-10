@@ -229,20 +229,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (copyBtn) {
                         copyBtn.addEventListener('click', () => {
                             const titleToCopy = copyBtn.dataset.animeTitle;
-                            navigator.clipboard.writeText(titleToCopy).then(() => {
-                                // Success feedback: change button text temporarily
-                                const originalText = copyBtn.textContent;
-                                copyBtn.textContent = 'Copied!';
-                                copyBtn.disabled = true;
-                                setTimeout(() => {
-                                    copyBtn.textContent = originalText;
-                                    copyBtn.disabled = false;
-                                }, 1500);
-                            }).catch(err => {
-                                console.error('Failed to copy title: ', err);
-                                // Optional: User feedback for error
-                                alert('Failed to copy title.');
-                            });
+                            
+                            if (navigator.clipboard && navigator.clipboard.writeText) {
+                                navigator.clipboard.writeText(titleToCopy).then(() => {
+                                    // Success feedback
+                                    const originalText = copyBtn.textContent;
+                                    copyBtn.textContent = 'Copied!';
+                                    copyBtn.disabled = true;
+                                    setTimeout(() => {
+                                        copyBtn.textContent = originalText;
+                                        copyBtn.disabled = false;
+                                    }, 1500);
+                                }).catch(err => {
+                                    console.error('Failed to copy title using navigator.clipboard: ', err);
+                                    // Attempt fallback
+                                    fallbackCopyTextToClipboard(titleToCopy, copyBtn);
+                                });
+                            } else {
+                                console.warn('navigator.clipboard.writeText not available. Using fallback.');
+                                // Fallback for older browsers or when navigator.clipboard is not available
+                                fallbackCopyTextToClipboard(titleToCopy, copyBtn);
+                            }
                         });
                     }
 
@@ -497,7 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const newAnimeData = extractAnimeData(apiData);
         if (currentEditIndex >= 0 && currentEditIndex < animeList.length) {
             // Preserve the search term from the original entry
-            newAnimeData.searchTerm = animeList[currentEditIndex].searchTerm;
             animeList[currentEditIndex] = newAnimeData;
             saveListToLocalStorage();
             renderAnimeList();
@@ -581,8 +587,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Extract genre names and identify adult genres
         const genres = (apiData.genres || []).map(genre => genre.name);
-        const adultGenres = ['Erotica', 'Ecchi', 'Hentai'];
-        const hasAdultGenre = genres.some(genre => adultGenres.includes(genre));
+        // const adultGenres = ['Erotica', 'Ecchi', 'Hentai'];
+        // const hasAdultGenre = genres.some(genre => adultGenres.includes(genre));
 
         // Extract theme names
         const themes = (apiData.themes || []).map(theme => theme.name);
@@ -614,8 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
             themes: themes,
             cover: coverImageUrl,
             synopsis: synopsisText,
-            hasAdultGenre: hasAdultGenre,
-            searchTerm: apiData.searchTerm,
+            // hasAdultGenre: hasAdultGenre,
             added: false
         };
     };
@@ -728,7 +733,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const apiData = await fetchAnimeById(malId);
                 if (apiData) {
                     animeData = extractAnimeData(apiData);
-                    animeData.searchTerm = line;
                 } else {
                     inputStatus.textContent += ` - ID not found.`;
                 }
@@ -738,7 +742,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const apiData = await fetchAnimeById(searchResults[0].mal_id);
                     if(apiData) {
                         animeData = extractAnimeData(apiData);
-                        animeData.searchTerm = line;
                     } else {
                         inputStatus.textContent += ` - Found match "${searchResults[0].title}", but could not fetch full data.`;
                     }
@@ -809,7 +812,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const apiData = await fetchAnimeById(malId);
             if (apiData) {
                 const animeData = extractAnimeData(apiData);
-                animeData.searchTerm = animeSearchInput.value.trim();
                 const result = addAnimeToList(animeData);
                 if (result === true) {
                     // Successfully added
@@ -1284,7 +1286,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                     const animeData = extractAnimeData(animeEntry);
                                     if (!animeData.season) animeData.season = season.toLowerCase();
                                     if (!animeData.year) animeData.year = year;
-                                    animeData.searchTerm = `${animeData.name || 'Anime'} (batch)`;
                                     animeList.push(animeData);
                                     addedCount++;
                                 }
@@ -1453,6 +1454,42 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.value = '';
         }
     });
+
+    // --- Fallback Copy Function ---
+    function fallbackCopyTextToClipboard(text, buttonElement) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+
+        // Styling to make textarea non-intrusive
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0"; // Make it invisible
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                const originalText = buttonElement.textContent;
+                buttonElement.textContent = 'Copied!'; // Keep feedback consistent
+                buttonElement.disabled = true;
+                setTimeout(() => {
+                    buttonElement.textContent = originalText;
+                    buttonElement.disabled = false;
+                }, 1500);
+            } else {
+                console.error('Fallback copy: document.execCommand failed');
+                alert('Failed to copy title using fallback. Please try manually.');
+            }
+        } catch (err) {
+            console.error('Fallback copy error:', err);
+            alert('Failed to copy title using fallback. Please try manually.');
+        }
+        document.body.removeChild(textArea);
+    }
 });
 
 

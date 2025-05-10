@@ -865,7 +865,7 @@ button.year-season-btn:hover{
     visibility: hidden;
     opacity: 0;
     z-index: 10000; /* Very high z-index */
-    width: 600px;
+    width: 500px;
     max-width: 90vw;
     background-color: #fff;
     color: #333;
