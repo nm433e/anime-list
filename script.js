@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxEpisodesFilter = document.getElementById('maxEpisodesFilter');
     const yearFilter = document.getElementById('yearFilter');
     const seasonFilter = document.getElementById('seasonFilter');
+    const minYearFilter = document.getElementById('minYearFilter');
+    const maxYearFilter = document.getElementById('maxYearFilter');
     const genreFilterList = document.getElementById('genreFilterList');
     const themeFilterList = document.getElementById('themeFilterList');
     const statusFilter = document.getElementById('statusFilter');
@@ -205,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
             animeInputList, animeSearchInput, importListInput, newAnimeId,
             minScore, maxScore, minMembers, maxMembers, minEpisodesFilter, maxEpisodesFilter,
             yearFilter, seasonFilter, statusFilter, listSearchInput,
+            minYearFilter, maxYearFilter,
             batchStartSeason, batchStartYear, batchEndSeason, batchEndYear, finalPage
         ];
         
@@ -1280,6 +1283,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const minEpisodesVal = parseInt(minEpisodesFilter.value);
         const maxEpisodesVal = parseInt(maxEpisodesFilter.value);
         const yearVal = parseInt(yearFilter.value);
+        const minYearVal = parseInt(minYearFilter.value);
+        const maxYearVal = parseInt(maxYearFilter.value);
         const seasonVal = seasonFilter.value ? seasonFilter.value.toLowerCase() : "";
         const statusVal = statusFilter.value;
 
@@ -1290,7 +1295,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isNaN(maxMembersVal) && anime.members > maxMembersVal) return false;
             if (!isNaN(minEpisodesVal) && anime.episodes < minEpisodesVal) return false;
             if (!isNaN(maxEpisodesVal) && anime.episodes > maxEpisodesVal) return false;
-            if (!isNaN(yearVal) && anime.year !== yearVal) return false;
+            if (!isNaN(yearVal)) {
+                if (anime.year !== yearVal) return false;
+            }
+            if (!isNaN(minYearVal) && anime.year < minYearVal) return false;
+            if (!isNaN(maxYearVal) && anime.year > maxYearVal) return false;
             if (seasonVal && (anime.season || '').toLowerCase() !== seasonVal) return false;
             
             if (statusVal === 'added' && !anime.added) return false;
@@ -1315,7 +1324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAnimeList();
     };
 
-    const filterInputs = [minScore, maxScore, minMembers, maxMembers, minEpisodesFilter, maxEpisodesFilter, yearFilter, seasonFilter, statusFilter];
+    const filterInputs = [minScore, maxScore, minMembers, maxMembers, minEpisodesFilter, maxEpisodesFilter, yearFilter, seasonFilter, statusFilter, minYearFilter, maxYearFilter];
     filterInputs.forEach(input => {
         input.addEventListener('input', () => {
             if (!currentUser) return; applyFilters();
@@ -1337,6 +1346,8 @@ document.addEventListener('DOMContentLoaded', () => {
         filterInputs.forEach(input => input.value = ''); 
         seasonFilter.value = ''; 
         statusFilter.value = ''; 
+        minYearFilter.value = '';
+        maxYearFilter.value = '';
         selectedGenres.clear();
         genreFilterMode = 'inclusive';
         document.querySelector('input[name="genreFilterMode"][value="inclusive"]').checked = true;
