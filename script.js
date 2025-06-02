@@ -405,9 +405,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = animeTableBody.insertRow();
             row.dataset.malId = anime.mal_id; 
 
-            row.insertCell(0).textContent = index + 1; 
+            // Selection checkbox column
+            const selectCell = row.insertCell(0);
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'row-select-checkbox';
+            checkbox.dataset.malId = anime.mal_id;
+            checkbox.addEventListener('change', onRowSelectChange);
+            selectCell.appendChild(checkbox);
 
-            const nameCell = row.insertCell(1);
+            // Number column
+            row.insertCell(1).textContent = index + 1;
+
+            const nameCell = row.insertCell(2);
             const nameLink = document.createElement('a');
             nameLink.href = `https://myanimelist.net/anime/${anime.mal_id}`;
             nameLink.target = '_blank';
@@ -426,12 +436,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            row.insertCell(2).textContent = `${anime.season || 'N/A'} ${anime.year || 'N/A'}`;
-            row.insertCell(3).textContent = anime.members ? anime.members.toLocaleString() : 'N/A';
-            row.insertCell(4).textContent = anime.score ? anime.score.toFixed(2) : 'N/A';
-            row.insertCell(5).textContent = anime.episodes || '?';
+            row.insertCell(3).textContent = `${anime.season || 'N/A'} ${anime.year || 'N/A'}`;
+            row.insertCell(4).textContent = anime.members ? anime.members.toLocaleString() : 'N/A';
+            row.insertCell(5).textContent = anime.score ? anime.score.toFixed(2) : 'N/A';
+            row.insertCell(6).textContent = anime.episodes || '?';
 
-            const genresCell = row.insertCell(6);
+            const genresCell = row.insertCell(7);
             const genreListDiv = document.createElement('div'); 
             genreListDiv.className = 'genre-list';
             if (anime.genres && anime.genres.length > 0) {
@@ -449,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             genresCell.appendChild(genreListDiv);
 
-            const themesCell = row.insertCell(7);
+            const themesCell = row.insertCell(8);
             const themeListDiv = document.createElement('div'); 
             themeListDiv.className = 'theme-list';
             if (anime.themes && anime.themes.length > 0) {
@@ -464,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             themesCell.appendChild(themeListDiv);
 
-            const actionsCell = row.insertCell(8);
+            const actionsCell = row.insertCell(9);
             const toggleBtn = document.createElement('button');
             toggleBtn.className = `action-btn toggle-btn ${anime.added ? 'added' : ''}`;
             toggleBtn.innerHTML = anime.added ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
@@ -1628,5 +1638,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initializeApp();
+
+    // Selection and bulk action elements
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+    const addSelectedBtn = document.getElementById('addSelectedBtn');
+    const removeSelectedBtn = document.getElementById('removeSelectedBtn');
+    
+    // Event listeners for select-all and bulk actions
+    selectAllCheckbox?.addEventListener('change', () => {
+        document.querySelectorAll('.row-select-checkbox').forEach(cb => {
+            cb.checked = selectAllCheckbox.checked;
+        });
+    });
+    deleteSelectedBtn?.addEventListener('click', deleteSelected);
+    addSelectedBtn?.addEventListener('click', () => updateSelectedAddedStatus(true));
+    removeSelectedBtn?.addEventListener('click', () => updateSelectedAddedStatus(false));
+    
+    // Helper functions for bulk actions
+    function onRowSelectChange() {
+        const all = document.querySelectorAll('.row-select-checkbox');
+        const checked = document.querySelectorAll('.row-select-checkbox:checked');
+        selectAllCheckbox.indeterminate = checked.length > 0 && checked.length < all.length;
+        selectAllCheckbox.checked = checked.length === all.length;
+    }
+
+    function getSelectedMalIds() {
+        return Array.from(document.querySelectorAll('.row-select-checkbox:checked'))
+            .map(cb => parseInt(cb.dataset.malId, 10));
+    }
+
+    async function deleteSelected() {
+        const ids = getSelectedMalIds();
+        if (ids.length === 0) { alert('No anime selected.'); return; }
+        if (!confirm(`Are you sure you want to delete ${ids.length} selected anime?`)) return;
+        for (const malId of ids) {
+            await deleteAnimeFromFirebase(malId);
+            animeList = animeList.filter(a => a.mal_id !== malId);
+        }
+        applyFilters();
+    }
+
+    async function updateSelectedAddedStatus(setAdded) {
+        const ids = getSelectedMalIds();
+        if (ids.length === 0) { alert('No anime selected.'); return; }
+        for (const malId of ids) {
+            const index = animeList.findIndex(a => a.mal_id === malId);
+            if (index !== -1) {
+                animeList[index].added = setAdded;
+                await updateAnimeInFirebase(malId, { added: setAdded });
+            }
+        }
+        applyFilters();
+    }
 });
 

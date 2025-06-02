@@ -744,17 +744,17 @@ label.filter-modes{
 }
 
 #animeTable th[data-sort-by="episodes"],
-#animeTable td:nth-child(6) {
-    width: 3%;       /* Adjust as needed - Smaller column */
-}
-
-#animeTable th:nth-child(7),
 #animeTable td:nth-child(7) {
-    width: 20%;      /* Genres */
+    width: 3%;       /* Adjust as needed - Smaller column */
 }
 
 #animeTable th:nth-child(8),
 #animeTable td:nth-child(8) {
+    width: 20%;      /* Genres */
+}
+
+#animeTable th:nth-child(9),
+#animeTable td:nth-child(9) {
     width: 20%;      /* Themes - New Column */
 }
 
@@ -764,6 +764,16 @@ label.filter-modes{
 }
 th.number-column{
     width: 3%; 
+}
+
+/* Select column for row checkboxes */
+th.select-column,
+#animeTable td:nth-child(1) {
+    width: 3%;
+    text-align: center;
+}
+.row-select-checkbox {
+    cursor: pointer;
 }
 
 button.year-season-btn{
